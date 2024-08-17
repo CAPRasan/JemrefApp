@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+  get "users/index" => "users#index"
+
   get "home/top" => "home#top"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

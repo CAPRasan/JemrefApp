@@ -19,9 +19,9 @@ header {
 }
 nav {
     background-color: #61D3FC;;
-    width: 30%
-    dixplay: flex; /* 子要素にflex: column;を与えるため */
+    width: 30%;
 }
+
 section {
     background-color: #FFDA63;
     width: 70%
