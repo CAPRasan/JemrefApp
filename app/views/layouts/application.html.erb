@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Jem Ref App" %></title>
+    <title><%= content_for(:title) || "JemRef" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -21,7 +21,19 @@
 
   <header>
     <div class="container">
-      <h1>Header</h1>
+      <div class="header-wrapper">
+        <div class="header-left">
+          <h1>JemRef</h1>
+        </div>
+        <% if flash[:notice] %>
+          <div class="flash-notice">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+        <div class="header-right">
+          header-right
+        </div>
+      </div>
     </div>
   </header>
 

@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       password: params[:password]
     )
     if @user.save
+      flash[:notice] ="登録に成功しました"
       redirect_to("/")
     else
       render("users/new")

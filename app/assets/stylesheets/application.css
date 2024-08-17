@@ -6,10 +6,29 @@
     width: 100%;
 }
 
+
 header {
     height: 100px;
     background-color: #A1B3D1;
     padding-top: 10px;
+}
+
+.header-left {
+    font-size: 12px;
+    float: left;
+    background-color: blanchedalmond;
+}
+
+.header-right {
+    float: right;
+    width:100px;
+    background-color: blanchedalmond;
+
+}
+
+.flash-notice {
+    margin-left: 100px;
+    color:red;
 }
 
 .main-wrapper {
@@ -19,10 +38,15 @@ header {
 }
 nav {
     background-color: #61D3FC;;
-    width: 30%;
+    width: 20%;
 }
 
 section {
     background-color: #FFDA63;
-    width: 70%
+    width: 80%
+}
+
+footer {
+    background-color: #FFDA63;
+    height: 180px;
 }

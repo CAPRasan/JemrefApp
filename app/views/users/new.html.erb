@@ -2,7 +2,10 @@
     <div class="heading">
         <h1>新規登録</h1>
     </div>
-    
+
+    <% @user.errors.full_messages.each do |message| %>
+        <%= message %>
+    <% end %>
 
     <%= form_tag("/users/create", {method: "post"}) do %>
         <div class="input-area">
