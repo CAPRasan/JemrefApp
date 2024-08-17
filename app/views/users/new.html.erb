@@ -8,7 +8,7 @@
     <% end %>
 
     <%= form_tag("/users/create", {method: "post"}) do %>
-        <div class="input-area">
+        <div class="user-sinup-area">
             <label for="name">名前: 
                 <input type="text" id="name" name="name" value="<%= @user.name %>">
             </label>
@@ -21,5 +21,6 @@
             <input type="submit" value="登録">
         </div>
     <% end %>
+    <%= link_to("ログインページに戻る","/login") %>
 
 </div>

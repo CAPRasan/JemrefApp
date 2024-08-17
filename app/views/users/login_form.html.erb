@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="about_us">
+        <h1>Jemref</h1>
+        <p>JemRefは、人文・社会科学系分野の和文文献の書誌情報整理に特化したウェブアプリです、云々。</p>
+        <p>＊ここにイメージが入る予定</p>
+    </div>
+    <%= form_tag("/login") do %>
+        <div class="sign-in-form">
+            <h2>ログイン</h2>
+            <label for="email">メールアドレス: 
+               <input type="text" id="email" name="email">
+            </label>
+            <label for="password">パスワード: 
+                <input type="password" id="password" name="password" >
+            </label>
+            <input type="submit" value="サインイン">
+        </div>
+    <% end %>
+    <p>または</p>
+    <div class="btn sign-up">
+        <%= link_to("新規登録", "/users/signup") %>
+    </div>
+
+
+</div>
