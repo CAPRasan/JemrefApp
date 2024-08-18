@@ -25,8 +25,14 @@
     <div class="container">
       <div class="header-wrapper">
         <div class="header-left">
-          <%= link_to("/login") do %>
-          <h1>JemRef</h1>
+          <% if @current_user %>
+            <%= link_to("/") do %>
+              <h1>JemRef</h1>
+            <% end %>
+          <% else %>
+            <%= link_to("/login") do %>
+            <h1>JemRef</h1>
+            <% end %>
           <% end %>
         </div>
 
