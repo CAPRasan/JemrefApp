@@ -4,16 +4,23 @@
         <p>JemRefは、人文・社会科学系分野の和文文献の書誌情報整理に特化したウェブアプリです、云々。</p>
         <p>＊ここにイメージが入る予定</p>
     </div>
-    <%= form_tag("/login") do %>
+
+    <!--エラーメッセージ-->
+    <% if @error_message %>
+          <div class="form-error">
+            <%= @error_message %>
+          </div>
+    <% end %>
+
+    <!--ログインフォーム-->
+    <%= form_with url: {controller: "users", action: "login"}, local: true do |f| %>
         <div class="sign-in-form">
             <h2>ログイン</h2>
-            <label for="email">メールアドレス: 
-               <input type="text" id="email" name="email">
-            </label>
-            <label for="password">パスワード: 
-                <input type="password" id="password" name="password" >
-            </label>
-            <input type="submit" value="サインイン">
+            <p>メールアドレス: </p> 
+                <%= f.text_field :email %>
+            <p>パスワード: </p>
+                <%= f.text_field :password %>
+            <%= f.submit "ログインする" %>
         </div>
     <% end %>
     <p>または</p>

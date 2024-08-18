@@ -23,16 +23,27 @@
     <div class="container">
       <div class="header-wrapper">
         <div class="header-left">
+          <%= link_to("/login") do %>
           <h1>JemRef</h1>
+          <% end %>
         </div>
+
         <% if flash[:notice] %>
           <div class="flash-notice">
             <%= flash[:notice] %>
           </div>
         <% end %>
+
         <div class="header-right">
-          header-right
+          <% if session[:user_id] != "nil" %>
+            現在ログインしているユーザーのID: <%= session[:user_id] %>
+          <% else %>
+            <%= link_to("ログイン", "/login") %>
+            <p>または</p>
+            <%= link_to("新規登録", "/signin") %>
+          <% end %>
         </div>
+        
       </div>
     </div>
   </header>
