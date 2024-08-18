@@ -5,11 +5,9 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-
   end
 
   def create
-
     @user = User.new(
       name: params[:name],
       email: params[:email],
@@ -24,11 +22,9 @@ class UsersController < ApplicationController
       puts @user.errors.full_messages
       render :new
     end
-    
   end
 
   def login_form
-    
   end
 
   def login
@@ -50,5 +46,4 @@ class UsersController < ApplicationController
     flash[:notice] = "ログアウトしました"
     redirect_to("/login")
   end
-
 end
