@@ -5,9 +5,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+
   end
 
   def create
+
     @user = User.new(
       name: params[:name],
       email: params[:email],
@@ -18,9 +20,11 @@ class UsersController < ApplicationController
       flash[:notice] ="登録に成功しました"
       redirect_to("/")
     else
-      render("users/new")
+      flash.now[:denger] = "登録に失敗しました"
+      puts @user.errors.full_messages
+      render :new
     end
-
+    
   end
 
   def login_form

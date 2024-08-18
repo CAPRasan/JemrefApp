@@ -3,7 +3,7 @@
         <h1>新規登録</h1>
     </div>
 
-    <% if @user.errors.any? %>
+    <% if @user.errors.full_messages %>
     <div class="error-alert">
       <ul>
         <% @user.errors.full_messages.each do |message| %>
@@ -27,6 +27,6 @@
             <input type="submit" value="登録">
         </div>
     <% end %>
-    <%= link_to("ログインページに戻る","/login") %>
+    <%= link_to("ログインページに戻る","/") %>
 
 </div>
