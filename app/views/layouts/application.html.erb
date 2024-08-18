@@ -37,8 +37,8 @@
         <% end %>
 
         <div class="header-right">
-          <% if session[:user_id] != "nil" %>
-            現在ログインしているユーザーのID: <%= session[:user_id] %>
+          <% if @current_user %>
+            現在ログインしているユーザー: <%= @current_user.name %>
           <% else %>
             <%= link_to("ログイン", "/login") %>
             <p>または</p>
