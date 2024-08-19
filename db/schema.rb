@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_17_045807) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_18_141322) do
+  create_table "records", force: :cascade do |t|
+    t.integer "publish_form"
+    t.string "author_name"
+    t.string "main_title"
+    t.string "sub_title"
+    t.integer "publish_date"
+    t.string "publisher"
+    t.string "compiled_by"
+    t.string "publication"
+    t.integer "volume"
+    t.integer "no"
+    t.text "memo"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
