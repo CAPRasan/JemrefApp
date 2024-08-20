@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   post "records/create" => "records#create"
   get "records/index" => "records#index"
   get "records/:id/edit" => "records#edit"
+  post "records/:id/destroy" => "records#destroy"
   post "records/:id/update" => "records#update"
 
   post "users/create" => "users#create"

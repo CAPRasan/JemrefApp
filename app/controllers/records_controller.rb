@@ -10,7 +10,7 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.new(
-      user_id: @current_user,
+      user_id: @current_user.id,
       author_name: params[:author_name],
       main_title: params[:main_title],
       sub_title: params[:sub_title],
@@ -24,12 +24,12 @@ class RecordsController < ApplicationController
       status: params[:status]
     )
     if @record.save
-      flash[:notice] = "更新が成功しました"
+      flash[:notice] = "登録が成功しました"
       redirect_to("/")
     else
-      puts "更新に失敗しました"
+      puts "登録に失敗しました"
       puts @record.errors.full_messages
-      render("/")
+      render("home/top")
     end
   end
 
@@ -48,11 +48,19 @@ class RecordsController < ApplicationController
     @record.status = params[:status]
 
     if @record.save
-      flash[:notice] = "更新に成功しました"
+      flash[:notice] = "書誌情報を更新しました"
       redirect_to("/records/index")
     else
-      flash[:notice] = "更新に失敗しました"
+      flash[:notice] = "書誌情報の更新に失敗しました"
       redirect_to("/records/#{@record.id}/edit")
     end
   end
+
+  def destroy
+    @record = Record.find_by(id: params[:id])
+    @record.destroy
+    flash[:notice] ="書誌情報を削除しました"
+    redirect_to("/records/index")
+  end
+
 end
