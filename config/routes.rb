@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post "records/create" => "records#create"
   get "records/index" => "records#index"
 
   post "users/create" => "users#create"

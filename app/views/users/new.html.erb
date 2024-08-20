@@ -14,7 +14,7 @@
     <% end %>
     
     <%= form_tag("/users/create", {method: "post"}) do %>
-        <div class="user-sinup-area">
+        <div class="user-sinup-form">
             <label for="name">名前:
                 <input type="text" id="name" name="name" value="<%= @user.name %>">
             </label>

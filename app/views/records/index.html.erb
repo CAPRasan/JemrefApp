@@ -2,12 +2,11 @@
   <div class="container">
     <div class="main-wrapper">
       <nav class="side-menu">
-
     #   後ほど、render :pertialで置き換え
       <h1>Navigation</h1>
         <ul>
             <li>
-                <a href="#">ホーム・書誌情報入力</a>
+              <%= link_to("ホーム・書誌情報入力", "/") %>    
             </li>
             <li>
                 <%= link_to("登録書誌表示・検索", "/records/index") %>
@@ -30,10 +29,23 @@
         </div>
       </nav>
     
-      <!-- 検索画面 -->
-      <section>
-        <div class="main contents">
+      <section class="main-section">
+        <div class="main-contents">
             <h1>登録書誌表示・検索</h1>
+            
+            <div class="bib-list">
+              <%= @current_user.records.each do |record| %>
+                <div class="record-item">
+                  <p>------------------------</p>
+                  <p><%=record.author_name %>（<%= record.publish_date %>年）</p>
+                  <p>「<%= record.main_title %>----<%= record.sub_title %>」</p>
+                  <p>収録物: <%= record.compiled_by %>編『<%= record.publication %>』<%= record.volume %>（<%= record.no %>）、<%= record.publisher %></p>
+                  <p> 状態<%= record.status %></p>
+                  
+                </div>
+              <% end %>
+            </div>
+
         </div>
       </section>
     </div>

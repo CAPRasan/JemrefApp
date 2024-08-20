@@ -1,0 +1,2 @@
+class Book < Record
+end

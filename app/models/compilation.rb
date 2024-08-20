@@ -1,0 +1,2 @@
+class Compilation < Record
+end
