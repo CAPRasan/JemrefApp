@@ -4,6 +4,10 @@ class RecordsController < ApplicationController
   def index
   end
 
+  def edit
+    @record = Record.find_by(id: params[:id])
+  end
+
   def create
     @record = Record.new(
       user_id: @current_user,
@@ -20,12 +24,35 @@ class RecordsController < ApplicationController
       status: params[:status]
     )
     if @record.save
-      flash[:notice] = "登録が成功しました"
+      flash[:notice] = "更新が成功しました"
       redirect_to("/")
     else
-      puts "登録に失敗しました"
+      puts "更新に失敗しました"
       puts @record.errors.full_messages
-      render("home/top")
+      render("/")
+    end
+  end
+
+  def update
+    @record = Record.find_by(id: params[:id])
+    @record.author_name = params[:author_name]
+    @record.main_title = params[:main_title]
+    @record.sub_title = params[:sub_title]
+    @record.publish_date = params[:publish_date]
+    @record.publisher = params[:publisher]
+    @record.compiled_by = params[:compiled_by]
+    @record.publication = params[:publication]
+    @record.volume = params[:volume]
+    @record.no = params[:no]
+    @record.memo = params[:memo]
+    @record.status = params[:status]
+
+    if @record.save
+      flash[:notice] = "更新に成功しました"
+      redirect_to("/records/index")
+    else
+      flash[:notice] = "更新に失敗しました"
+      redirect_to("/records/#{@record.id}/edit")
     end
   end
 end
