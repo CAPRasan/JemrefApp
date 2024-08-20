@@ -49,3 +49,10 @@ footer {
     background-color: #FFDA63;
     height: 180px;
 }
+
+.bibinfo-entry-form {
+    height: 150px;
+    border: solid 2px black;
+    background-color: palegoldenrod;
+    margin-bottom: 20px;
+}

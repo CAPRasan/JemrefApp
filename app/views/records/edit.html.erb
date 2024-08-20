@@ -6,7 +6,7 @@
       <h1>Navigation</h1>
         <ul>
             <li>
-                <a href="#">ホーム・書誌情報入力</a>
+                <%= link_to("ホーム・書誌情報入力", "/records/new") %>
             </li>
             <li>
                 <%= link_to("登録書誌表示・検索", "/records/index") %>
@@ -38,8 +38,7 @@
             <%= form_tag("/records/#{@record.id}/update", {method: "post"}) do %> -->
               <div class="bibinfo-entry-form">
 
-                <label for="type">形態:（0=編著、1=著書、2=論文）</label>
-                <input type="integer" id="type" name="type" value="<%=  %>">
+                <p>形態: <%= @record.type %>"</p>
                 <label for="author_name">論文著者名:</label>
                 <input type="text" id="author_name" name="author_name" value="<%= @record.author_name %>">
                 <label for="main_title">主題:</label>

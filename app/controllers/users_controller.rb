@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] ="登録に成功しました"
-      redirect_to("/")
+      redirect_to("/records/new")
     else
       flash.now[:denger] = "登録に失敗しました"
       puts @user.errors.full_messages
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     if @user
       session[:user_id] = @user.id
       flash[:notice] = "ログインしました"
-      redirect_to("/")
+      redirect_to("/records/new")
     else
       @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]

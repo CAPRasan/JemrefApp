@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "records/new" => "records#new"
+  get "records/new/paper" => "records#new_paper"
+  get "records/new/conpilation" => "records#new_conpilation"
+  post "records/create_book" => "records#create_book"
+  post "records/create_paper" => "records#create_paper"
+  post "records/create_compilation" => "records#create_compilation"
   post "records/create" => "records#create"
   get "records/index" => "records#index"
   get "records/:id/edit" => "records#edit"
@@ -13,6 +19,7 @@ Rails.application.routes.draw do
   get "users/signup" => "users#new"
 
   get "/" => "home#top"
+
 
 
 
