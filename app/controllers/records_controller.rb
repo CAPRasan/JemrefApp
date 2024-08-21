@@ -9,29 +9,10 @@ class RecordsController < ApplicationController
     @record = Record.find_by(id: params[:id])
   end
 
-  def create
-    @record = Record.new(
-      user_id: @current_user.id,
-      author_name: params[:author_name],
-      main_title: params[:main_title],
-      sub_title: params[:sub_title],
-      publish_date: params[:publish_date],
-      publisher: params[:publisher],
-      compiled_by: params[:compiled_by],
-      publication: params[:publication],
-      volume: params[:volume],
-      no: params[:no],
-      memo: params[:memo],
-      status: params[:status]
-    )
-    if @record.save
-      flash[:notice] = "登録が成功しました"
-      redirect_to("/records/new")
-    else
-      puts "登録に失敗しました"
-      puts @record.errors.full_messages
-      render("records/new")
-    end
+  def new
+    @book = Book.new
+    @paper = Paper.new
+    @compilation = Compilation.new
   end
 
   def create_book
@@ -58,7 +39,9 @@ class RecordsController < ApplicationController
     else
       puts "登録に失敗しました"
       puts @book.errors.full_messages
-      render("records/new")
+      @paper = Paper.new
+      @compilation = Compilation.new
+      render :new
     end
   end
 
@@ -88,7 +71,9 @@ class RecordsController < ApplicationController
     else
       puts "登録に失敗しました"
       puts @paper.errors.full_messages
-      render("records/new")
+      @book = Book.new
+      @compilation = Compilation.new
+      render :new
     end
   end
 
@@ -116,7 +101,9 @@ class RecordsController < ApplicationController
     else
       puts "登録に失敗しました"
       puts @compilation.errors.full_messages
-      render("records/new")
+      @book = Book.new
+      @paper = Paper. new
+      render :new
     end
   end
 
@@ -143,7 +130,7 @@ class RecordsController < ApplicationController
       flash[:notice] = "書誌情報の更新に失敗しました"
       puts "エラー内容"
       puts @record.errors.full_messages
-      render("records/edit")
+      render :e
     end
   end
 

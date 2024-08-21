@@ -45,10 +45,6 @@
         <div class="header-right">
           <% if @current_user %>
             現在ログインしているユーザー: <%= @current_user.name %>
-          <% else %>
-            <%= link_to("ログイン", "/login") %>
-            <p>または</p>
-            <%= link_to("新規登録", "/signin") %>
           <% end %>
         </div>
         

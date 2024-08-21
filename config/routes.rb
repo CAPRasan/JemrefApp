@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   post "records/create_book" => "records#create_book"
   post "records/create_paper" => "records#create_paper"
   post "records/create_compilation" => "records#create_compilation"
-  post "records/create" => "records#create"
   get "records/index" => "records#index"
   get "records/:id/edit" => "records#edit"
   post "records/:id/destroy" => "records#destroy"
