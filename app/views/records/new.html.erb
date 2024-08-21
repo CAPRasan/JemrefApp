@@ -1,36 +1,4 @@
-<main>
-  <div class="container">
-    <div class="main-wrapper">
-      <nav class="side-menu">
 
-      <h1>Navigation</h1>
-        <ul>
-            <li>
-                <%= link_to("ホーム・書誌情報入力", "/records/new") %> 
-            </li>
-            <li>
-                <%= link_to("登録書誌表示・検索", "/records/index") %>
-            </li>
-            <li>
-                <a href="#">利用方法</a>
-            </li>
-            <li>
-                <%= link_to("ログアウト", "/logout", {method: "post"}) %>
-            </li>
-            <li>
-                <a href="#">設定</a>
-            </li>
-        </ul>
-        <div class="information-wrapper">
-            <h2>インフォメーション</h2>
-        </div>
-        <div class="contact-wrapper">
-            <h2>お問い合わせ</h2>
-        </div>
-      </nav>
-    
-      <!-- 検索画面 -->
-      <section>
         <div class="main contents">
             <h1>書誌情報登録</h1>
 
@@ -123,7 +91,4 @@
               </div>
             <% end %>
         </div>
-      </section>
-    </div>
-  </div>
-</main>
+

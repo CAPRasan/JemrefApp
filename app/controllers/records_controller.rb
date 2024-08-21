@@ -24,7 +24,6 @@ class RecordsController < ApplicationController
       publish_date: params[:publish_date],
       publisher: params[:publisher],
       compiled_by: params[:compiled_by],
-      publication: params[:publication],
       publication_main_title: params[:publication_main_title],
       publication_sub_title: params[:publication_sub_title],
       volume: params[:volume],
@@ -34,11 +33,13 @@ class RecordsController < ApplicationController
       status: params[:status]
     )
     if @book.save
-      flash[:notice] = "登録が成功しました"
+      flash[:notice] = "登録に成功しました"
       redirect_to("/records/new")
     else
+      # デバッグ用
       puts "登録に失敗しました"
       puts @book.errors.full_messages
+      # render用に空のインスタンスを作成
       @paper = Paper.new
       @compilation = Compilation.new
       render :new
@@ -54,7 +55,6 @@ class RecordsController < ApplicationController
       publish_date: params[:publish_date],
       publisher: params[:publisher],
       compiled_by: params[:compiled_by],
-      publication: params[:publication],
       publication_main_title: params[:publication_main_title],
       publication_sub_title: params[:publication_sub_title],
       publication_main_title: params[:publication_main_title],
@@ -66,7 +66,7 @@ class RecordsController < ApplicationController
       status: params[:status]
     )
     if @paper.save
-      flash[:notice] = "登録が成功しました"
+      flash[:notice] = "登録に成功しました"
       redirect_to("/records/new")
     else
       puts "登録に失敗しました"
@@ -86,7 +86,6 @@ class RecordsController < ApplicationController
       publish_date: params[:publish_date],
       publisher: params[:publisher],
       compiled_by: params[:compiled_by],
-      publication: params[:publication],
       publication_main_title: params[:publication_main_title],
       publication_sub_title: params[:publication_sub_title],
       volume: params[:volume],
@@ -96,7 +95,7 @@ class RecordsController < ApplicationController
       status: params[:status]
     )
     if @compilation.save
-      flash[:notice] = "登録が成功しました"
+      flash[:notice] = "登録に成功しました"
       redirect_to("/records/new")
     else
       puts "登録に失敗しました"
@@ -130,7 +129,7 @@ class RecordsController < ApplicationController
       flash[:notice] = "書誌情報の更新に失敗しました"
       puts "エラー内容"
       puts @record.errors.full_messages
-      render :e
+      render :edit
     end
   end
 
