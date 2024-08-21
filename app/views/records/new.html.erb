@@ -36,12 +36,14 @@
 
             <%= form_tag("/records/create_book", {method: "post"}) do %>
               <div class="bibinfo-entry-form">
-                <label for="author_name">論文著者名:</label>
+                <label for="author_name">著書 著者名:</label>
                 <input type="text" id="author_name" name="author_name" value="<%= %>">
                 <label for="main_title">主題:</label>
                 <input type="text" id="main_title" name="main_title" value="<%= %>">
                 <label for="sub_title">副題:</label>
                 <input type="text" id="sub_title" name="sub_title" value="<%= %>">
+                <label for="volume_other_form">巻号その他:</label>
+                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= %>">
                 <label for="publish_date">出版年:</label>
                 <input type="integer" id="publish_date" name="publish_date" value="<%= %>">
                 <label for="publisher">出版社:</label>
@@ -51,16 +53,12 @@
                 <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
                 <input type="integer" id="status" name="status" value="<%= 0 %>">
                 <input type="submit" value="著書として登録">
-
               </div>
             <% end %>
 
             <%= form_tag("/records/create_paper", {method: "post"}) do %>
               <div class="bibinfo-entry-form">
-
-                <label for="type">形態:（0=編著、1=著書、2=論文）</label>
-                <input type="integer" id="type" name="type" value="<%= %>">
-                <label for="author_name">論文著者名:</label>
+                <label for="author_name">雑誌論文 論文著者名:</label>
                 <input type="text" id="author_name" name="author_name" value="<%= %>">
                 <label for="main_title">主題:</label>
                 <input type="text" id="main_title" name="main_title" value="<%= %>">
@@ -70,29 +68,30 @@
                 <input type="integer" id="publish_date" name="publish_date" value="<%= %>">
                 <label for="publisher">出版社:</label>
                 <input type="text" id="publisher" name="publisher" value="<%= %>">
+                <p>収録物</p>
                 <label for="compiled_by">雑誌編者:</label>
                 <input type="text" id="compiled_by" name="compiled_by" value="<%= %>">
-                <label for="publication">収録雑誌名:</label>
-                <input type="text" id="publication" name="publication" value="<%= %>">
+                <label for="publication_main_title">収録雑誌名:主題</label>
+                <input type="text" id="publication_main_title" name="publication_main_title" value="<%= %>">
+                <label for="publication_sub_title">副題</label>
+                <input type="text" id="publication_sub_title" name="publication_sub_title" value="<%= %>">
                 <label for="volume">巻:</label>
                 <input type="integer" id="volume" name="volume" value="<%= %>">
                 <label for="no">号:</label>
                 <input type="integer" id="no" name="no" value="<%= %>">
+                <label for="volume_other_form">巻号その他:</label>
+                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= %>">
                 <label for="memo">メモ:</label>
                 <textarea id="memo" name="memo" value="<%= %>"></textarea>
                 <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
                 <input type="integer" id="status" name="status" value="<%= 0 %>">
                 <input type="submit" value="雑誌論文として登録">
-
               </div>
             <% end %>
-            
+
             <%= form_tag("/records/create_compilation", {method: "post"}) do %>
               <div class="bibinfo-entry-form">
-
-                <label for="type">形態:（0=編著、1=著書、2=論文）</label>
-                <input type="integer" id="type" name="type" value="<%= %>">
-                <label for="author_name">論文著者名:</label>
+                <label for="author_name">編著論文 論文著者名:</label>
                 <input type="text" id="author_name" name="author_name" value="<%= %>">
                 <label for="main_title">主題:</label>
                 <input type="text" id="main_title" name="main_title" value="<%= %>">
@@ -102,14 +101,19 @@
                 <input type="integer" id="publish_date" name="publish_date" value="<%= %>">
                 <label for="publisher">出版社:</label>
                 <input type="text" id="publisher" name="publisher" value="<%= %>">
+                <p>収録物</p>
                 <label for="compiled_by">編者:</label>
                 <input type="text" id="compiled_by" name="compiled_by" value="<%= %>">
-                <label for="publication">収録書籍名:</label>
-                <input type="text" id="publication" name="publication" value="<%= %>">
+                <label for="publication_main_title">収録書籍名:主題</label>
+                <input type="text" id="publication_main_title" name="publication_main_title" value="<%= %>">
+                <label for="publication_sub_title">副題</label>
+                <input type="text" id="publication_sub_title" name="publication_sub_title" value="<%= %>">
                 <label for="volume">巻:</label>
                 <input type="integer" id="volume" name="volume" value="<%= %>">
                 <label for="no">号:</label>
                 <input type="integer" id="no" name="no" value="<%= %>">
+                <label for="volume_other_form">巻号その他:</label>
+                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= %>">
                 <label for="memo">メモ:</label>
                 <textarea id="memo" name="memo" value="<%= %>"></textarea>
                 <label for="status">状態:（0=既読、1=未読、2=オミット）</label>

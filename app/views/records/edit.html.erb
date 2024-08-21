@@ -33,13 +33,26 @@
       <section>
         <div class="main contents">
             <h1>書誌情報変更</h1>
+            
+              <!-- 出力されない？ -->
+              <% if @record.errors.full_messages %>
+                <div class="error-alert">
+                <ul>
+                  <% @record.errors.full_messages.each do |message| %>
+                  <li class='error-message'><%= message %></li>
+                  <% end %>
+                </ul>
+                </div>
+              <% end %>
+              
+            
+            <%= link_to("一覧にもどる", "/records/index") %>
 
-
-            <%= form_tag("/records/#{@record.id}/update", {method: "post"}) do %> -->
-              <div class="bibinfo-entry-form">
+            <%= form_tag("/records/#{@record.id}/update", {method: "post"}) do %>
+              <div class="bibinfo-edit-form">
 
                 <p>形態: <%= @record.type %>"</p>
-                <label for="author_name">論文著者名:</label>
+                <label for="author_name">著者名:</label>
                 <input type="text" id="author_name" name="author_name" value="<%= @record.author_name %>">
                 <label for="main_title">主題:</label>
                 <input type="text" id="main_title" name="main_title" value="<%= @record.main_title %>">
@@ -51,12 +64,17 @@
                 <input type="text" id="publisher" name="publisher" value="<%= @record.publisher %>">
                 <label for="compiled_by">編者:</label>
                 <input type="text" id="compiled_by" name="compiled_by" value="<%= @record.compiled_by %>">
-                <label for="publication">収録書籍名:</label>
-                <input type="text" id="publication" name="publication" value="<%= @record.publication %>">
+                <label for="publication_main_title">収録物名:主題</label>
+                <input type="text" id="publication_main_title" name="publication_main_title" value="<%= @record.publication_main_title %>">
+                <label for="publication_sub_title">副題</label>
+                <input type="text" id="publication_sub_title" name="publication_sub_title" value="<%= @record.publication_sub_title %>">
                 <label for="volume">巻:</label>
                 <input type="integer" id="volume" name="volume" value="<%= @record.volume %>">
                 <label for="no">号:</label>
                 <input type="integer" id="no" name="no" value="<%= @record.no %>">
+                <label for="volume_other_form">巻号その他:</label>
+                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= @record.volume_other_form%>">
+                
                 <label for="memo">メモ:</label>
                 <textarea id="memo" name="memo" value="<%= @record.memo %>"></textarea>
                 # のちに選べるようにする

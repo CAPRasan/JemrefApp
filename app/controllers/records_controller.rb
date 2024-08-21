@@ -43,8 +43,11 @@ class RecordsController < ApplicationController
       publisher: params[:publisher],
       compiled_by: params[:compiled_by],
       publication: params[:publication],
+      publication_main_title: params[:publication_main_title],
+      publication_sub_title: params[:publication_sub_title],
       volume: params[:volume],
       no: params[:no],
+      volume_other_form: params[:volume_other_form],
       memo: params[:memo],
       status: params[:status]
     )
@@ -68,7 +71,12 @@ class RecordsController < ApplicationController
       publisher: params[:publisher],
       compiled_by: params[:compiled_by],
       publication: params[:publication],
+      publication_main_title: params[:publication_main_title],
+      publication_sub_title: params[:publication_sub_title],
+      publication_main_title: params[:publication_main_title],
+      publication_sub_title: params[:publication_sub_title],
       volume: params[:volume],
+      volume_other_form: params[:volume_other_form],
       no: params[:no],
       memo: params[:memo],
       status: params[:status]
@@ -93,7 +101,10 @@ class RecordsController < ApplicationController
       publisher: params[:publisher],
       compiled_by: params[:compiled_by],
       publication: params[:publication],
+      publication_main_title: params[:publication_main_title],
+      publication_sub_title: params[:publication_sub_title],
       volume: params[:volume],
+      volume_other_form: params[:volume_other_form],
       no: params[:no],
       memo: params[:memo],
       status: params[:status]
@@ -117,8 +128,11 @@ class RecordsController < ApplicationController
     @record.publisher = params[:publisher]
     @record.compiled_by = params[:compiled_by]
     @record.publication = params[:publication]
+    @record.publication_main_title = params[:publication_main_title]
+    @record.publication_sub_title = params[:publication_sub_title]
     @record.volume = params[:volume]
     @record.no = params[:no]
+    @record.volume_other_form = params[:volume_other_form]
     @record.memo = params[:memo]
     @record.status = params[:status]
 
@@ -127,7 +141,9 @@ class RecordsController < ApplicationController
       redirect_to("/records/index")
     else
       flash[:notice] = "書誌情報の更新に失敗しました"
-      redirect_to("/records/#{@record.id}/edit")
+      puts "エラー内容"
+      puts @record.errors.full_messages
+      render("records/edit")
     end
   end
 

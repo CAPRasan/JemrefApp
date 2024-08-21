@@ -37,8 +37,13 @@
               <% @current_user.records.each do |record| %>
                 <div class="record-item">
                   <p>------------------------</p>
-                  <p><%=record.author_name %>（<%= record.publish_date %>年） 「<%= record.main_title %>----<%= record.sub_title %>」</p>
-                  <p>収録物: <%= record.compiled_by %>編『<%= record.publication %>』<%= record.volume %>（<%= record.no %>）、<%= record.publisher %> 状態<%= record.status %></p>
+                  <% if record.type == "Compilation" || record.type == "Paper" %>
+                    <h3><span>📃</span><%=record.author_name %>（<%= record.publish_date %>） 「<%= record.get_title %>」</h3>
+                    <p><%= record.compiled_by %>編『<%= record.get_publication_title %>』<%= record.get_volume_and_number %><%= record.volume_other_form %>, <%= record.publisher %> （状態<%= record.status %>）</p>
+                  <% elsif record.type == "Book" %>
+                    <h3><span>📕</span><%=record.author_name %>（<%= record.publish_date %>） 『<%= record.get_title %>』<%= record.volume_other_form %></h3>
+                    <p><%= record.publisher %> （状態<%= record.status %>）</p>
+                  <% end %>
                   <div class="update-link">
                     <%= link_to("更新/削除", "/records/#{record.id}/edit") %>
                   </div>
