@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
   before_action :authenticatie_user
+  before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
   end
@@ -127,7 +128,6 @@ class RecordsController < ApplicationController
     @record.publish_date = params[:publish_date]
     @record.publisher = params[:publisher]
     @record.compiled_by = params[:compiled_by]
-    @record.publication = params[:publication]
     @record.publication_main_title = params[:publication_main_title]
     @record.publication_sub_title = params[:publication_sub_title]
     @record.volume = params[:volume]
@@ -152,5 +152,13 @@ class RecordsController < ApplicationController
     @record.destroy
     flash[:notice] ="書誌情報を削除しました"
     redirect_to("/records/index")
+  end
+
+  def ensure_correct_user
+    @record = Record.find_by(id: params[:id])
+    if @record.user_id != @current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to("/records/index")
+    end
   end
 end
