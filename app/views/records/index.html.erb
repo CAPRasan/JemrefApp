@@ -2,8 +2,20 @@
         <div class="main-contents">
             <h1>登録書誌表示・検索</h1>
             
+            <div class="serch-form">
+              <%= form_with local: true, method: :get do |f| %>
+                <%= f.text_field :keyword %>
+                <%= f.submit "検索"%>
+              <% end %>
+            </div>
+
+
             <div class="bib-list">
-              <% @current_user.records.each do |record| %>
+              <% if @keyword.present? %>
+                <%= "「#{@keyword}」の検索結果" %>
+              <% end %>
+
+              <% @records.each do |record| %>
                 <div class="record-item">
                   <p>------------------------</p>
                   <% if record.type == "Compilation" || record.type == "Paper" %>

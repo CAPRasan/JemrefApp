@@ -3,6 +3,8 @@ class RecordsController < ApplicationController
   before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
+    @keyword = search_params[:keyword]
+    @records = @current_user.records.search(@keyword)
   end
 
   def edit
@@ -69,7 +71,6 @@ class RecordsController < ApplicationController
       redirect_to("/records/index")
     else
       flash[:notice] = "書誌情報の更新に失敗しました"
-      puts "エラー内容"
       puts @record.errors.full_messages
       render :edit
     end
@@ -93,7 +94,7 @@ class RecordsController < ApplicationController
   private
   def record_params
     params.permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
     )
@@ -101,7 +102,7 @@ class RecordsController < ApplicationController
 
   def books_params
     params.require(:book).permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
     )
@@ -109,7 +110,7 @@ class RecordsController < ApplicationController
 
   def papers_params
     params.require(:paper).permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
     )
@@ -117,10 +118,13 @@ class RecordsController < ApplicationController
 
   def compilation_params
     params.require(:compilation).permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
     )
   end
 
+  def search_params
+    params.permit(:keyword)
+  end
 end

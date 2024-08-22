@@ -33,6 +33,31 @@ class Record < ApplicationRecord
         end
         volume_and_number
     end
+
+    def self.search(keyword)
+        # 検索方法について調査必要、現時点では力技フリーワード
+        if keyword
+            where("
+                author_name LIKE ? or
+                main_title LIKE ? or
+                sub_title LIKE ? or
+                publisher LIKE ? or
+                compiled_by LIKE ? or
+                publication_main_title LIKE ? or
+                publication_sub_title LIKE ? or
+                volume_other_form LIKE ? ",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",)
+        else
+            all
+        end
+    end
 end
 
 
