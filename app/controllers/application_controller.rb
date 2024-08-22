@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def fobid_login_user
     if @current_user
       flash[:notice] ="すでにログイン済みです"
-      redirect_to("/")
+      redirect_to("/records/new")
     end
   end
 end

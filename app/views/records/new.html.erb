@@ -2,92 +2,91 @@
         <div class="main contents">
             <h1>書誌情報登録</h1>
 
-            <%= form_tag("/records/create_book", {method: "post"}) do %>
+            <%= form_with model: @book, url: records_create_book_path, local: true do |f| %>
               <div class="bibinfo-entry-form">
-                <label for="author_name">著書 著者名:</label>
-                <input type="text" id="author_name" name="author_name" value="<%= @book.author_name %>">
-                <label for="main_title">主題:</label>
-                <input type="text" id="main_title" name="main_title" value="<%= @book.main_title %>">
-                <label for="sub_title">副題:</label>
-                <input type="text" id="sub_title" name="sub_title" value="<%= @book.sub_title %>">
-                <label for="volume_other_form">巻号その他:</label>
-                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= @book.volume_other_form %>">
-                <label for="publish_date">出版年:</label>
-                <input type="integer" id="publish_date" name="publish_date" value="<%= @book.publish_date %>">
-                <label for="publisher">出版社:</label>
-                <input type="text" id="publisher" name="publisher" value="<%= @book.publisher %>">
-                <label for="memo">メモ:</label>
-                <textarea id="memo" name="memo" value="<%= @book.memo %>"></textarea>
-                <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
-                <input type="integer" id="status" name="status" value="<%= @book.status %>">
-                <input type="submit" value="著書として登録">
+              <%= f.label :author_name, "著書 著者名:" %>
+              <%= f.text_field :author_name %>
+              <%= f.label :main_title, "主題:" %>
+              <%= f.text_field :main_title %>
+              <%= f.label :sub_title, "副題:" %>
+              <%= f.text_field :sub_title %>
+              <%= f.label :volume_other_form, "巻号その他:" %>
+              <%= f.text_field :volume_other_form %>
+              <%= f.label :publish_date, "出版年" %>
+              <%= f.number_field :publish_date %>
+              <%= f.label :publisher, "出版社" %>
+              <%= f.text_field :publisher %>
+              <%= f.label :memo, "メモ" %>
+              <%= f.text_area :memo %>
+              <%= f.label :status, "状態:" %>
+              <%= f.number_field :status %>
+              <%= f.submit "著書として登録" %>
               </div>
             <% end %>
 
-            <%= form_tag("/records/create_paper", {method: "post"}) do %>
+            <%= form_with model: @paper, url: records_create_paper_path, local: true do |f| %>
               <div class="bibinfo-entry-form">
-                <label for="author_name">雑誌論文 論文著者名:</label>
-                <input type="text" id="author_name" name="author_name" value="<%= @paper.author_name %>">
-                <label for="main_title">主題:</label>
-                <input type="text" id="main_title" name="main_title" value="<%= @paper.main_title %>">
-                <label for="sub_title">副題:</label>
-                <input type="text" id="sub_title" name="sub_title" value="<%= @paper.sub_title %>">
-                <label for="publish_date">出版年:</label>
-                <input type="integer" id="publish_date" name="publish_date" value="<%= @paper.publish_date %>">
-                <label for="publisher">出版社:</label>
-                <input type="text" id="publisher" name="publisher" value="<%= @paper.publisher %>">
+                <%= f.label :author_name, "雑誌論文 著者名:" %>
+                <%= f.text_field :author_name %>
+                <%= f.label :main_title, "主題:" %>
+                <%= f.text_field :main_title %>
+                <%= f.label :sub_title, "副題:" %>
+                <%= f.text_field :sub_title %>
+                <%= f.label :publish_date, "出版年" %>
+                <%= f.number_field :publish_date %>
+                <%= f.label :publisher, "出版社" %>
+                <%= f.text_field :publisher %>
                 <p>収録物</p>
-                <label for="compiled_by">雑誌編者:</label>
-                <input type="text" id="compiled_by" name="compiled_by" value="<%= @paper.compiled_by %>">
-                <label for="publication_main_title">収録雑誌名:主題</label>
-                <input type="text" id="publication_main_title" name="publication_main_title" value="<%= @paper.publication_main_title %>">
-                <label for="publication_sub_title">副題</label>
-                <input type="text" id="publication_sub_title" name="publication_sub_title" value="<%= @paper.publication_sub_title %>">
-                <label for="volume">巻:</label>
-                <input type="integer" id="volume" name="volume" value="<%= @paper.volume %>">
-                <label for="no">号:</label>
-                <input type="integer" id="no" name="no" value="<%=@paper.no %>">
-                <label for="volume_other_form">巻号その他:</label>
-                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= @paper.volume_other_form %>">
-                <label for="memo">メモ:</label>
-                <textarea id="memo" name="memo" value="<%= @paper.memo %>"></textarea>
-                <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
-                <input type="integer" id="status" name="status" value="<%= @paper.status %>">
-                <input type="submit" value="雑誌論文として登録">
+                <%= f.label :compiled_by, "編者" %>
+                <%= f.text_field :compiled_by %>
+                <%= f.label :publication_main_title, "主題:" %>
+                <%= f.text_field :publication_main_title  %>
+                <%= f.label :publication_sub_title, "副題:" %>
+                <%= f.text_field :publication_sub_title  %>
+                <%= f.label :volume, "巻:" %>
+                <%= f.number_field :volume %>
+                <%= f.label :no, "号:" %>
+                <%= f.number_field :no %>
+                <%= f.label :volume_other_form, "巻号その他:" %>
+                <%= f.text_field :volume_other_form %>
+                <%= f.label :memo, "メモ" %>
+                <%= f.text_area :memo  %>
+                <%= f.label :status, "状態:" %>
+                <%= f.number_field :status %>
+                <%= f.submit "論文として登録" %>
               </div>
             <% end %>
 
-            <%= form_tag("/records/create_compilation", {method: "post"}) do %>
+            <%= form_with model: @compilation, url: records_create_compilation_path, local: true do |f| %>
               <div class="bibinfo-entry-form">
-                <label for="author_name">編著論文 論文著者名:</label>
-                <input type="text" id="author_name" name="author_name" value="<%= @compilation.author_name %>">
-                <label for="main_title">主題:</label>
-                <input type="text" id="main_title" name="main_title" value="<%= @compilation.main_title %>">
-                <label for="sub_title">副題:</label>
-                <input type="text" id="sub_title" name="sub_title" value="<%= @compilation.sub_title %>">
-                <label for="publish_date">出版年:</label>
-                <input type="integer" id="publish_date" name="publish_date" value="<%= @compilation.publish_date %>">
-                <label for="publisher">出版社:</label>
-                <input type="text" id="publisher" name="publisher" value="<%= @compilation.publisher %>">
+                <%= f.label :author_name, "編著論文 著者名:" %>
+                <%= f.text_field :author_name %>
+                <%= f.label :main_title, "主題:" %>
+                <%= f.text_field :main_title %>
+                <%= f.label :sub_title, "副題:" %>
+                <%= f.text_field :sub_title %>
+                <%= f.label :publish_date, "出版年" %>
+                <%= f.number_field :publish_date %>
+                <%= f.label :publisher, "出版社" %>
+                <%= f.text_field :publisher %>
                 <p>収録物</p>
-                <label for="compiled_by">編者:</label>
-                <input type="text" id="compiled_by" name="compiled_by" value="<%= @compilation.compiled_by %>">
-                <label for="publication_main_title">収録書籍名:主題</label>
-                <input type="text" id="publication_main_title" name="publication_main_title" value="<%= @compilation.publication_main_title %>">
-                <label for="publication_sub_title">副題</label>
-                <input type="text" id="publication_sub_title" name="publication_sub_title" value="<%= @compilation.publication_sub_title %>">
-                <label for="volume">巻:</label>
-                <input type="integer" id="volume" name="volume" value="<% @compilation.volume %>">
-                <label for="no">号:</label>
-                <input type="integer" id="no" name="no" value="<%= @compilation.no %>">
-                <label for="volume_other_form">巻号その他:</label>
-                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= @compilation.volume_other_form %>">
-                <label for="memo">メモ:</label>
-                <textarea id="memo" name="memo" value="<%= @compilation.memo %>"></textarea>
-                <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
-                <input type="integer" id="status" name="status" value="<%= @compilation.status %>">
-                <input type="submit" value="編著として登録">
-
+                <%= f.label :compiled_by, "編者" %>
+                <%= f.text_field :compiled_by %>
+                <%= f.label :publication_main_title, "主題:" %>
+                <%= f.text_field :publication_main_title %>
+                <%= f.label :publication_sub_title, "副題:" %>
+                <%= f.text_field :publication_sub_title %>
+                <%= f.label :volume, "巻:" %>
+                <%= f.number_field :volume %>
+                <%= f.label :no, "号:" %>
+                <%= f.number_field :no %>
+                <%= f.label :volume_other_form, "巻号その他:" %>
+                <%= f.text_field :volume_other_form %>
+                <%= f.label :memo, "メモ" %>
+                <%= f.text_area :memo %>
+                <%= f.label :status, "状態:" %>
+                <%= f.number_field :status %>
+                <%= f.submit "編著として登録" %>
               </div>
             <% end %>
         </div>

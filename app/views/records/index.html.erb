@@ -7,14 +7,14 @@
                 <div class="record-item">
                   <p>------------------------</p>
                   <% if record.type == "Compilation" || record.type == "Paper" %>
-                    <h3><span>📃</span><%=record.author_name %>（<%= record.publish_date %>） 「<%= record.get_title %>」</h3>
+                    <h3>📃<%=record.author_name %>（<%= record.publish_date %>） 「<%= record.get_title %>」</h3>
                     <p><%= record.compiled_by %>編『<%= record.get_publication_title %>』<%= record.get_volume_and_number %><%= record.volume_other_form %>, <%= record.publisher %> （状態<%= record.status %>）</p>
                   <% elsif record.type == "Book" %>
-                    <h3><span>📕</span><%=record.author_name %>（<%= record.publish_date %>） 『<%= record.get_title %>』<%= record.volume_other_form %></h3>
+                    <h3>📕<%=record.author_name %>（<%= record.publish_date %>） 『<%= record.get_title %>』<%= record.volume_other_form %></h3>
                     <p><%= record.publisher %> （状態<%= record.status %>）</p>
                   <% end %>
                   <div class="update-link">
-                    <%= link_to("更新/削除", "/records/#{record.id}/edit") %>
+                    <%= link_to("更新/削除", edit_record_path(record)) %>
                   </div>
                 </div>
               <% end %>

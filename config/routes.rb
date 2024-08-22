@@ -1,23 +1,21 @@
 Rails.application.routes.draw do
-  get "records/new" => "records#new"
-  get "records/new/paper" => "records#new_paper"
-  get "records/new/conpilation" => "records#new_conpilation"
-  post "records/create_book" => "records#create_book"
-  post "records/create_paper" => "records#create_paper"
-  post "records/create_compilation" => "records#create_compilation"
-  get "records/index" => "records#index"
-  get "records/:id/edit" => "records#edit"
-  post "records/:id/destroy" => "records#destroy"
-  post "records/:id/update" => "records#update"
+  get "records/new", to: "records#new"
+  post "records/create_book", to: "records#create_book"
+  post "records/create_paper", to: "records#create_paper"
+  post "records/create_compilation", to: "records#create_compilation"
+  get "records/index", to: "records#index"
+  get "records/:id/edit", to: "records#edit", as: :edit_record
+  delete "records/:id/destroy", to: "records#destroy"
+  patch "records/:id/update", to: "records#update", as: :update_record
 
-  post "users/create" => "users#create"
-  post "login" => "users#login"
-  get "login" => "users#login_form"
-  get "logout" => "users#logout"
-  get "users/index" => "users#index"
-  get "users/signup" => "users#new"
+  post "users/create", to: "users#create"
+  post "login", to: "users#login"
+  get "login", to: "users#login_form"
+  get "logout", to: "users#logout"
+  get "users/index", to: "users#index"
+  get "users/signup", to: "users#new"
 
-  get "/" => "home#top"
+ root to: "home#top"
 
 
 

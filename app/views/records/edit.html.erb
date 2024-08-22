@@ -2,7 +2,6 @@
         <div class="main contents">
             <h1>書誌情報変更</h1>
             
-              <!-- 出力されない？ -->
               <% if @record.errors.full_messages %>
                 <div class="error-alert">
                 <ul>
@@ -12,13 +11,12 @@
                 </ul>
                 </div>
               <% end %>
-              
             
             <%= link_to("一覧にもどる", "/records/index") %>
 
-            <%= form_tag("/records/#{@record.id}/update", {method: "post"}) do %>
+            <%= form_with url: update_record_path(@record), method: :patch, local: true do |f|%>
               <div class="bibinfo-edit-form">
-
+                <!-- STIの場合のmodel指定方法が不明なためさしあたりhtml直書き -->
                 <p>形態: <%= @record.type %>"</p>
                 <label for="author_name">著者名:</label>
                 <input type="text" id="author_name" name="author_name" value="<%= @record.author_name %>">
@@ -42,18 +40,15 @@
                 <input type="integer" id="no" name="no" value="<%= @record.no %>">
                 <label for="volume_other_form">巻号その他:</label>
                 <input type="string" id="volume_other_form" name="volume_other_form" value="<%= @record.volume_other_form%>">
-                
                 <label for="memo">メモ:</label>
                 <textarea id="memo" name="memo" value="<%= @record.memo %>"></textarea>
-                # のちに選べるようにする
                 <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
                 <input type="integer" id="status" name="status" value="<%= @record.status %>">
                 <input type="submit" value="変更">
-
               </div>
             <% end %>
             
         </div>
         <div class="delete-form">
-        <%= button_to "書誌情報を削除する", "/records/#{@record.id}/destroy", {method: "post" } %>
+        <%= button_to "書誌情報を削除する", "/records/#{@record.id}/destroy", {method: "delete" } %>
         </div>

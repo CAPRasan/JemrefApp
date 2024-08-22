@@ -5,27 +5,25 @@
         <p>＊ここにイメージが入る予定</p>
     </div>
 
-    <!--エラーメッセージ-->
     <% if @error_message %>
           <div class="form-error">
             <%= @error_message %>
           </div>
     <% end %>
 
-    <!--ログインフォーム-->
-    <%= form_with url: { controller: "users", action: "login" }, local: true do |f| %>
+    <%= form_with url: login_path, local: true do |f| %>
         <div class="sign-in-form">
             <h2>ログイン</h2>
-            <p>メールアドレス: </p> 
+            <%= f.label :email, "メールアドレス" %>
                 <%= f.text_field :email %>
-            <p>パスワード: </p>
+            <%= f.label :password, "パスワード" %>
                 <%= f.text_field :password %>
             <%= f.submit "ログインする" %>
         </div>
     <% end %>
     <p>または</p>
     <div class="btn sign-up">
-        <%= link_to("新規登録", "/users/signup") %>
+        <%= link_to("新規登録", users_signup_path) %>
     </div>
 
 

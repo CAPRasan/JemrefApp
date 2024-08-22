@@ -16,22 +16,8 @@ class RecordsController < ApplicationController
   end
 
   def create_book
-    @book = Book.new(
-      user_id: @current_user.id,
-      author_name: params[:author_name],
-      main_title: params[:main_title],
-      sub_title: params[:sub_title],
-      publish_date: params[:publish_date],
-      publisher: params[:publisher],
-      compiled_by: params[:compiled_by],
-      publication_main_title: params[:publication_main_title],
-      publication_sub_title: params[:publication_sub_title],
-      volume: params[:volume],
-      no: params[:no],
-      volume_other_form: params[:volume_other_form],
-      memo: params[:memo],
-      status: params[:status]
-    )
+    @book = Book.new(books_params)
+    @book.user_id = @current_user.id
     if @book.save
       flash[:notice] = "登録に成功しました"
       redirect_to("/records/new")
@@ -47,24 +33,8 @@ class RecordsController < ApplicationController
   end
 
   def create_paper
-    @paper = Paper.new(
-      user_id: @current_user.id,
-      author_name: params[:author_name],
-      main_title: params[:main_title],
-      sub_title: params[:sub_title],
-      publish_date: params[:publish_date],
-      publisher: params[:publisher],
-      compiled_by: params[:compiled_by],
-      publication_main_title: params[:publication_main_title],
-      publication_sub_title: params[:publication_sub_title],
-      publication_main_title: params[:publication_main_title],
-      publication_sub_title: params[:publication_sub_title],
-      volume: params[:volume],
-      volume_other_form: params[:volume_other_form],
-      no: params[:no],
-      memo: params[:memo],
-      status: params[:status]
-    )
+    @paper = Paper.new(papers_params)
+    @paper.user_id = @current_user.id
     if @paper.save
       flash[:notice] = "登録に成功しました"
       redirect_to("/records/new")
@@ -78,22 +48,8 @@ class RecordsController < ApplicationController
   end
 
   def create_compilation
-    @compilation = Compilation.new(
-      user_id: @current_user.id,
-      author_name: params[:author_name],
-      main_title: params[:main_title],
-      sub_title: params[:sub_title],
-      publish_date: params[:publish_date],
-      publisher: params[:publisher],
-      compiled_by: params[:compiled_by],
-      publication_main_title: params[:publication_main_title],
-      publication_sub_title: params[:publication_sub_title],
-      volume: params[:volume],
-      volume_other_form: params[:volume_other_form],
-      no: params[:no],
-      memo: params[:memo],
-      status: params[:status]
-    )
+    @compilation = Compilation.new(compilation_params)
+    @compilation.user_id = @current_user.id
     if @compilation.save
       flash[:notice] = "登録に成功しました"
       redirect_to("/records/new")
@@ -108,21 +64,7 @@ class RecordsController < ApplicationController
 
   def update
     @record = Record.find_by(id: params[:id])
-    @record.author_name = params[:author_name]
-    @record.main_title = params[:main_title]
-    @record.sub_title = params[:sub_title]
-    @record.publish_date = params[:publish_date]
-    @record.publisher = params[:publisher]
-    @record.compiled_by = params[:compiled_by]
-    @record.publication_main_title = params[:publication_main_title]
-    @record.publication_sub_title = params[:publication_sub_title]
-    @record.volume = params[:volume]
-    @record.no = params[:no]
-    @record.volume_other_form = params[:volume_other_form]
-    @record.memo = params[:memo]
-    @record.status = params[:status]
-
-    if @record.save
+    if @record.update(record_params)
       flash[:notice] = "書誌情報を更新しました"
       redirect_to("/records/index")
     else
@@ -147,4 +89,38 @@ class RecordsController < ApplicationController
       redirect_to("/records/index")
     end
   end
+
+  private
+  def record_params
+    params.permit(
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :compiled_by, :publication_main_title, :publication_sub_title,
+      :volume, :no, :volume_other_form, :memo, :status
+    )
+  end
+
+  def books_params
+    params.require(:book).permit(
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :compiled_by, :publication_main_title, :publication_sub_title,
+      :volume, :no, :volume_other_form, :memo, :status
+    )
+  end
+
+  def papers_params
+    params.require(:paper).permit(
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :compiled_by, :publication_main_title, :publication_sub_title,
+      :volume, :no, :volume_other_form, :memo, :status
+    )
+  end
+
+  def compilation_params
+    params.require(:compilation).permit(
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher, 
+      :compiled_by, :publication_main_title, :publication_sub_title,
+      :volume, :no, :volume_other_form, :memo, :status
+    )
+  end
+
 end
