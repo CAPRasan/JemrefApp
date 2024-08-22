@@ -41,7 +41,7 @@
                 <label for="volume_other_form">巻号その他:</label>
                 <input type="string" id="volume_other_form" name="volume_other_form" value="<%= @record.volume_other_form%>">
                 <label for="memo">メモ:</label>
-                <textarea id="memo" name="memo" value="<%= @record.memo %>"></textarea>
+                <textarea id="memo" name="memo"><%= @record.memo %></textarea>
                 <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
                 <input type="integer" id="status" name="status" value="<%= @record.status %>">
                 <input type="submit" value="変更">

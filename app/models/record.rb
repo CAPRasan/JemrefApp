@@ -35,7 +35,7 @@ class Record < ApplicationRecord
     end
 
     def self.search(keyword)
-        # 検索方法について調査必要、現時点では力技フリーワード
+        # todo 検索方法について調査必要、現時点では力技フリーワード
         if keyword
             where("
                 author_name LIKE ? or
