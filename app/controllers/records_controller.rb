@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
 
   def index
     @keyword = search_params[:keyword]
-    @records = @current_user.records.search(@keyword)
+    @records = @current_user.records.search(@keyword).order(:publish_date)
   end
 
   def edit
@@ -30,7 +30,7 @@ class RecordsController < ApplicationController
       # render用に空のインスタンスを作成
       @paper = Paper.new
       @compilation = Compilation.new
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -45,7 +45,7 @@ class RecordsController < ApplicationController
       puts @paper.errors.full_messages
       @book = Book.new
       @compilation = Compilation.new
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -60,7 +60,7 @@ class RecordsController < ApplicationController
       puts @compilation.errors.full_messages
       @book = Book.new
       @paper = Paper. new
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -72,7 +72,7 @@ class RecordsController < ApplicationController
     else
       flash[:notice] = "書誌情報の更新に失敗しました"
       puts @record.errors.full_messages
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

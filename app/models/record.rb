@@ -3,6 +3,7 @@ class Record < ApplicationRecord
     validates :main_title, { presence: true }
     validates :publish_date, { presence: true }
     belongs_to :user
+    enum status: { read: 0, unread: 1, unnecessary: 2 }
 
     def get_title
         if self.sub_title != ""

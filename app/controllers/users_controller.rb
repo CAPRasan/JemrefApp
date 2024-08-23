@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     else
       flash.now[:denger] = "登録に失敗しました"
       puts @user.errors.full_messages
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
       @password = params[:password]
-      render("users/login_form")
+      render :login, status: :unprocessable_entity
     end
   end
 
