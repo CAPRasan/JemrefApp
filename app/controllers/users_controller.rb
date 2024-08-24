@@ -10,11 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(
-      name: params[:name],
-      email: params[:email],
-      password: params[:password]
-    )
+    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] ="登録に成功しました"
@@ -39,7 +35,7 @@ class UsersController < ApplicationController
       @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
       @password = params[:password]
-      render :login, status: :unprocessable_entity
+      render :login_form, status: :unprocessable_entity
     end
   end
 
@@ -47,5 +43,10 @@ class UsersController < ApplicationController
     session[:user_id] = "nil"
     flash[:notice] = "ログアウトしました"
     redirect_to("/login")
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:name, :email, :password)
   end
 end
