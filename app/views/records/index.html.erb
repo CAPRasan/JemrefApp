@@ -1,14 +1,13 @@
 
-        <div class="main-contents">
-            <h1>登録書誌表示・検索</h1>
-            
-            <div class="serch-form">
-              <%= form_with local: true, method: :get do |f| %>
-                <%= f.text_field :keyword %>
-                <%= f.submit "検索"%>
-              <% end %>
-            </div>
+        <div class="container-fluid">
+            <h2 class="my-4">登録書誌表示・検索</h1>
 
+              <%= form_with local: true, method: :get do %>
+              <div class="input-group mb-4 ps-2 w-75">
+                <input type="text" class="form-control border-primary border-2" name="keyword" placeholder="フリーワード検索"　aria-describedby="button-addon">
+                <button type="submit" class="btn btn-primary px-5" id="button-addon">検索</button>
+              </div>
+              <% end %>
 
             <div class="bib-list">
               <% if @keyword.present? %>
