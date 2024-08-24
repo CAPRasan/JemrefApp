@@ -12,9 +12,6 @@ class RecordsController < ApplicationController
   end
 
   def new
-    @book = Book.new
-    @paper = Paper.new
-    @compilation = Compilation.new
   end
 
   def create_book
@@ -101,7 +98,7 @@ class RecordsController < ApplicationController
   end
 
   def books_params
-    params.require(:book).permit(
+    params.permit(
       :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
@@ -109,7 +106,7 @@ class RecordsController < ApplicationController
   end
 
   def papers_params
-    params.require(:paper).permit(
+    params.permit(
       :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
@@ -117,7 +114,7 @@ class RecordsController < ApplicationController
   end
 
   def compilation_params
-    params.require(:compilation).permit(
+    params.permit(
       :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status

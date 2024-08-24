@@ -39,32 +39,32 @@
             <li class="nav-item">
               <a class="nav-link pe-3" href="#">利用方法</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link pe-3" href="#">設定</a> 
-              <!-- <%= link_to "ログアウト", logout_path, class: "nav-link pe-3", method: :post %> -->
+            <% if @current_user %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">アカウント</a>
+              <ul class="dropdown-menu">
+                <li><p class="ps-3">現在のユーザー </p></li>
+                <li><p class="ps-4">👤 <%= @current_user.name %></p></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to "ログアウト", logout_path, class: "dropdown-item", method: :post %></li>
+              </ul>
             </li>
+            <% end %>
           </ul>
         </div>
       </div>
     </nav>
   </header>
 
-  <main class="container my-5">
+  <main class="container my-3">
     <% if flash[:notice] %>
           <div class="flash-notice">
             <%= flash[:notice] %>
           </div>
         <% end %>
-
-        <% if @current_user %>
-              <a class="nav-link pe-3" href="#">
-                👤ユーザー名: <%= @current_user.name %>
-              </a>
-            <% end %>
-
     
     <div class="container-fluid">
-        <div class="main-contents-wrapper col">
+        <div class="main-contents-wrapper">
           <%= yield %>
         </div>
     </div>
