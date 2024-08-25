@@ -1,9 +1,4 @@
-<div class="container">
-    <div class="about_us">
-        <h1>Jemref</h1>
-        <p>JemRefは、人文・社会科学系分野の和文文献の書誌情報整理に特化したウェブアプリです、云々。</p>
-        <p>＊ここにイメージが入る予定</p>
-    </div>
+<div class="container-fluid">
 
     <% if @error_message %>
           <div class="form-error">
@@ -11,20 +6,38 @@
           </div>
     <% end %>
 
-    <%= form_with model: @user, url: login_path, local: true do |f| %>
-        <div class="sign-in-form">
-            <h2>ログイン</h2>
-            <%= f.label :email, "メールアドレス" %>
-                <%= f.text_field :email %>
-            <%= f.label :password, "パスワード" %>
-                <%= f.text_field :password %>
-            <%= f.submit "ログインする" %>
+    <h2 class="fw-bold text-center border-bottom border-secondary my-4 pb-4">ログイン</h2>
+    <div class="row justify-content-around  pt-4">
+        <div class="col-md-5 shadow-sm px-3 pb-5" style="background-color:#EEEEEE;">
+            <%= form_with model: @user, url: login_path, local: true do |f| %>
+            <h5 class="fw-bold border-bottom my-3 pb-2">ログインフォーム</h5>
+            <div class="ps-4 mb-2">
+                <div class="col-10 mt-3">
+                <label for="inputEmail" class="form-label">メールアドレス</label>
+                <input type="email" name="email" class="form-control" id="inputEmail">
+                </div>
+            </div>
+            <div class="ps-4 mb-2">
+                <div class="col-10 mt-3 shadow-sm">
+                <label for="inputPassword" class="form-label">パスワード</label>
+                <input type="password" name="password" class="form-control" id="inputPassword">
+                </div>
+            </div>
+            <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-primary mt-4 px-5">ログインする</button>
+            </div>
+            <% end %>
         </div>
-    <% end %>
-    <p>または</p>
-    <div class="btn sign-up">
-        <%= link_to "新規登録", users_signup_path, data: { "turbolinks" => false }  %>
+        <div class="col-md-5 px-3" style="background-color:#EEEEEE;">
+            <h5 class="fw-bold border-bottom my-3 pb-2">初めてご利用される方へ</h5> 
+            <div class="ps-4 mt-4">
+            <p>ご利用にはユーザー登録が必要です。</p>
+            <p>・ユーザー登録には、メールアドレスとパスワードの設定が必要です。</p>
+            <p>・ユーザー情報は、書誌データの管理に使用します。
+            </div>
+            <div class="text-center mb-4" style="margin-top:50px; ">
+            <%= link_to "新規登録はこちら", users_signup_path, { class: "btn btn-outline-secondary btn-lg px-4" } %>
+            </div>
+        </div>
     </div>
-
-
 </div>
