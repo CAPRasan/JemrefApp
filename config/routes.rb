@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "records/create_compilation", to: "records#create_compilation"
   get "records/index", to: "records#index"
   get "records/:id/edit", to: "records#edit", as: :edit_record
-  delete "records/:id/destroy", to: "records#destroy"
+  delete "records/:id/destroy", to: "records#destroy", as: :destroy_record
   patch "records/:id/update", to: "records#update", as: :update_record
 
   post "users/create", to: "users#create"

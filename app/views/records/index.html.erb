@@ -1,10 +1,10 @@
 
         <div class="container-fluid">
-            <h2 class="my-4">登録書誌表示・検索</h1>
+            <h2 class="my-4">登録書誌一覧・検索</h1>
 
               <%= form_with local: true, method: :get do %>
               <div class="input-group mb-4 ps-2 w-75 shadow-sm">
-                <input type="text" class="form-control border-primary border-2" name="keyword" placeholder="フリーワード検索"　aria-describedby="button-addon">
+                <input type="text" class="form-control border-primary border-2" name="keyword" placeholder="フリーワード検索" aria-describedby="button-addon">
                 <button type="submit" class="btn btn-primary px-5" id="button-addon">検索</button>
               </div>
               <% end %>
@@ -18,40 +18,89 @@
                 <ul class="list-group mt-2">
                   <% if record.type == "Compilation" || record.type == "Paper" %>
                   <li class="list-group-item d-flex justify-content-between align-items-start shadow-sm pb-1">
-                    <div class="ms-2 me-auto" style="width:85%;">  
+                    <div class="ms-2 me-2" style="width:85%;">  
                       <div>
                         <h5 class="fw-bold py-2 bg-secondary bg-opacity-10 border-2 border-bottom">📃 <%=record.author_name %>（<%= record.publish_date %>）</h4>
                       </div>
                       <h5 class="ms-4 fw-bold">「 <%= record.get_title %> 」</h5>
                       <p class="ms-5 text-secondary"><%= record.compiled_by %>編『<%= record.get_publication_title %>』<%= record.get_volume_and_number %><%= record.volume_other_form %>, <%= record.publisher %></p>
                     </div>
-                    <div>
-                    <span class="badge bg-primary rounded-pill"><%= record.status %></span>
-                    <%= link_to "更新 / 削除", edit_record_path(record), { class: "btn btn-outline-secondary btn-sm" } %>
+                    <div class="float-end smt-3 mt-2 me-1">
+                    <h5><span class="badge bg-primary rounded-pill "><%= record.status %></span></h5>
                     </div>
+                    <div class="ms-1 me-2">
+                    <%= link_to "更新", edit_record_path(record), { class: "btn btn-outline-secondary btn-sm mt-2" } %>
+
+                    <!-- 削除ボタン -->
+                    <%= form_with url: destroy_record_path(record), method: :delete  do %>
+                      <button type="button" class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#delete-confirmation">
+                        削除
+                      </button>
+                      <div class="modal fade" id="delete-confirmation" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="ModalLabel">ご確認</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              本当に削除しますか？
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+                              <button type="submit" class="btn btn-primary">はい</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                    </div>
+                    
                   </li>
 
                   <% elsif record.type == "Book" %>
                   <li class="list-group-item d-flex justify-content-between align-items-start shadow-sm pb-1">
-                    <div class="ms-2 me-auto" style="width:85%;">  
+                    <div class="ms-2 me-2" style="width:85%;">  
                       <div>
                         <h5 class="fw-bold py-2 bg-secondary bg-opacity-10 border-2 border-bottom">📕 <%=record.author_name %>（<%= record.publish_date %>）</h5>
                       </div>
                       <h5 class="ms-4 fw-bold">『 <%= record.get_title %> 』<%= record.volume_other_form %></h5>
                       <p class="ms-5 text-secondary"><%= record.publisher %></p>
                     </div>
-                    <div>
-                    <span class="badge bg-primary rounded-pill"><%= record.status %></span>
-                    <%= link_to "更新 / 削除", edit_record_path(record), { class: "btn btn-outline-secondary btn-sm" } %>
+                    <div class="float-end smt-3  mt-2 mx-1">
+                    <h5><span class="badge bg-primary rounded-pill"><%= record.status %></span></h5>
+                    </div>
+                    <div class="ms-1 me-2">
+                    <%= link_to "更新", edit_record_path(record), { class: "btn btn-outline-secondary btn-sm mt-2" } %>
+
+                    <!-- 削除ボタン -->
+                    <%= form_with url: destroy_record_path(record), method: :delete  do %>
+                      <button type="button" class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#delete-confirmation">
+                        削除
+                      </button>
+                      <div class="modal fade" id="delete-confirmation" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="ModalLabel">ご確認</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              本当に削除しますか？
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+                              <button type="submit" class="btn btn-primary">はい</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
                     </div>
                   </li>
                   <% end %>
-                  <div class="update-link">
-                    
-                  </div>
                 </ul>
               <% end %>
             </div>
-
         </div>
 

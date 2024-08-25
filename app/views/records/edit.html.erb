@@ -1,5 +1,5 @@
 
-        <div class="main contents">
+        <div class="main-contents">
             <h2 class="my-4">書誌情報変更</h2>
             
             <% if @record.errors.full_messages %>
@@ -178,9 +178,30 @@
               <% end %>
             <% end %>            
           </div>
-        
+
+          # 削除ボタンと警告モーダル
           <div class="mx-auto p-2 mt-4" style="width: 200px;">
-          <%= button_to "書誌情報を削除する", "/records/#{@record.id}/destroy", {method: "delete", class: "btn btn-outline-danger" } %>
+          <%= form_with url: destroy_record_path(@record), method: :delete  do %>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-confirmation">
+              書誌情報を削除する
+            </button>
+            <div class="modal fade" id="delete-confirmation" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ModalLabel">ご確認</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    本当に削除しますか？
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+                    <button type="submit" class="btn btn-primary">はい</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
           </div>
         </div>
-

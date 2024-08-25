@@ -1,6 +1,7 @@
 
         <div class="main-contents mx-2">
             <h2 class="my-4">書誌情報登録</h2>
+            
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="book-tab" data-bs-toggle="tab" data-bs-target="#book-tab-pane" type="button" role="tab" aria-controls="book-tab-pane" aria-selected="true">著書</button>
@@ -13,27 +14,27 @@
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-
               <!-- 著書タブ -->
               <div class="tab-pane fade show active" id="book-tab-pane" role="tabpanel" aria-labelledby="book-tab" tabindex="0">
                 <%= form_with model: Book.new, url: records_create_book_path, local: true do |f| %>
                   <div class="input-group mb-3">
                     <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">著書情報</h5>
                     <form class="row g-3 needs-validation" novalidate>
-                      <div class="col-md-6 mt-3 pe-5">
+                      <div class="col-md-6 pe-5">
                         <label for="inputAuthorName" class="form-label">著者名</label>
                         <input type="text" class="form-control" id="inputAuthorName" name="author_name" required>
                       </div>
-                      <div class="col-md-3 mt-3">
+                      <div class="col-md-3">
                         <label for="inputPublishDate" class="form-label">刊行年（西暦・半角数字）</label>
                         <input type="number" class="form-control" id="inputPublishDate" name="publish_date" placeholder="1980" required>
                       </div>
-                      <div class="input-group col-md-12 mt-3 pe-4">
+                      <div class="col-12 py-2">タイトル</div>
+                      <div class="input-group col-md-12 pe-4">
                         <input type="text" class="form-control" name="main_title" placeholder="主題" required>
                         <span class="input-group-text">：</span>
                         <input type="text" class="form-control" name="sub_title" placeholder="副題">
                       </div>
-                      <div class="col-md-8 mt-3">
+                      <div class="col-md-8 mt-5">
                         <label for="inputVolumeOtherForm" class="form-label">巻号その他（任意）</label>
                         <input type="text" name="volume_other_form" class="form-control" id="inputVolumeOtherForm" placeholder="1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合">
                       </div>
@@ -63,25 +64,27 @@
                   <div class="input-group mb-3">
                     <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">論文情報</h5>
                     <form class="row g-3 needs-validation"novalidate>
-                      <div class="col-md-6 mt-3 pe-5">
+                      <div class="col-md-6 pe-5">
                         <label for="inputAuthorName" class="form-label">著者名</label>
                         <input type="text" class="form-control" id="inputAuthorName" name="author_name" required>
                       </div>
-                      <div class="col-md-3 mt-3">
+                      <div class="col-md-3">
                         <label for="inputPublishDate" class="form-label">刊行年（西暦・半角数字）</label>
                         <input type="number" class="form-control" id="inputPublishDate" name="publish_date" placeholder="1980" required>
                       </div>
-                      <div class="input-group col-md-12 mt-3 pe-4">
+                      <div class="col-12 py-2">タイトル</div>
+                      <div class="input-group col-md-12 pe-4">
                         <input type="text" class="form-control" name="main_title" placeholder="主題" required>
                         <span class="input-group-text">：</span>
                         <input type="text" class="form-control" name="sub_title" placeholder="副題">
                       </div>
-                      <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">収録物情報</h5>
+                      <h5 class="fw-bold mt-3 py-3 col-12 border-bottom border-secondary">収録物情報</h5>
                       <div class="col-8">
                         <label for="inputCompiledBy" class="form-label">編者名</label>
                         <input type="text" class="form-control" id="inputCompiledBy" name="compiled_by">
                       </div>
-                      <div class="input-group col-md-12 mt-3 pe-4">
+                      <div class="col-12 py-2">雑誌タイトル</div>
+                      <div class="input-group col-md-12 pe-4">
                         <input type="text" class="form-control" name="publication_main_title" placeholder="主題" required>
                         <span class="input-group-text">：</span>
                         <input type="text" class="form-control" name="publication_sub_title" placeholder="副題">
@@ -112,8 +115,8 @@
                           <option value="unnecessary">不必要</option>
                         </select>
                       </div>
-                      <div class="d-grid gap-2 col-6 mx-auto">
-                        <button type="submit" class="btn btn-primary btn-lg mt-4">雑誌論文として登録</button>
+                      <div class="d-grid gap-2 mt-4  col-6 mx-auto">
+                        <button type="submit" class="btn btn-primary btn-lg mt-3">雑誌論文として登録</button>
                       </div>
                     </form>
                   </div>
@@ -126,25 +129,27 @@
                 <div class="input-group mb-3">
                   <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">論文情報</h5>
                   <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-md-6 mt-3 pe-5">
+                    <div class="col-md-6 pe-5">
                       <label for="inputAuthorName" class="form-label">著者名</label>
                       <input type="text" class="form-control" id="inputAuthorName" name="author_name" required>
                     </div>
-                    <div class="col-md-3 mt-3">
+                    <div class="col-md-3">
                       <label for="inputPublishDate" class="form-label">刊行年（西暦・半角数字）</label>
                       <input type="number" class="form-control" id="inputPublishDate" name="publish_date" placeholder="1980" required>
                     </div>
-                    <div class="input-group col-md-12 mt-3 pe-4">
+                    <div class="col-12 py-2">タイトル</div>
+                    <div class="input-group col-md-12 pe-4">
                       <input type="text" class="form-control" name="main_title" placeholder="主題" required>
                       <span class="input-group-text">：</span>
                       <input type="text" class="form-control" name="sub_title" placeholder="副題">
                     </div>
-                    <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">収録物情報</h5>
+                    <h5 class="fw-bold mt-3 py-3 col-12 border-bottom border-secondary">収録物情報</h5>
                     <div class="col-8">
                       <label for="inputCompiledBy" class="form-label">編者名</label>
                       <input type="text" class="form-control" id="inputCompiledBy" name="compiled_by" required>
                     </div>
-                    <div class="input-group col-md-12 mt-3 pe-4">
+                    <div class="col-12 py-2">収録物タイトル</div>
+                    <div class="input-group col-md-12 pe-4">
                       <input type="text" class="form-control" name="publication_main_title" placeholder="主題" required>
                       <span class="input-group-text">：</span>
                       <input type="text" class="form-control" name="publication_sub_title" placeholder="副題">
@@ -177,7 +182,7 @@
                         <option value="unnecessary">不必要</option>
                       </select>
                     </div>
-                    <div class="d-grid gap-2 col-6 mx-auto">
+                    <div class="d-grid gap-2 mt-4 col-6 mx-auto">
                       <button type="submit" class="btn btn-primary btn-lg mt-3">編著論文として登録</button>
                     </div>
                   </form>
