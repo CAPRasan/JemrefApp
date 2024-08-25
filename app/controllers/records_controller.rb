@@ -22,7 +22,7 @@ class RecordsController < ApplicationController
     @book.user_id = @current_user.id
     if @book.save
       flash[:notice] = "登録に成功しました"
-      redirect_to("/records/new")
+      redirect_to("/records/index")
     else
       # デバッグ用
       puts "登録に失敗しました"
@@ -36,7 +36,7 @@ class RecordsController < ApplicationController
     @paper.user_id = @current_user.id
     if @paper.save
       flash[:notice] = "登録に成功しました"
-      redirect_to("/records/new")
+      redirect_to("/records/index")
     else
       puts "登録に失敗しました"
       puts @paper.errors.full_messages
@@ -49,7 +49,7 @@ class RecordsController < ApplicationController
     @compilation.user_id = @current_user.id
     if @compilation.save
       flash[:notice] = "登録に成功しました"
-      redirect_to("/records/new")
+      redirect_to("/records/index")
     else
       puts "登録に失敗しました"
       puts @compilation.errors.full_messages

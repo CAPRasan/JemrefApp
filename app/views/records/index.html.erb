@@ -9,10 +9,11 @@
               </div>
               <% end %>
 
-            <div class="">
+            <div class="bib-list mb-5">
               <% if @keyword.present? %>
                 <%= "「#{@keyword}」の検索結果" %>
               <% end %>
+              <h6 class="ms-3 mb-3">全<%= @records.count %>件の書誌情報</h6>
 
               <% @records.each do |record| %>
                 <ul class="list-group mt-2">
@@ -29,33 +30,15 @@
                     <h5><span class="badge bg-primary rounded-pill "><%= record.status %></span></h5>
                     </div>
                     <div class="ms-1 me-2">
-                    <%= link_to "更新", edit_record_path(record), { class: "btn btn-outline-secondary btn-sm mt-2" } %>
+                      <%= link_to "更新", "/records/#{record.id}/edit", { class: "btn btn-outline-secondary btn-sm mt-2 px-3" } %>
 
-                    <!-- 削除ボタン -->
-                    <%= form_with url: destroy_record_path(record), method: :delete  do %>
-                      <button type="button" class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#delete-confirmation">
-                        削除
-                      </button>
-                      <div class="modal fade" id="delete-confirmation" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="ModalLabel">ご確認</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              本当に削除しますか？
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                              <button type="submit" class="btn btn-primary">はい</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    <% end %>
+                      <!-- 削除ボタン、この場合のmodalの処理は要調査 -->
+                      <%= form_with url: "/records/#{record.id}/destroy", method: :delete, local: true  do %>
+                        <button type="button" class="btn btn-outline-danger btn-sm mt-2 px-3">
+                          削除
+                        </button>
+                      <% end %>
                     </div>
-                    
                   </li>
 
                   <% elsif record.type == "Book" %>
@@ -71,30 +54,13 @@
                     <h5><span class="badge bg-primary rounded-pill"><%= record.status %></span></h5>
                     </div>
                     <div class="ms-1 me-2">
-                    <%= link_to "更新", edit_record_path(record), { class: "btn btn-outline-secondary btn-sm mt-2" } %>
+                    <%= link_to "更新", "/records/#{record.id}/edit", { class: "btn btn-outline-secondary btn-sm mt-2 px-3" } %>
 
                     <!-- 削除ボタン -->
-                    <%= form_with url: destroy_record_path(record), method: :delete  do %>
-                      <button type="button" class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#delete-confirmation">
+                    <%= form_with url: "/records/#{record.id}/destroy", method: :delete, local: true  do %>
+                      <button type="submit" class="btn btn-outline-danger btn-sm mt-2 px-3">
                         削除
                       </button>
-                      <div class="modal fade" id="delete-confirmation" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="ModalLabel">ご確認</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              本当に削除しますか？
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-                              <button type="submit" class="btn btn-primary">はい</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     <% end %>
                     </div>
                   </li>
