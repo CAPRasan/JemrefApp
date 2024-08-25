@@ -69,11 +69,13 @@
 
   <main class="container my-3">
     <% if flash[:notice] %>
-          <div class="flash-notice">
-            <%= flash[:notice] %>
-          </div>
-        <% end %>
-    
+      <div class="alert alert-info" role="alert">
+        ℹ️ <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+
+        
     <div class="container-fluid">
         <div class="main-contents-wrapper">
           <%= yield %>

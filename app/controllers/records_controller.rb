@@ -22,7 +22,7 @@ class RecordsController < ApplicationController
     @book.user_id = @current_user.id
     if @book.save
       flash[:notice] = "登録に成功しました"
-      redirect_to("/records/index")
+      redirect_to records_index_path
     else
       # デバッグ用
       puts "登録に失敗しました"
@@ -36,7 +36,7 @@ class RecordsController < ApplicationController
     @paper.user_id = @current_user.id
     if @paper.save
       flash[:notice] = "登録に成功しました"
-      redirect_to("/records/index")
+      redirect_to records_index_path
     else
       puts "登録に失敗しました"
       puts @paper.errors.full_messages
@@ -49,7 +49,7 @@ class RecordsController < ApplicationController
     @compilation.user_id = @current_user.id
     if @compilation.save
       flash[:notice] = "登録に成功しました"
-      redirect_to("/records/index")
+      redirect_to records_index_path
     else
       puts "登録に失敗しました"
       puts @compilation.errors.full_messages
@@ -61,7 +61,7 @@ class RecordsController < ApplicationController
     @record = Record.find_by(id: params[:id])
     if @record.update(record_params)
       flash[:notice] = "書誌情報を更新しました"
-      redirect_to("/records/index")
+      redirect_to records_index_path
     else
       flash[:notice] = "書誌情報の更新に失敗しました"
       puts @record.errors.full_messages
@@ -73,14 +73,14 @@ class RecordsController < ApplicationController
     @record = Record.find_by(id: params[:id])
     @record.destroy
     flash[:notice] ="書誌情報を削除しました"
-    redirect_to("/records/index")
+    redirect_to records_index_path
   end
 
   def ensure_correct_user
     @record = Record.find_by(id: params[:id])
     if @record.user_id != @current_user.id
       flash[:notice] = "権限がありません"
-      redirect_to("/records/index")
+      redirect_to records_index_path
     end
   end
 

@@ -17,8 +17,8 @@
               <!-- 著書タブ -->
               <div class="tab-pane fade show active" id="book-tab-pane" role="tabpanel" aria-labelledby="book-tab" tabindex="0">
                 <%= form_with model: Book.new, url: records_create_book_path, local: true do |f| %>
-                  <div class="input-group mb-3">
-                    <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">著書情報</h5>
+                  <div class="input-group mb-3 p-4 border border-top-0 rounded-1 shadow-sm">
+                    <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">📕 著書情報</h5>
                     <form class="row g-3 needs-validation" novalidate>
                       <div class="col-md-6 pe-5">
                         <label for="inputAuthorName" class="form-label">著者名</label>
@@ -61,8 +61,8 @@
               <!-- 雑誌論文タブ -->
               <div class="tab-pane fade" id="paper-tab-pane" role="tabpanel" aria-labelledby="paper-tab" tabindex="0">
                 <%= form_with model: Paper.new, url: records_create_paper_path, local: true do |f| %>
-                  <div class="input-group mb-3">
-                    <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">論文情報</h5>
+                  <div class="input-group mb-3 p-4 border border-top-0 rounded-1 shadow-sm">
+                    <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">📃 論文情報</h5>
                     <form class="row g-3 needs-validation"novalidate>
                       <div class="col-md-6 pe-5">
                         <label for="inputAuthorName" class="form-label">著者名</label>
@@ -78,7 +78,7 @@
                         <span class="input-group-text">：</span>
                         <input type="text" class="form-control" name="sub_title" placeholder="副題">
                       </div>
-                      <h5 class="fw-bold mt-3 py-3 col-12 border-bottom border-secondary">収録物情報</h5>
+                      <h5 class="fw-bold mt-3 py-3 col-12 border-bottom border-secondary">📕 収録物情報</h5>
                       <div class="col-8">
                         <label for="inputCompiledBy" class="form-label">編者名</label>
                         <input type="text" class="form-control" id="inputCompiledBy" name="compiled_by">
@@ -126,8 +126,8 @@
               <!-- 編著論文タブ -->
               <div class="tab-pane fade" id="compilation-tab-pane" role="tabpanel" aria-labelledby="compilation-tab" tabindex="0">
                 <%= form_with model: Compilation.new, url: records_create_compilation_path, local: true do |f| %>
-                <div class="input-group mb-3">
-                  <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">論文情報</h5>
+                <div class="input-group mb-3 p-4 border border-top-0 rounded-1 shadow-sm">
+                  <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">📃 論文情報</h5>
                   <form class="row g-3 needs-validation" novalidate>
                     <div class="col-md-6 pe-5">
                       <label for="inputAuthorName" class="form-label">著者名</label>
@@ -143,7 +143,7 @@
                       <span class="input-group-text">：</span>
                       <input type="text" class="form-control" name="sub_title" placeholder="副題">
                     </div>
-                    <h5 class="fw-bold mt-3 py-3 col-12 border-bottom border-secondary">収録物情報</h5>
+                    <h5 class="fw-bold mt-3 py-3 col-12 border-bottom border-secondary">📕 収録物情報</h5>
                     <div class="col-8">
                       <label for="inputCompiledBy" class="form-label">編者名</label>
                       <input type="text" class="form-control" id="inputCompiledBy" name="compiled_by" required>
