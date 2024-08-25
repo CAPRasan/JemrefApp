@@ -1,20 +1,20 @@
 
         <div class="main contents">
-            <h1>書誌情報変更</h1>
+            <h2 class="my-4">書誌情報変更</h2>
             
-              <% if @record.errors.full_messages %>
-                <div class="error-alert">
-                <ul>
-                  <% @record.errors.full_messages.each do |message| %>
-                  <li class='error-message'><%= message %></li>
-                  <% end %>
-                </ul>
-                </div>
-              <% end %>
+            <% if @record.errors.full_messages %>
+              <div class="error-alert">
+              <ul>
+                <% @record.errors.full_messages.each do |message| %>
+                <li class='error-message'><%= message %></li>
+                <% end %>
+              </ul>
+              </div>
+            <% end %>
             
-            <%= link_to("一覧にもどる", "/records/index") %>
+          <%= link_to("一覧に戻る", records_index_path, {class: "ms-3 link-offset-1 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"}) %>
             
-
+          <div class="container">
             <!-- bookクラスの編集フォーム -->
             <%= form_with url: update_record_path(@record), method: :patch, local: true do %>
               <% if @record.type == "Book" %>
@@ -177,9 +177,10 @@
                   </div>
               <% end %>
             <% end %>            
-        </div>
+          </div>
         
-        <div class="mx-auto p-2 mt-4" style="width: 200px;">
-        <%= button_to "書誌情報を削除する", "/records/#{@record.id}/destroy", {method: "delete", class: "btn btn-outline-danger" } %>
+          <div class="mx-auto p-2 mt-4" style="width: 200px;">
+          <%= button_to "書誌情報を削除する", "/records/#{@record.id}/destroy", {method: "delete", class: "btn btn-outline-danger" } %>
+          </div>
         </div>
 

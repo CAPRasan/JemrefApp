@@ -8,7 +8,7 @@ class Record < ApplicationRecord
 
     def get_title
         if self.sub_title != ""
-            title = "#{ self.main_title } ––––#{ self.sub_title }"
+            title = "#{ self.main_title } 　━#{ self.sub_title }━"
         else
             title = "#{ self.main_title }"
         end
@@ -17,7 +17,7 @@ class Record < ApplicationRecord
 
     def get_publication_title
         if self.publication_sub_title != ""
-            publication_title = "#{ self.publication_main_title } ––––#{ self.publication_sub_title }"
+            publication_title = "#{ self.publication_main_title }　 ━#{ self.publication_sub_title }━"
         else
             publication_title = "#{ self.publication_main_title }"
         end
