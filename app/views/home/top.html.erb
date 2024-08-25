@@ -1,4 +1,19 @@
+<div class="container">
+    <div class="text-center pb-5 border-bottom">
+        
+        <h2 class="my-5 fw-bold">JemRefは、人文・社会科学系分野の和文文献の書誌情報整理に特化したツールです。</h2>
 
-<h1>これは仮設ホームです</h1>
-<%= link_to("ログインはこちら", login_path) %>
-<%= link_to("ログイン済みの方はこちら", records_new_path) %>
+        <p class="">研究文献はあまりに多く、玉石混交です。</p>
+        <p>その整理を、メモや記憶に頼ることは難しい時代になりました。</p>
+        <%= image_tag "jemref_img_registration.png", class: "img-thumbnail w-50 rounded mx-auto d-block" %>
+        
+        <p class="pt-5 ms-3">文献を〈忘れない〉、〈見逃さない〉、〈積み残さない〉ための方法を提供します。</p>
+        <%= image_tag "jemref_img_index.png", class: "img-thumbnail w-50 rounded mx-auto d-block" %>
+    </div>
+
+    
+    <div class="text-center my-5">
+        <%= link_to "ログイン", login_path, { class: "btn btn-outline-primary btn-lg mt-4 px-5" } %>
+        <h5 class="my-4">または</h5>
+        <%= link_to "新規登録", users_signup_path, { class: "btn btn-secondary btn-lg px-5" } %>
+    </div>
