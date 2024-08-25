@@ -14,41 +14,172 @@
             
             <%= link_to("一覧にもどる", "/records/index") %>
             
-            <%= form_with url: update_record_path(@record), method: :patch, local: true do |f|%>
-              <div class="bibinfo-edit-form">
-                <!-- STIの場合のmodel指定方法が不明なためさしあたりhtml直書き -->
-                <p>形態: <%= @record.type %>"</p>
-                <label for="author_name">著者名:</label>
-                <input type="text" id="author_name" name="author_name" value="<%= @record.author_name %>">
-                <label for="main_title">主題:</label>
-                <input type="text" id="main_title" name="main_title" value="<%= @record.main_title %>">
-                <label for="sub_title">副題:</label>
-                <input type="text" id="sub_title" name="sub_title" value="<%= @record.sub_title %>">
-                <label for="publish_date">出版年:</label>
-                <input type="integer" id="publish_date" name="publish_date" value="<%= @record.publish_date %>">
-                <label for="publisher">出版社:</label>
-                <input type="text" id="publisher" name="publisher" value="<%= @record.publisher %>">
-                <label for="compiled_by">編者:</label>
-                <input type="text" id="compiled_by" name="compiled_by" value="<%= @record.compiled_by %>">
-                <label for="publication_main_title">収録物名:主題</label>
-                <input type="text" id="publication_main_title" name="publication_main_title" value="<%= @record.publication_main_title %>">
-                <label for="publication_sub_title">副題</label>
-                <input type="text" id="publication_sub_title" name="publication_sub_title" value="<%= @record.publication_sub_title %>">
-                <label for="volume">巻:</label>
-                <input type="integer" id="volume" name="volume" value="<%= @record.volume %>">
-                <label for="no">号:</label>
-                <input type="integer" id="no" name="no" value="<%= @record.no %>">
-                <label for="volume_other_form">巻号その他:</label>
-                <input type="string" id="volume_other_form" name="volume_other_form" value="<%= @record.volume_other_form%>">
-                <label for="memo">メモ:</label>
-                <textarea id="memo" name="memo"><%= @record.memo %></textarea>
-                <label for="status">状態:（0=既読、1=未読、2=オミット）</label>
-                <input type="integer" id="status" name="status" value="<%= @record.status %>">
-                <input type="submit" value="変更">
-              </div>
-            <% end %>
-            
+
+            <!-- bookクラスの編集フォーム -->
+            <%= form_with url: update_record_path(@record), method: :patch, local: true do %>
+              <% if @record.type == "Book" %>
+                <div class="input-group mb-3">
+                  <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">著書情報</h5>
+                  <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6 mt-3 pe-5">
+                      <label for="inputAuthorName" class="form-label">著者名</label>
+                      <input type="text" class="form-control" id="inputAuthorName" name="author_name" value="<%= @record.author_name %>" required>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                      <label for="inputPublishDate" class="form-label">刊行年（西暦・半角数字）</label>
+                      <input type="number" class="form-control" id="inputPublishDate" name="publish_date" placeholder="1980" value="<%= @record.publish_date %>" required>
+                    </div>
+                    <div class="input-group col-md-12 mt-3 pe-4">
+                      <input type="text" class="form-control" name="main_title" placeholder="主題" value="<%= @record.main_title %>" required>
+                      <span class="input-group-text">：</span>
+                      <input type="text" class="form-control" name="sub_title" placeholder="副題" value="<%= @record.sub_title %>" >
+                    </div>
+                    <div class="col-md-8 mt-3">
+                      <label for="inputVolumeOtherForm" class="form-label">巻号その他（任意）</label>
+                      <input type="text" name="volume_other_form" class="form-control" id="inputVolumeOtherForm" value="<%= @record.volume_other_form %>">
+                    </div>
+                    <div class="col-md-6 pe-5 mt-3">
+                      <label for="inputPublisher" class="form-label">出版社</label>
+                      <input type="text" name="publisher" class="form-control" id="inputPublisher" value="<%= @record.publisher %>" required>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                      <label for="inputStatus" class="form-label">状態</label>
+                      <select id="inputStatus" name="status" class="form-select">
+                        <option selected value="read">既読</option>
+                        <option value="unread">未読</option>
+                        <option value="unnecessary">不必要</option>
+                      </select>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                      <button type="submit" class="btn btn-primary btn-lg mt-5 ">更新</button>
+                    </div>
+                  </form>
+                </div>
+              
+            <!-- paperクラスの編集フォーム -->
+              <% elsif @record.type == "Paper" %>
+                <div class="input-group mb-3">
+                <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">雑誌論文情報</h5>
+                <form class="row g-3 needs-validation"novalidate>
+                  <div class="col-md-6 mt-3 pe-5">
+                    <label for="inputAuthorName" class="form-label">著者名</label>
+                    <input type="text" class="form-control" id="inputAuthorName" name="author_name" value="<%= @record.author_name %>" required>
+                  </div>
+                  <div class="col-md-3 mt-3">
+                    <label for="inputPublishDate" class="form-label">刊行年（西暦・半角数字）</label>
+                    <input type="number" class="form-control" id="inputPublishDate" name="publish_date" placeholder="1980" value="<%= @record.publish_date %>" required>
+                  </div>
+                  <div class="input-group col-md-12 mt-3 pe-4">
+                    <input type="text" class="form-control" name="main_title" placeholder="主題" value="<%= @record.main_title %>" required>
+                    <span class="input-group-text">：</span>
+                    <input type="text" class="form-control" name="sub_title" placeholder="副題" value="<%= @record.sub_title %>">
+                  </div>
+                  <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">収録物情報</h5>
+                  <div class="col-8">
+                    <label for="inputCompiledBy" class="form-label">編者名</label>
+                    <input type="text" class="form-control" id="inputCompiledBy" name="compiled_by" value="<%= @record.compiled_by %>">
+                  </div>
+                  <div class="input-group col-md-12 mt-3 pe-4">
+                    <input type="text" class="form-control" name="publication_main_title" placeholder="主題" value="<%= @record.publication_main_title %>" required>
+                    <span class="input-group-text">：</span>
+                    <input type="text" class="form-control" name="publication_sub_title" placeholder="副題" value="<%= @record.publication_sub_title %>">
+                  </div>
+                  <div class="mt-3 pe-5 col-md-4">
+                    <label class="form-label">巻号</label>
+                    <div class="input-group">
+                      <span class="input-group-text">第</span>
+                      <input type="number" name="volume" aria-label="volume" class="form-control col-1" value="<%= @record.volume %>">
+                      <span class="input-group-text">巻</span>
+                      <input type="number" name="no" aria-label="no" class="form-control col-1" value="<%= @record.no %>">
+                      <span class="input-group-text">号</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mt-3">
+                    <label for="inputVolumeOtherForm" class="form-label">巻号その他（任意）</label>
+                    <input type="text" name="volume_other_form" class="form-control" id="inputVolumeOtherForm"  value="<%= @record.volume_other_form %>">
+                  </div>
+                  <div class="col-md-4 pe-5 mt-3">
+                    <label for="inputPublisher" class="form-label">出版社</label>
+                    <input type="text" name="publisher" class="form-control" id="inputPublisher" value="<%= @record.publisher %>">
+                  </div>
+                  <div class="col-md-3 mt-3">
+                    <label for="inputStatus" class="form-label">状態</label>
+                    <select id="inputStatus" name="status" class="form-select">
+                      <option selected value="read">既読</option>
+                      <option value="unread">未読</option>
+                      <option value="unnecessary">不必要</option>
+                    </select>
+                  </div>
+                  <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-primary btn-lg mt-5">更新</button>
+                  </div>
+                </form>
+                </div>
+              
+              <!-- compilationクラスの編集フォーム -->
+                <% else %>
+                <div class="input-group mb-3">
+                    <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">編著論文情報</h5>
+                    <form class="row g-3 needs-validation" novalidate>
+                      <div class="col-md-6 mt-3 pe-5">
+                        <label for="inputAuthorName" class="form-label">著者名</label>
+                        <input type="text" class="form-control" id="inputAuthorName" name="author_name" value="<%= @record.author_name %>" required>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <label for="inputPublishDate" class="form-label">刊行年（西暦・半角数字）</label>
+                        <input type="number" class="form-control" id="inputPublishDate" name="publish_date" placeholder="1980" value="<%= @record.publish_date %>" required>
+                      </div>
+                      <div class="input-group col-md-12 mt-3 pe-4">
+                        <input type="text" class="form-control" name="main_title" placeholder="主題" value="<%= @record.main_title %>" required>
+                        <span class="input-group-text">：</span>
+                        <input type="text" class="form-control" name="sub_title" placeholder="副題" value="<%= @record.sub_title %>">
+                      </div>
+                      <h5 class="fw-bold py-3 col-12 border-bottom border-secondary">収録物情報</h5>
+                      <div class="col-8">
+                        <label for="inputCompiledBy" class="form-label">編者名</label>
+                        <input type="text" class="form-control" id="inputCompiledBy" name="compiled_by" value="<%= @record.compiled_by %>" required>
+                      </div>
+                      <div class="input-group col-md-12 mt-3 pe-4">
+                        <input type="text" class="form-control" name="publication_main_title" value="<%= @record.publication_main_title %>" placeholder="主題" required>
+                        <span class="input-group-text">：</span>
+                        <input type="text" class="form-control" name="publication_sub_title" value="<%= @record.publication_sub_title %>" placeholder="副題">
+                      </div>
+                      <div class="mt-3 pe-5 col-md-4">
+                        <label class="form-label">巻号</label>
+                        <div class="input-group">
+                          <span class="input-group-text">第</span>
+                          <input type="number" class="form-control col-1" name="volume" value="<%= @record.volume %>" aria-label="volume">
+                          <span class="input-group-text">巻</span>
+                          <input type="number" class="form-control col-1" name="no" value="<%= @record.no %>" aria-label="no">
+                          <span class="input-group-text">号</span>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mt-3">
+                        <label for="inputVolumeOtherForm" class="form-label">巻号その他（任意）</label>
+                        <input type="text" class="form-control" name="volume_other_form" value="<%= @record.volume_other_form %>" id="inputVolumeOtherForm" placeholder="1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合">
+                      </div>
+                      <div class="col-md-4 pe-5 mt-3">
+                        <label for="inputPublisher" class="form-label">出版社</label>
+                        <input type="text" class="form-control" name="publisher" value="<%= @record.publisher %>" id="inputPublisher" required>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <label for="inputStatus" class="form-label">状態</label>
+                        <select id="inputStatus" name="status" class="form-select">
+                          <option selected value="read">既読</option>
+                          <option value="unread">未読</option>
+                          <option value="unnecessary">不必要</option>
+                        </select>
+                      </div>
+                      <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-primary btn-lg mt-5">更新</button>
+                      </div>
+                    </form>
+                  </div>
+              <% end %>
+            <% end %>            
         </div>
-        <div class="delete-form">
-        <%= button_to "書誌情報を削除する", "/records/#{@record.id}/destroy", {method: "delete" } %>
+        
+        <div class="mx-auto p-2 mt-4" style="width: 200px;">
+        <%= button_to "書誌情報を削除する", "/records/#{@record.id}/destroy", {method: "delete", class: "btn btn-outline-danger" } %>
         </div>
+
