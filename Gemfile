@@ -38,7 +38,7 @@ gem "bootsnap", require: false
 gem "jquery-rails"
 gem "dartsass-sprockets"
 gem "bootstrap", "~> 5.3.3"
-
+gem "font-awesome-rails"
 
 
 
