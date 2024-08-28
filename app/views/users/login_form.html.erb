@@ -11,14 +11,14 @@
         <div class="col-md-5 shadow-sm px-3 pb-5" style="background-color:#EEEEEE;">
             <%= form_with model: @user, url: login_path, local: true do |f| %>
             <h5 class="fw-bold border-bottom my-3 pb-2"></i>ログインフォーム</h5>
-            <div class="ps-4 mb-2">
-                <div class="col-10 mt-3">
+            <div class="px-4 mt-2">
+                <div class="col-12 mt-4">
                 <label for="inputEmail" class="form-label">メールアドレス</label>
                 <input type="email" name="email" class="form-control" id="inputEmail">
                 </div>
             </div>
-            <div class="ps-4 mb-2">
-                <div class="col-10 mt-3 shadow-sm">
+            <div class="px-4 mb-2">
+                <div class="col-12 mt-3 shadow-sm">
                 <label for="inputPassword" class="form-label">パスワード</label>
                 <input type="password" name="password" class="form-control" id="inputPassword">
                 </div>
@@ -30,10 +30,10 @@
         </div>
         <div class="col-md-5 px-3" style="background-color:#EEEEEE;">
             <h5 class="fw-bold border-bottom my-3 pb-2"></i>初めてご利用される方へ</h5> 
-            <div class="ps-4 mt-4">
-            <p>ご利用にはユーザー登録が必要です。</p>
-            <p>・ユーザー登録には、メールアドレスとパスワードの設定が必要です。</p>
-            <p>・ユーザー情報は、書誌データの管理に使用します。
+            <div class="px-4 mt-4">
+            <p class="my-4">ご利用にはユーザー登録が必要です。</p>
+            <p>・メールアドレスとパスワードを設定してください。</p>
+            <p>・ユーザー情報は、書誌データの管理にのみ使用します。
             </div>
             <div class="text-center mb-4" style="margin-top:50px; ">
             <%= link_to "新規登録はこちら", users_signup_path, { class: "btn btn-outline-secondary btn-lg px-4" } %>
