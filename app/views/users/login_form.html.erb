@@ -9,7 +9,7 @@
     <h2 class="fw-bold text-center border-bottom border-secondary my-4 pb-4">ログイン</h2>
     <div class="row justify-content-around  pt-4">
         <div class="col-md-5 shadow-sm px-3 pb-5" style="background-color:#EEEEEE;">
-            <%= form_with model: @user, url: login_path, local: true do |f| %>
+            <%= form_with model: @user, url: login_path, data: { turbo: false } do |f| %>
             <h5 class="fw-bold border-bottom my-3 pb-2"></i>ログインフォーム</h5>
             <div class="px-4 mt-2">
                 <div class="col-12 mt-4">
