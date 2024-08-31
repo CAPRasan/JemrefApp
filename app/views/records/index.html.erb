@@ -26,15 +26,18 @@
                       <h5 class="ms-4 fw-bold">「 <%= record.get_title %> 」</h5>
                       <p class="ms-5 text-secondary"><%= record.compiled_by %>編『<%= record.get_publication_title %>』<%= record.get_volume_and_number %><%= record.volume_other_form %>, <%= record.publisher %></p>
                     </div>
-                    <div class="float-end smt-3 mt-2 me-1">
+                    <div class="smt-3 mt-2 me-1">
                     <h5><span class="badge bg-primary rounded-pill fw-normal"><%= record.status %></span></h5>
                     </div>
                     <div class="ms-1 me-2">
+                      <div>
                       <%= link_to "更新", "/records/#{record.id}/edit", { class: "btn btn-outline-secondary btn-sm mt-2 px-3" } %>
+                      </div>
 
-                      <!-- 削除ボタン、要調整 -->
+                      <!-- 削除ボタン -->
+                      <div>
                       <%= form_with url: "/records/#{record.id}/destroy", method: :delete do %>
-                      <button type="submit" class="btn btn-outline-danger btn-sm mt-2 px-3" data-bs-toggle="modal" data-bs-target="#delete-confirmation-<%= record.id %>">
+                      <button type="button" class="btn btn-outline-danger btn-sm mt-2 px-3" data-bs-toggle="modal" data-bs-target="#delete-confirmation-<%= record.id %>">
                         削除
                       </button>
                       <div class="modal fade" id="delete-confirmation-<%= record.id %>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -54,7 +57,7 @@
                           </div>
                         </div>
                       </div>
-                    <% end %>
+                      <% end %>
                     </div>
                   </li>
 
@@ -74,11 +77,29 @@
                     <%= link_to "更新", "/records/#{record.id}/edit", { class: "btn btn-outline-secondary btn-sm mt-2 px-3" } %>
 
                     <!-- 削除ボタン -->
-                    <%= form_with url: "/records/#{record.id}/destroy", method: :delete, local: true  do %>
-                      <button type="submit" class="btn btn-outline-danger btn-sm mt-2 px-3">
+                    <div>
+                      <%= form_with url: "/records/#{record.id}/destroy", method: :delete do %>
+                      <button type="button" class="btn btn-outline-danger btn-sm mt-2 px-3" data-bs-toggle="modal" data-bs-target="#delete-confirmation-<%= record.id %>">
                         削除
                       </button>
-                    <% end %>
+                      <div class="modal fade" id="delete-confirmation-<%= record.id %>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="ModalLabel">確認</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              本当に削除しますか？
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+                              <button type="submit" class="btn btn-primary">はい</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <% end %>
                     </div>
                   </li>
                   <% end %>
