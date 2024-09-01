@@ -21,37 +21,38 @@
                     <h5 class="fw-bold py-3 mb-4 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 著書情報</h5>
                     <form class="row g-3 needs-validation" novalidate>
                       <div class="col-md-6 pe-5">
-                        <label for="inputAuthorName" class="form-label">著者名</label>
-                        <input type="text" class="form-control border-dark-subtle" id="inputAuthorName" name="author_name" required>
+                        <%= f.label :author_name, "著者名", class: "form-label" %>
+                        <%= f.text_field :author_name, class: "form-control border-dark-subtle", required: true %>
                       </div>
                       <div class="col-md-3">
-                        <label for="inputPublishDate" class="form-label">刊行年（西暦・半角数字）</label>
-                        <input type="number" class="form-control border-dark-subtle" id="inputPublishDate" name="publish_date" placeholder="1980" required>
+                        <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
+                        <%= f.number_field :publish_date, class: "form-control border-dark-subtle", required: true %>
                       </div>
                       <div class="col-12 py-2">タイトル</div>
                       <div class="input-group col-md-12 pe-4">
-                        <input type="text" class="form-control border-dark-subtle" name="main_title" placeholder="主題" required>
+                        <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", required: true %>
                         <span class="input-group-text">：</span>
-                        <input type="text" class="form-control border-dark-subtle" name="sub_title" placeholder="副題">
+                        <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題" %>
                       </div>
                       <div class="col-md-8 mt-5">
-                        <label for="inputVolumeOtherForm" class="form-label">巻号その他（任意）</label>
-                        <input type="text" name="volume_other_form" class="form-control border-dark-subtle" id="inputVolumeOtherForm" placeholder="1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合">
+                        <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
+                        <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合" %>
                       </div>
                       <div class="col-md-6 pe-5 mt-3">
-                        <label for="inputPublisher" class="form-label border-dark-subtle">出版社</label>
-                        <input type="text" name="publisher" class="form-control border-dark-subtle" id="inputPublisher" required>
+                        <%= f.label :publisher, "出版社", class: "form-label" %>
+                        <%= f.text_field :publisher, class: "form-control border-dark-subtle", required: true %>
                       </div>
-                      <div class="col-md-3 mt-3">
-                        <label for="inputStatus" class="form-label">状態</label>
-                        <select id="inputStatus" name="status" class="form-select border-dark-subtle">
-                          <option selected value="read">既読</option>
-                          <option value="unread">未読</option>
-                          <option value="unnecessary">不必要</option>
-                        </select>
+                      <div class="col-md-3 mt-2">
+                        <div class="col-12 py-2">状態</div>
+                        <%= f.select :status,
+                        [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ],
+                        {},
+                        class: "form-select border-dark-subtle",
+                        required: true
+                         %>
                       </div>
                       <div class="d-grid gap-2 mt-4 col-6 mx-auto">
-                        <button type="submit" class="btn btn-primary btn-lg mt-3">著書として登録</button>
+                        <%= f.submit "著書として登録", class: "btn btn-primary btn-lg mt-3" %>
                       </div>
                     </form>
                   </div>

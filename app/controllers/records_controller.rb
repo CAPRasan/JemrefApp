@@ -18,7 +18,7 @@ class RecordsController < ApplicationController
   end
 
   def create_book
-    @book = Book.new(record_params)
+    @book = Book.new(book_params)
     @book.user_id = @current_user.id
     if @book.save
       flash[:notice] = "登録に成功しました"
@@ -87,6 +87,14 @@ class RecordsController < ApplicationController
   private
   def record_params
     params.permit(
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+      :compiled_by, :publication_main_title, :publication_sub_title,
+      :volume, :no, :volume_other_form, :memo, :status
+    )
+  end
+
+  def book_params
+    params.require(:book).permit(
       :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
