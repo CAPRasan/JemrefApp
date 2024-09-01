@@ -32,7 +32,7 @@ class RecordsController < ApplicationController
   end
 
   def create_paper
-    @paper = Paper.new(record_params)
+    @paper = Paper.new(paper_params)
     @paper.user_id = @current_user.id
     if @paper.save
       flash[:notice] = "登録に成功しました"
@@ -95,6 +95,13 @@ class RecordsController < ApplicationController
 
   def book_params
     params.require(:book).permit(
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+      :volume_other_form, :memo, :status
+    )
+  end
+
+  def paper_params
+    params.require(:paper).permit(
       :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
