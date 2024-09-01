@@ -45,7 +45,7 @@ class RecordsController < ApplicationController
   end
 
   def create_compilation
-    @compilation = Compilation.new(record_params)
+    @compilation = Compilation.new(compilation_params)
     @compilation.user_id = @current_user.id
     if @compilation.save
       flash[:notice] = "登録に成功しました"
@@ -102,6 +102,14 @@ class RecordsController < ApplicationController
 
   def paper_params
     params.require(:paper).permit(
+      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+      :compiled_by, :publication_main_title, :publication_sub_title,
+      :volume, :no, :volume_other_form, :memo, :status
+    )
+  end
+
+  def compilation_params
+    params.require(:compilation).permit(
       :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
       :compiled_by, :publication_main_title, :publication_sub_title,
       :volume, :no, :volume_other_form, :memo, :status
