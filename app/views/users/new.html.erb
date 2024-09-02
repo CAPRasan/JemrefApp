@@ -1,8 +1,4 @@
 <div class="container">
-    <div class="heading">
-        <h1>新規登録</h1>
-    </div>
-
     <% if @user.errors.full_messages %>
     <div class="error-alert">
       <ul>
@@ -12,10 +8,10 @@
       </ul>
     </div>
     <% end %>
-    
+    <h2 class="fw-bold text-center border-bottom border-secondary my-4 pb-4">新規登録</h2>
     <div class="col-md-5 shadow-sm px-3 pb-5" style="background-color:#EEEEEE;">
     <%= form_with model: @user, url: users_create_path, data: { turbo: false } do |f|%>
-      <h5 class="fw-bold border-bottom my-3 pb-2"></i>ログインフォーム</h5>
+      <h5 class="fw-bold border-bottom my-3 p-2 text-center">ユーザー情報入力</h5>
       <div class="px-4 mt-2">
         <div class="col-12 mt-4">
           <%= f.label :name, "名前（ニックネーム）", class: "form-label" %>
@@ -33,13 +29,16 @@
           <%= f.label :password, "パスワード", class: "form-label"  %>
           <%= f.password_field :password, class: "form-control"  %>
         </div>
+        <div class="col-12 mt-4">
+          <%= f.label :password_confirmation, "パスワード（確認用）", class: "form-label"  %>
+          <%= f.password_field :password_confirmation, class: "form-control"  %>
+        </div>
       </div>
       <div class="text-center">
         <%= f.submit "登録する", class: "btn btn-lg btn-primary mt-4 px-5"%>
       </div>
 
     <% end %>
-    <%= link_to("ログインページに戻る", login_path) %>
     </div>
-
+      <%= link_to("ログインページに戻る", login_path) %>
 </div>
