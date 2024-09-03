@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticatie_user, { only: [ :logout ] }
   before_action :fobid_login_user, { only: [ :new, :create, :login, :login_form ] }
-  def index
-    @users = User.all
-  end
+  # def index
+  #   @users = User.all
+  # end
 
   def new
     @user = User.new
