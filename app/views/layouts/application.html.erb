@@ -1,99 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_importmap_tags %>
-    <%= javascript_include_tag 'application' %>
-    <meta name="turbo-cache-control" content="no-cache">
-  </head>
-
+  <%= render "layouts/head" %>
   <body>
-
-  <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary" data-bs-theme="dark">
-      <div class="container-fluid">
-      <% if @current_user %>
-        <a class="navbar-brand px-4 fs-2 fw-bold" href="/records/new">JemRef</a>
-      <% else %>
-        <a class="navbar-brand px-4 fs-2 fw-bold" href="/">JemRef</a>
-      <% end %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <% if @current_user %>
-            <li class="nav-item">
-              <%= link_to "書誌情報入力", records_new_path, { class: "nav-link pe-3" } %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "登録書誌一覧・検索", records_index_path, { class: "nav-link pe-3" } %>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link pe-3" href="#">利用方法・お問い合わせ</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">アカウント</a>
-              <ul class="dropdown-menu" style="width: 200px;">
-                <li><p class="ps-3">現在のユーザー </p></li>
-                <li><p class="ps-4"><span class="fa fa-user pe-2" style="color:white;"></span> <%= @current_user.name %></p></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><%= link_to "ログアウト", logout_path, class: "dropdown-item", method: :post %></li>
-              </ul>
-            </li>
-            <% else %>
-            <li class="nav-item">
-              <a class="nav-link pe-3" href="#">利用方法・お問い合わせ</a>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", login_path, { class: "nav-link pe-3" } %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "新規登録", users_signup_path, { class: "nav-link pe-3" } %>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+    <%= render "layouts/header" %>
 
   <main class="container my-3">
     <% if flash[:notice] %>
       <div class="alert alert-info" role="alert">
         ℹ️ <%= flash[:notice] %>
       </div>
-    <% end %>
-
-    
-
-
-        
+    <% end %> 
     <div class="container-fluid">
         <div class="main-contents-wrapper">
           <%= yield %>
         </div>
     </div>
   </main>
-    
-  <footer>
-    <nav class="bg-body-tertiary bg-primary" data-bs-theme="dark" style="height:250px; margin-top:150px; padding-bottom:50px;">
-      <div class="container-fluid text-center pt-4">
-        <small style="color:white;">© 2024 JemRef</small>
-      </div>
-    </nav>
-  </footer>
+  <%= render "layouts/footer" %>
   </body>
 </html>

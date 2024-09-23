@@ -1,0 +1,48 @@
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary" data-bs-theme="dark">
+      <div class="container-fluid">
+      <% if @current_user %>
+        <%= link_to "JemRef", records_index_path, class:"navbar-brand px-4 fs-2 fw-bold" %>
+      <% else %>
+        <%= link_to "JemRef", root_path, class:"navbar-brand px-4 fs-2 fw-bold" %>
+      <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <% if @current_user %>
+            <li class="nav-item">
+              <%= link_to "書誌情報入力", records_new_path, class: "nav-link pe-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "登録書誌一覧・検索", records_index_path, class: "nav-link pe-3" %>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pe-3" href="#">利用方法・お問い合わせ</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">アカウント</a>
+              <ul class="dropdown-menu" style="width: 200px;">
+                <li><p class="ps-3">現在のユーザー </p></li>
+                <li><p class="ps-4"><span class="fa fa-user pe-2" style="color:white;"></span> <%= @current_user.name %></p></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><%= link_to "ログアウト", logout_path, class: "dropdown-item", method: :post %></li>
+              </ul>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <%= link_to "利用方法・お問い合わせ", "#", class:"nav-link pe-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", login_path, class: "nav-link pe-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", users_signup_path, class: "nav-link pe-3" %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
