@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "login", to: "users#login_form"
   get "logout", to: "users#logout"
   get "users/index", to: "users#index"
-  get "users/signup", to: "users#new"
+  get "signup", to: "users#new"
 
  root to: "home#top"
 

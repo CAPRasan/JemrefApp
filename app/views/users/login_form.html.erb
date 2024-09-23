@@ -1,3 +1,4 @@
+<% provide(:title, "ログイン") %>
 <div class="container-fluid">
 
     <% if @error_message %>
@@ -36,7 +37,7 @@
             <p>・ユーザー情報は、書誌データの管理にのみ使用します。
             </div>
             <div class="text-center mb-4" style="margin-top:50px;">
-            <%= link_to "新規登録はこちら", users_signup_path, { class: "btn btn-outline-secondary btn-lg px-4" } %>
+            <%= link_to "新規登録はこちら", signup_path, class: "btn btn-outline-secondary btn-lg px-4" %>
             </div>
         </div>
     </div>
