@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :record, only: [ :new, :index, edit, destroy, update]
   get "records/new", to: "records#new"
   post "records/create_book", to: "records#create_book"
   post "records/create_paper", to: "records#create_paper"
@@ -8,12 +9,16 @@ Rails.application.routes.draw do
   delete "records/:id/destroy", to: "records#destroy", as: :destroy_record
   patch "records/:id/update", to: "records#update", as: :update_record
 
-  post "users/create", to: "users#create"
-  post "login", to: "users#login"
-  get "login", to: "users#login_form"
-  get "logout", to: "users#logout"
-  get "users/index", to: "users#index"
-  get "signup", to: "users#new"
+  get "/signup", to: "users#new"
+
+  resources :users
+
+ # post "users/create", to: "users#create"
+ # get "users/index", to: "users#index"
+ # get "signup", to: "users#new"
+ # post "login", to: "users#login"
+ # get "login", to: "users#login_form"
+ # get "logout", to: "users#logout"
 
  root to: "home#top"
 

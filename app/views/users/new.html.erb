@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
     <h2 class="fw-bold text-center border-bottom border-secondary my-4 pb-4">新規登録</h2>
       <div class="col-md-5 shadow-sm px-3 pb-5" style="background-color:#EEEEEE;">
-      <%= form_with model: @user, url: users_create_path, data: { turbo: false } do |f|%>
+      <%= form_with model: @user, data: { turbo: false } do |f|%>
         <h5 class="fw-bold border-bottom my-3 p-2">ユーザー情報を入力してください</h5>
         <div class="px-4 mt-2">
           <div class="col-12 mt-4">
@@ -42,7 +42,7 @@
         </div>
       <% end %>
       </div>
-      <%= link_to("ログインページに戻る", login_path, class: "mt-5 text-center") %>
+      <%= link_to("ログインページに戻る", "#", class: "mt-5 text-center") %>
     </div>
       
 </div>
