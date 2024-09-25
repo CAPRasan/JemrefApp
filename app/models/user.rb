@@ -6,15 +6,12 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true,
                       length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
     validates :password, presence: true, length: { minimum: 8 }
-  has_secure_password
+    has_secure_password
+
+    # 渡された文字列のハッシュ値を返す
+    def User.digest(string)
+        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                      BCrypt::Engine.cost
+        BCrypt::Password.create(string, cost: cost)
+    end
 end
-
-
-
-# create_table "users", force: :cascade do |t|
-#     t.string "name"
-#     t.string "email"
-#     t.string "password"
-#     t.datetime "created_at", null: false
-#     t.datetime "updated_at", null: false
-#   end

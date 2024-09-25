@@ -1,7 +1,4 @@
 class RecordsController < ApplicationController
-  before_action :authenticatie_user
-  before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
-
   def index
     @keyword = search_params[:keyword]
     @records = @current_user.records.search(@keyword).order(:publish_date)
