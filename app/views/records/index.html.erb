@@ -31,7 +31,7 @@
                     </div>
                     <div class="ms-1 me-2">
                       <div>
-                      <%= link_to "更新", "/records/#{record.id}/edit", { class: "btn btn-outline-secondary btn-sm mt-2 px-3" } %>
+                      <%= link_to "更新", edit_record_path(record), class: "btn btn-outline-secondary btn-sm mt-2 px-3" %>
                       </div>
 
                       <!-- 削除ボタン -->
@@ -74,7 +74,7 @@
                     <h5><span class="badge bg-primary rounded-pill fw-normal"><%= record.status %></span></h5>
                     </div>
                     <div class="ms-1 me-2">
-                    <%= link_to "更新", "/records/#{record.id}/edit", { class: "btn btn-outline-secondary btn-sm mt-2 px-3" } %>
+                    <%= link_to "更新", edit_record_path(record), { class: "btn btn-outline-secondary btn-sm mt-2 px-3" } %>
 
                     <!-- 削除ボタン -->
                     <div>
