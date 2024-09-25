@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  # before_action :authenticatie_user
+  before_action :authenticatie_user
   # before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
@@ -81,6 +81,13 @@ class RecordsController < ApplicationController
     if @record.user_id != current_user.id
       flash[:notice] = "権限がありません"
       redirect_to records_index_path
+    end
+  end
+
+  def authenticatie_user
+    unless current_user
+      flash[:danger] = "ログインしてください"
+      redirect_to root_path unless current_user
     end
   end
 

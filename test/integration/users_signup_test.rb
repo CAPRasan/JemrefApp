@@ -18,7 +18,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password: "password", password_confirmation: "password" } }
     end
     follow_redirect!
-    assert_template "users/show"
+    assert_template "records/index"
     assert_not flash.empty?
     assert is_logged_in?
   end

@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       reset_session
       log_in user
       flash[:success] = "ログインしました"
-      redirect_to user
+      redirect_to records_path
     else
       flash.now[:danger] = "メールアドレスまたはパスワードが間違っています"
       render "new", status: :unprocessable_entity

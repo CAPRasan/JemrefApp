@@ -38,9 +38,9 @@ end
 class ValidLoginTest < ValidLogin
   test "login with valid information followed by logout" do
     assert is_logged_in?
-    assert_redirected_to @user
+    assert_redirected_to records_path
     follow_redirect!
-    assert_template "users/show"
+    assert_template "records/index"
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
   end
