@@ -21,12 +21,10 @@ class RecordsController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
-      flash[:notice] = "登録に成功しました"
+      flash[:success] = "登録に成功しました"
       redirect_to records_path
     else
-      # デバッグ用
-      puts "登録に失敗しました"
-      puts @book.errors.full_messages
+      flash.now[:danger] = "登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
   end
@@ -35,11 +33,10 @@ class RecordsController < ApplicationController
     @paper = Paper.new(paper_params)
     @paper.user_id = current_user.id
     if @paper.save
-      flash[:notice] = "登録に成功しました"
+      flash[:success] = "登録に成功しました"
       redirect_to records_path
     else
-      puts "登録に失敗しました"
-      puts @paper.errors.full_messages
+      flash.now[:danger] = "登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
   end
@@ -51,7 +48,7 @@ class RecordsController < ApplicationController
       flash[:notice] = "登録に成功しました"
       redirect_to records_path
     else
-      puts "登録に失敗しました"
+      flash.now[:danger] = "登録に失敗しました"
       puts @compilation.errors.full_messages
       render :new, status: :unprocessable_entity
     end
@@ -60,10 +57,10 @@ class RecordsController < ApplicationController
   def update
     @record = Record.find_by(id: params[:id])
     if @record.update(record_params)
-      flash[:notice] = "書誌情報を更新しました"
+      flash[:success] = "書誌情報を更新しました"
       redirect_to records_path
     else
-      flash[:notice] = "書誌情報の更新に失敗しました"
+      flash.now[:denger] = "書誌情報の更新に失敗しました"
       puts @record.errors.full_messages
       render :edit, status: :unprocessable_entity
     end
@@ -72,14 +69,14 @@ class RecordsController < ApplicationController
   def destroy
     @record = Record.find_by(id: params[:id])
     @record.destroy
-    flash[:notice] ="書誌情報を削除しました"
+    flash[:success] ="書誌情報を削除しました"
     redirect_to records_path
   end
 
   def ensure_correct_user
     @record = Record.find_by(id: params[:id])
     if @record.user_id != current_user.id
-      flash[:notice] = "権限がありません"
+      flash[:danger] = "権限がありません"
       redirect_to records_path
     end
   end

@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       reset_session
       log_in @user
       flash[:success] ="登録に成功しました"
-      redirect_to records_path
+      redirect_to records_path, status: :see_other
     else
       flash.now[:danger] = "登録に失敗しました"
       render :new, status: :unprocessable_entity
