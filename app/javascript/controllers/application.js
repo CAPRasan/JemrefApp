@@ -9,7 +9,9 @@ window.Stimulus   = application
 export { application }
 
 const tabEl = document.querySelector('button[data-bs-toggle="tab"]')
+window.addEventListener('load', function(){
 tabEl.addEventListener('shown.bs.tab', event => {
   event.target // newly activated tab
   event.relatedTarget // previous active tab
+})
 })

@@ -12,19 +12,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <% if logged_in? %>
-            <li class="nav-item">
-              <%= link_to "書誌情報入力", new_record_path, class: "nav-link pe-3", data: { turbo: false } %>
+            <li class="nav-item"></li>
+              <%= link_to "登録書誌一覧・検索", records_path, class: "nav-link pe-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to "登録書誌一覧・検索", records_path, class: "nav-link pe-3", data: { turbo: false } %>
+              <%= link_to "書誌情報入力", new_record_path, class: "nav-link pe-3" %>
             </li>
             <li class="nav-item">
               <!-- <%= link_to "利用方法・お問い合わせ", "#", class: "nav-link pe-3" %> -->
             </li>
-            <li class="nav-item"></li>
+            <!-- <li class="nav-item"></li>
             <%= link_to "ログアウト", logout_path, class: "nav-link pe-3", data: { "turbo-method": :delete } %>
-            </li>
-            <!-- <li class="nav-item dropdown">
+            </li> -->
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">アカウント</a>
               <ul class="dropdown-menu" style="width: 200px;">
                 <li><p class="ps-3">現在のユーザー </p></li>
@@ -33,7 +33,7 @@
                 <li><%= link_to "ログアウト", logout_path, class: "dropdown-item",
                                              data: { "turbo-method": :delete } %></li>
               </ul>
-            </li> -->
+            </li>
             <% else %>
             <li class="nav-item">
               <!-- <%= link_to "利用方法・お問い合わせ", "#", class:"nav-link pe-3" %> -->
