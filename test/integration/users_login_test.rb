@@ -67,4 +67,9 @@ class LogoutTest < Logout
     assert_select "a[href=?]", signup_path, count: 2
     assert_select "a[href=?]", logout_path, count: 0
   end
+
+  test "should still work after logout in second window" do
+    delete logout_path
+    assert_redirected_to root_url
+  end
 end
