@@ -26,8 +26,9 @@
               <ul class="dropdown-menu" style="width: 200px;">
                 <li><p class="ps-3">現在のユーザー </p></li>
                 <li><p class="ps-4"><span class="fa fa-user pe-2" style="color:white;"></span> <%= @current_user.name %></p></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><%= link_to "ログアウト", logout_path, class: "dropdown-item",
+                <li><hr class="dropdown-divider mb-3"></li>
+                <li><%= link_to "ユーザー情報の編集", edit_user_path(current_user), class: "dropdown-item ps-4 mb-3" %></li>
+                <li><%= link_to "ログアウト", logout_path, class: "dropdown-item ps-4 mb-3",
                                              data: { "turbo-method": :delete } %></li>
               </ul>
             </li>

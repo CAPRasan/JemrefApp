@@ -1,0 +1,14 @@
+<% provide(:title, "ユーザー情報の編集") %>
+<% provide(:button_text, "変更する") %>
+<div class="container">
+    <%= render "layouts/error_messages"%>
+
+    <div class="row justify-content-center">
+    <h2 class="fw-bold text-center border-bottom border-secondary my-4 pb-4">ユーザー情報の編集</h2>
+      <div class="col-md-5 shadow-sm px-3 pb-5" style="background-color:#EEEEEE;">
+      <%= render "layouts/form" %>
+      </div>
+      <%= link_to "戻る", records_path, class: "mt-5 text-center" %>
+    </div>
+      
+</div>
