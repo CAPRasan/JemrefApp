@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :authenticatie_user, { only: [ :logout ] }
-  # before_action :fobid_login_user, { only: [ :new, :create, :login, :login_form ] }
+  before_action :logged_in_user, only: [ :show, :edit, :update ]
+  before_action :correct_user, only: [ :edit, :update ]
   # def index
   #   @users = User.all
   # end
@@ -45,5 +45,18 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
+  end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "ログインが必要です"
+      redirect_to login_url, status: :see_other
+    end
+  end
+
+  def correct_user
+    @user = User.find_by(id: params[:id])
+    flash[:danger] = "権限がありません"
+    redirect_to records_path unless current_user?(@user)
   end
 end

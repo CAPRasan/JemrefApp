@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  before_action :authenticatie_user
+  before_action :logged_in_user
   # before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
@@ -81,10 +81,10 @@ class RecordsController < ApplicationController
     end
   end
 
-  def authenticatie_user
-    unless current_user
+  def logged_in_user
+    unless logged_in?
       flash[:danger] = "ログインしてください"
-      redirect_to root_path unless current_user
+      redirect_to login_url, status: :see_other
     end
   end
 
