@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get "sessions/new"
   resources :records, only: [ :new, :index, :edit ]
-
   post "records/create_book", to: "records#create_book"
   post "records/create_paper", to: "records#create_paper"
   post "records/create_compilation", to: "records#create_compilation"
@@ -15,9 +14,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-
-
- root to: "home#top"
+  root to: "home#top"
 
 
 
