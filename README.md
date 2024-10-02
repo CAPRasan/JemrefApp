@@ -31,40 +31,14 @@ JemRefが目指すのは、 **文献を〈忘れない〉、〈見逃さない�
 ### バージョン情報
 * Ruby: 3.3.4
 * Ruby on Rails: 7.2.1
+* PostgreSQL 14.13
 
-### JemRefのセットアップ手順
-(現在、webへのデプロイ作業中です。セットアップがうまくいかない場合は、リリースをお待ちください。)
-#### (1) JemRefリポジトリのクローン
-下記コマンドを実行してください。
-~~~
-git clone https://github.com/CAPRasan/JemrefApp.git
-~~~
+## JemRefの利用方法
+注意：これはプロトタイプ版です。  
+開発過程でデータが失われる可能性がありますので、本格的なご利用はお控えください。  
 
-#### (2) Gemのインストール
-JemRefのディレクトリに移動し、下記コマンドを実行してください。
-
-~~~
-bundle install
-~~~
-
-#### (3) データベースの設定
-データベースを作成・マイグレーションするため、下記コマンドを順に実行してください。
-~~~
-rails db:create
-~~~
-~~~
-rails db:migrate
-~~~
-
-#### (4) ローカルサーバーを起動
-下記コマンドを実行してください。
-~~~
-rails s
-~~~
-
-#### (5) Webブラウザを起動
-下記URLにアクセスしてください。  
-[http://localhost:3000](http://localhost:3000/)
+ご利用の際は、下記URLにアクセスしてください。  
+[https://enigmatic-sierra-65789-cc6464dac8ee.herokuapp.com/](https://enigmatic-sierra-65789-cc6464dac8ee.herokuapp.com)
 
 ## 機能
 ### 現在できること
