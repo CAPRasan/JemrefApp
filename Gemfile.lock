@@ -200,6 +200,7 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.8)
     popper_js (2.11.8)
     psych (5.1.2)
       stringio
@@ -393,6 +394,7 @@ DEPENDENCIES
   jquery-rails
   minitest
   minitest-reporters
+  pg
   puma (>= 5.0)
   rails (~> 7.2.0)
   rails-controller-testing
