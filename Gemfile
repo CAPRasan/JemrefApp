@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+ruby "3.3.4"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -42,7 +43,7 @@ gem "dartsass-sprockets"
 gem "bootstrap", "~> 5.3.3"
 gem "font-awesome-rails"
 gem "dotenv-rails"
-
+gem "rack-timeout"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
