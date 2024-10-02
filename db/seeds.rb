@@ -35,16 +35,19 @@ Paper.create!(
     status: "read",
     user_id: 1,
     publication_main_title: "日本の教育史学",
+    publication_sub_title: ""
 )
 
 Compilation.create!(
     author_name: "中山裕一郎",
     main_title: "音楽教員養成の歴史",
+    sub_title: "",
     publish_date: 1976,
     publisher: "音楽之友社",
     compiled_by: "浅香淳",
     status: "read",
     user_id: 1,
     publication_main_title: "音楽教育の歴史",
+    publication_sub_title: "",
     volume_other_form: "音楽教育講座第２巻"
 )

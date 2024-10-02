@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2024_09_25_135938) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "records", force: :cascade do |t|
     t.string "author_name"
     t.string "main_title"
@@ -18,14 +21,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_135938) do
     t.integer "publish_date"
     t.string "publisher"
     t.string "compiled_by"
-    t.string "publication"
     t.integer "volume"
     t.integer "no"
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "type"
     t.string "publication_main_title"
     t.string "publication_sub_title"
