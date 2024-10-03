@@ -51,3 +51,50 @@ Compilation.create!(
     publication_sub_title: "",
     volume_other_form: "音楽教育講座第２巻"
 )
+
+# 状態readの書誌情報（本）をランダムで30件作成
+30.times do |n|
+    author_name = Faker::Book.author
+    main_title = Faker::Book.title
+    sub_title = Faker::Book.title
+    publish_date = rand(1900..2024)
+    publisher = Faker::Book.publisher
+
+
+    Book.create!(author_name: author_name,
+                 main_title: main_title,
+                 sub_title: sub_title,
+                 publish_date: publish_date,
+                 publisher: publisher,
+                 status: "read",
+                 user_id: 1,
+                 )
+end
+
+# 状態readの書誌情報（編著）をランダムで30件作成
+30.times do |n|
+    author_name = Faker::Book.author
+    main_title = Faker::Book.title
+    sub_title = Faker::Book.title
+    publish_date = rand(1900..2024)
+    publisher = Faker::Book.publisher
+    compiled_by = Faker::Book.author
+    publication_main_title = Faker::Book.title
+    volume = rand(1..24)
+    no = rand(1..12)
+
+
+    Compilation.create!(author_name: author_name,
+                 main_title: main_title,
+                 sub_title: sub_title,
+                 publish_date: publish_date,
+                 publisher: publisher,
+                 compiled_by: compiled_by,
+                 publication_main_title: publication_main_title,
+                 publication_sub_title: "",
+                 volume: volume,
+                 no: no,
+                 status: "unread",
+                 user_id: 1,
+                 )
+end

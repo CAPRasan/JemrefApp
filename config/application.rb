@@ -23,5 +23,9 @@ module JemRefApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    Rails.application.config.i18n.default_locale = :ja
+    # 念の為
+    Faker::Config.locale = :ja
   end
 end

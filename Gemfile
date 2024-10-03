@@ -38,12 +38,19 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # gem 'bootstrap', '~> 5.3.0'
+
+# ダミーseedデータ作成用
+gem "faker"
+gem "gimei"
+gem "rails-i18n"
+
 gem "jquery-rails"
 gem "dartsass-sprockets"
 gem "bootstrap", "~> 5.3.3"
 gem "font-awesome-rails"
 gem "dotenv-rails"
 gem "rack-timeout"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
