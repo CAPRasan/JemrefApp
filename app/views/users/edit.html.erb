@@ -11,4 +11,8 @@
       <%= link_to "戻る", records_path, class: "mt-5 text-center" %>
     </div>
       
+    <div class="fw-bold text-center border-top border-secondary my-4 py-4">
+      <%= link_to "ユーザーを削除する", current_user, data: { "turbo-method": :delete,
+                                          turbo_confirm: "本当によろしいですか？この操作は取り消せず、すべての書誌データが削除されます。" } %>
+    </div>
 </div>

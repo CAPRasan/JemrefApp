@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [ :show, :edit, :update ]
-  before_action :correct_user, only: [ :edit, :update ]
+  before_action :correct_user, only: [ :edit, :update, :destroy ]
   # def index
   #   @users = User.all
   # end
@@ -39,6 +39,12 @@ class UsersController < ApplicationController
       flash.now[:danger] = "更新に失敗しました"
       render "edit", status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "ユーザーが削除されました"
+    redirect_to root_url, status: :see_other
   end
 
   private
