@@ -60,7 +60,7 @@ jobs:
         image: postgres:14
         env:
           POSTGRES_USER: jemref
-          POSTGRES_PASSWORD: <%= ENV["PSQL_PASSWORD"] %>
+          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD }}
           POSTGRES_DB: my_database_test
         ports:
           - 5432:5432
