@@ -55,21 +55,24 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_USER: jemref
-          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD }}
-          POSTGRES_DB: my_database_test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U postgres" 
-          --health-interval 10s 
-          --health-timeout 5s 
-          --health-retries 5
+
     steps:
+      # CIでPostgreSQLをインストール・設定する
+      - name: Install PostgreSQL
+        run: sudo apt-get update && sudo apt-get install -y postgresql postgresql-contrib libpq-dev
+      
+      - name: Start PostgreSQL service
+        run: sudo service postgresql start
+      
+      - name: Setup DB
+        env:
+          PGUSER: postgres
+        run: |
+          psql -c "CREATE USER jemref WITH PASSWORD '${{ secrets.PSQL_PASSWORD }}';"
+          psql -c "ALTER USER jemref CREATEDB;"
+          psql -c "CREATE DATABASE my_database_test OWNER jemref;"
+  
+      # 以下デフォルト設定
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips sqlite3
 
