@@ -10,6 +10,7 @@ default: &default
 development:
   <<: *default
   database: my_database_development
+  host: 127.0.0.1
 
 test:
   <<: *default

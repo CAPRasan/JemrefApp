@@ -1,8 +1,8 @@
 
 # herokuでのみ適用する設定
-if ENV['RACK_ENV'] == 'production' || ENV['RAILS_ENV'] == 'production'
-  workers Integer(ENV['WEB_CONCURRENCY'] || 2)
-  threads_count = Integer(ENV['RAILS_MAX_THREADS'] || 5)
+if ENV["RACK_ENV"] == "production" || ENV["RAILS_ENV"] == "production"
+  workers Integer(ENV["WEB_CONCURRENCY"] || 2)
+  threads_count = Integer(ENV["RAILS_MAX_THREADS"] || 5)
   threads threads_count, threads_count
 
   preload_app!
@@ -12,8 +12,8 @@ if ENV['RACK_ENV'] == 'production' || ENV['RAILS_ENV'] == 'production'
     ActiveRecord::Base.establish_connection
   end
   rackup      DefaultRackup if defined?(DefaultRackup)
-  port        ENV['PORT']     || 3000
-  environment ENV['RACK_ENV'] || 'development'
+  port        ENV["PORT"]     || 3000
+  environment ENV["RACK_ENV"] || "development"
 else
   # ローカルでのみ適用する設定
   threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
