@@ -1,4 +1,4 @@
-
+<% provide(:title, "登録書誌情報一覧・検索") %>
         <div class="container-fluid">
             <h2 class="my-4">登録書誌一覧・検索</h1>
 
@@ -14,9 +14,12 @@
                 <%= "「#{@keyword}」の検索結果" %>
               <% end %>
               <h6 class="ms-3 mb-3">全<%= @records.count %>件の書誌情報</h6>
-
+            </div>
+              <%= will_paginate @records %>
+            <div>
               <% @records.each do |record| %>
                 <ul class="list-group mt-2">
+                  <!-- この部分のリファクタリングは今後の課題 -->
                   <% if record.type == "Compilation" || record.type == "Paper" %>
                   <li class="list-group-item d-flex justify-content-between align-items-start shadow-sm pb-1">
                     <div class="ms-2 me-2" style="width:85%;">  
@@ -105,6 +108,9 @@
                   <% end %>
                 </ul>
               <% end %>
+            </div>
+            <div class="mt-5">
+              <%= will_paginate @records %>
             </div>
         </div>
 

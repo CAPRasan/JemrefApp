@@ -4,7 +4,8 @@ class RecordsController < ApplicationController
 
   def index
     @keyword = search_params[:keyword]
-    @records = current_user.records.search(@keyword).order(:publish_date)
+    records = current_user.records.search(@keyword).order(:publish_date)
+    @records = records.paginate(page: params[:page], per_page: 20)
   end
 
   def edit

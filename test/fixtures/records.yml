@@ -1,2 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+<% 30.times do |n| %>
+book_<%= n %>:
+  author_name: "<%= Faker::Book.author %>"
+  main_title: "<%= Faker::Book.title %>"
+  sub_title: "<%= Faker::Book.title %>"
+  publish_date: <%= rand(1900..2024) %>
+  publisher: "<%= Faker::Book.publisher %>"
+  type: "Book"
+  status: "read"
+  user_id: 1
+<% end %>
