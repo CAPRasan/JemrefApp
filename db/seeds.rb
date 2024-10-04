@@ -1,7 +1,8 @@
 User.create!(
    email: "yagisan@example.com",
    name: "やぎさん",
-   password: "password"
+   password: password
+  #    admin: true
 )
 
 Record.create!(

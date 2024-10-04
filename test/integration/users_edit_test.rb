@@ -35,7 +35,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_equal email, @user.email
     delete user_path(@user)
     log_in_as(@user)
-    assert_redirected_to records_url
+    assert_template "sessions/new"
   end
 
   test "should redirect edit when logged in as wrong user" do
