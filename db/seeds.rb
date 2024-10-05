@@ -1,9 +1,8 @@
 User.create!(
    email: "yagisan@example.com",
    name: "やぎさん",
-   password: password
-  #    admin: true
-)
+   admin: true,
+   password: ENV["ADMIN_PASSWORD"])
 
 Record.create!(
     author_name: "ガート・ビースタ著、亘理陽一ほか訳",
