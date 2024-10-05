@@ -31,14 +31,14 @@ JemRefが目指すのは、 **文献を〈忘れない〉、〈見逃さない�
 ### バージョン情報
 * Ruby: 3.3.4
 * Ruby on Rails: 7.2.1
-* PostgreSQL 14.13
+* PostgreSQL: 14.13
 
 ## JemRefの利用方法
 注意：これはプロトタイプ版です。  
 開発過程でデータが失われる可能性がありますので、本格的なご利用はお控えください。  
 
 ご利用の際は、下記URLにアクセスしてください。  
-[https://enigmatic-sierra-65789-cc6464dac8ee.herokuapp.com/](https://enigmatic-sierra-65789-cc6464dac8ee.herokuapp.com)
+[https://jemref-2cc144d8d5b0.herokuapp.com/](https://jemref-2cc144d8d5b0.herokuapp.com/)
 
 ## 機能
 ### 現在できること
