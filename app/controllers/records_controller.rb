@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
   before_action :logged_in_user
-  # before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
+  before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
     @keyword = search_params[:keyword]
@@ -74,54 +74,56 @@ class RecordsController < ApplicationController
     redirect_to records_path
   end
 
-  def ensure_correct_user
-    @record = Record.find_by(id: params[:id])
-    if @record.user_id != current_user.id
-      flash[:danger] = "権限がありません"
-      redirect_to records_path
-    end
-  end
 
-  def logged_in_user
-    unless logged_in?
-      flash[:danger] = "ログインしてください"
-      redirect_to login_url, status: :see_other
-    end
-  end
 
   private
-  def record_params
-    params.permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-      :compiled_by, :publication_main_title, :publication_sub_title,
-      :volume, :no, :volume_other_form, :memo, :status
-    )
-  end
+    def record_params
+      params.permit(
+        :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+        :compiled_by, :publication_main_title, :publication_sub_title,
+        :volume, :no, :volume_other_form, :memo, :status
+      )
+    end
 
-  def book_params
-    params.require(:book).permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-      :volume_other_form, :memo, :status
-    )
-  end
+    def book_params
+      params.require(:book).permit(
+        :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+        :volume_other_form, :memo, :status
+      )
+    end
 
-  def paper_params
-    params.require(:paper).permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-      :compiled_by, :publication_main_title, :publication_sub_title,
-      :volume, :no, :volume_other_form, :memo, :status
-    )
-  end
+    def paper_params
+      params.require(:paper).permit(
+        :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+        :compiled_by, :publication_main_title, :publication_sub_title,
+        :volume, :no, :volume_other_form, :memo, :status
+      )
+    end
 
-  def compilation_params
-    params.require(:compilation).permit(
-      :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-      :compiled_by, :publication_main_title, :publication_sub_title,
-      :volume, :no, :volume_other_form, :memo, :status
-    )
-  end
+    def compilation_params
+      params.require(:compilation).permit(
+        :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+        :compiled_by, :publication_main_title, :publication_sub_title,
+        :volume, :no, :volume_other_form, :memo, :status
+      )
+    end
 
-  def search_params
-    params.permit(:keyword)
-  end
+    def ensure_correct_user
+      @record = Record.find_by(id: params[:id])
+      if @record.user_id != current_user.id
+        flash[:danger] = "権限がありません"
+        redirect_to records_path, status: :see_other
+      end
+    end
+
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください"
+        redirect_to login_url, status: :see_other
+      end
+    end
+
+    def search_params
+      params.permit(:keyword)
+    end
 end

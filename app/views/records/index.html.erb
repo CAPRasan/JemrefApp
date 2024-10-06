@@ -1,6 +1,6 @@
-<% provide(:title, "登録書誌情報一覧・検索") %>
+<% provide(:title, "文献の一覧・検索") %>
         <div class="container-fluid">
-            <h2 class="my-4">登録書誌一覧・検索</h1>
+            <h2 class="my-4">文献の一覧・検索</h1>
 
               <%= form_with local: true, method: :get do %>
               <div class="input-group mb-4 ps-2 w-75">
@@ -13,7 +13,7 @@
               <% if @keyword.present? %>
                 <%= "「#{@keyword}」の検索結果" %>
               <% end %>
-              <h6 class="ms-3 mb-3">全<%= @records.count %>件の書誌情報</h6>
+              <h6 class="ms-3 mb-3">全<%= @records.count %>件の文献情報</h6>
             </div>
               <%= will_paginate @records %>
             <div>

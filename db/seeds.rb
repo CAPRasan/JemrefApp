@@ -12,7 +12,7 @@ Record.create!(
     publisher: "明石書店",
     status: "unread",
     user_id: 1,
-    type: "Book",
+    type: "Book"
 )
 
 Book.create!(
@@ -22,7 +22,7 @@ Book.create!(
     publish_date: 2008,
     publisher: "春秋社",
     status: "read",
-    user_id: 1,
+    user_id: 1
 )
 
 Paper.create!(
@@ -67,7 +67,7 @@ Compilation.create!(
                  publish_date: publish_date,
                  publisher: publisher,
                  status: "read",
-                 user_id: 1,
+                 user_id: 1
                  )
 end
 
