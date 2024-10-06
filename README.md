@@ -38,7 +38,7 @@ JemRefが目指すのは、 **文献を〈忘れない〉、〈見逃さない�
 開発過程でデータが失われる可能性がありますので、本格的なご利用はお控えください。  
 
 ご利用の際は、下記URLにアクセスしてください。  
-[https://jemref-2cc144d8d5b0.herokuapp.com/](https://jemref-2cc144d8d5b0.herokuapp.com/)
+[https://prototype.jemref.com/](https://prototype.jemref.com)
 
 ## 機能
 ### 現在できること
