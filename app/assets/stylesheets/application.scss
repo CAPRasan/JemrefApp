@@ -1,3 +1,5 @@
+$accordion-button-active-bg: rgba(122, 170, 233, 0.25);
+// $accordion-btn-focus-box-shadow: none;
 @import "bootstrap";
 @import "font-awesome";
 
@@ -9,4 +11,12 @@
     width: 100%;
     margin-top: 45px;
   }
-  
+
+// 文献を選択した際に色を変えない設定
+
+.accordion-button:focus {
+  box-shadow: none; 
+}
+// .accordion-button:not(.collapsed) {
+//   background-color: transparent; 
+// }

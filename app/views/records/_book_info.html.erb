@@ -1,0 +1,13 @@
+<div class="col ms-2 me-2" style="width:85%;">  
+  <div>
+    <h5 class="fw-bold py-2 bg-secondary bg-opacity-10 border-bottom mt-2">
+      <span class="fa fa-book px-2" style=" font-size:25px;"></span> <%=record.author_name %>（<%= record.publish_date %>）
+    </h5>
+  </div>
+  <h5 class="ms-4 fw-bold" style=" font-size:18px;">『 <%= record.get_title %> 』<%= record.volume_other_form %></h5>
+  <p class="ms-5 text-secondary"><%= record.publisher %></p>
+</div>
+<div class="col-1 float-end smt-3  mt-2 mx-1">
+<h5><span class="badge bg-primary rounded-pill fw-normal"><%= record.status %></span></h5>
+</div>
+

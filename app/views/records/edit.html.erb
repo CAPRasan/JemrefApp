@@ -1,7 +1,9 @@
 
         <div class="main-contents">
-            <h2 class="my-4">書誌情報の変更</h2>
-            
+            <h2 class="mt-4 mb-2">書誌情報の変更</h2>
+            <div style="float:left;">
+            <%= link_to "一覧に戻る", records_path, class: "ms-3 link-underline link-underline-opacity-0" %>
+            </div>
             <% if @record.errors.full_messages %>
               <div class="error-alert">
               <ul>
@@ -12,175 +14,19 @@
               </div>
             <% end %>
             
-          <%= link_to("一覧に戻る", records_path, {class: "ms-3 link-offset-1 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"}) %>
-            
-          <div class="container pt-4">
-            <!-- bookクラスの編集フォーム -->
-            <%= form_with url: update_record_path(@record), method: :patch, local: true do |f| %>
-              <% if @record.type == "Book" %>
-              <div class="input-group mb-3 p-4 pb-5 border rounded-1 shadow-sm">
-                <h5 class="fw-bold pb-3 mb-4 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 著書情報</h5>
-                <form class="row g-3 needs-validation" novalidate>
-                  <div class="col-md-6 pe-5">
-                    <%= f.label :author_name, "著者名", class: "form-label" %>
-                    <%= f.text_field :author_name, class: "form-control border-dark-subtle", value: "#{@record.author_name}", required: true %>
-                  </div>
-                  <div class="col-md-3">
-                    <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
-                    <%= f.number_field :publish_date, class: "form-control border-dark-subtle", value: "#{@record.publish_date}", required: true %>
-                  </div>
-                  <div class="col-12 py-2">タイトル</div>
-                  <div class="input-group col-md-12 pe-4">
-                    <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", value: "#{@record.main_title}", required: true %>
-                    <span class="input-group-text">：</span>
-                    <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題", value: "#{@record.sub_title}" %>
-                  </div>
-                  <div class="col-md-8 mt-5">
-                    <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
-                    <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合", value: "#{@record.volume_other_form}" %>
-                  </div>
-                  <div class="col-md-6 pe-5 mt-3">
-                    <%= f.label :publisher, "出版社", class: "form-label" %>
-                    <%= f.text_field :publisher, class: "form-control border-dark-subtle", value: "#{@record.publisher}", required: true %>
-                  </div>
-                  <div class="col-md-3 mt-2">
-                    <div class="col-12 py-2">状態</div>
-                    <%= f.select :status,
-                    [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ], {},
-                    class: "form-select border-dark-subtle",
-                    required: true %>
-                  </div>
-                  <div class="d-grid gap-2 mt-4 col-6 mx-auto">
-                    <%= f.submit "更新", class: "btn btn-primary btn-lg mt-3" %>
-                  </div>
-                </form>
-              </div>
+          <div class="container mt-5">
 
+            <!-- bookクラスの編集フォーム -->
+            <% if @record.type == "Book" %>
+              <%= render "book_registration" %>
+              
             <!-- paperクラスの編集フォーム -->
-              <% elsif @record.type == "Paper" %>
-                <div class="input-group mb-3 p-4 pb-5 border rounded-1 shadow-sm">
-                    <h5 class="fw-bold pb-3 mb-4 col-12 border-bottom border-secondary border-2"><i class="fa fa-file pe-2"></i> 論文情報</h5>
-                    <form class="row g-3 needs-validation"novalidate>
-                      <div class="col-md-6 pe-5">
-                        <%= f.label :author_name, "著者名", class: "form-label" %>
-                        <%= f.text_field :author_name, class: "form-control border-dark-subtle", value: "#{ @record.author_name }", required: true %>
-                      </div>
-                      <div class="col-md-3">
-                        <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
-                        <%= f.number_field :publish_date, class: "form-control border-dark-subtle", value: "#{ @record.publish_date }", required: true %>
-                      </div>
-                      <div class="col-12 py-2">タイトル</div>
-                      <div class="input-group col-md-12 pe-4">
-                        <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", value: "#{ @record.main_title }", required: true %>
-                        <span class="input-group-text">：</span>
-                        <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題", value: "#{ @record.sub_title }" %>
-                      </div>
-                      <h5 class="fw-bold mt-3 mb-4 py-3 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 収録物情報</h5>
-                      <div class="col-8">
-                        <%= f.label :compiled_by, "編者名", class: "form-label" %>
-                        <%= f.text_field :compiled_by, class: "form-control border-dark-subtle", value: "#{ @record.compiled_by }", required: true %>
-                      </div>
-                      <div class="col-12 py-2">雑誌タイトル</div>
-                      <div class="input-group col-md-12 pe-4">
-                        <%= f.text_field :publication_main_title, class: "form-control border-dark-subtle", placeholder: "主題", value: "#{ @record.publication_main_title }", required: true %>
-                        <span class="input-group-text">：</span>
-                        <%= f.text_field :publication_sub_title, class: "form-control border-dark-subtle", placeholder: "副題", value: "#{ @record.publication_sub_title }" %>
-                      </div>
-                      <div class="mt-3 pe-5 col-md-4">
-                        <label class="form-label">巻号（半角数字）</label>
-                        <div class="input-group">
-                          <span class="input-group-text">第</span>
-                          <%= f.number_field :volume, class: "form-control border-dark-subtle col-1", value: "#{ @record.volume }" %>
-                          <span class="input-group-text">巻</span>
-                          <%= f.number_field :no, class: "form-control border-dark-subtle col-1", value: "#{ @record.no }" %>
-                          <span class="input-group-text">号</span>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mt-3">
-                        <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
-                        <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合", value: "#{ @record.volume_other_form }" %>
-                      </div>
-                      <div class="col-md-4 pe-5 mt-3">
-                        <%= f.label :publisher, "出版社", class: "form-label" %>
-                        <%= f.text_field :publisher, class: "form-control border-dark-subtle", value: "#{ @record.publisher }" %>
-                      </div>
-                      <div class="col-md-3 mt-2">
-                        <div class="col-12 py-2">状態</div>
-                        <%= f.select :status,
-                        [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ], {},
-                        selected: "#{ @record.status }",
-                        class: "form-select border-dark-subtle",
-                        required: true %>
-                      </div>
-                      <div class="d-grid gap-2 mt-4 col-6 mx-auto">
-                        <%= f.submit "更新", class: "btn btn-primary btn-lg mt-3" %>
-                      </div>
-                    </form>
-                  </div>
+            <% elsif @record.type == "Paper" %>
+              <%= render "paper_registration" %>
               
               <!-- compilationクラスの編集フォーム -->
-                <% else %>
-                  <div class="input-group mb-3 p-4 pb-5 border rounded-1 shadow-sm">
-                    <h5 class="fw-bold pb-3 mb-4 col-12 border-bottom border-secondary border-2"> <span class="fa fa-file pe-2"></span> 論文情報</h5>
-                    <form class="row g-3 needs-validation" novalidate>
-                      <div class="col-md-6 pe-5">
-                        <%= f.label :author_name, "著者名", class: "form-label" %>
-                        <%= f.text_field :author_name, class: "form-control border-dark-subtle", value: "#{ @record.author_name }", required: true %>
-                      </div>
-                      <div class="col-md-3">
-                        <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
-                        <%= f.number_field :publish_date, class: "form-control border-dark-subtle", value: "#{ @record.publish_date }", required: true %>
-                      </div>
-                      <div class="col-12 py-2">タイトル</div>
-                      <div class="input-group col-md-12 pe-4">
-                        <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", value: "#{ @record.main_title }", required: true %>
-                        <span class="input-group-text">：</span>
-                        <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題", value: "#{ @record.sub_title }" %>
-                      </div>
-                      <h5 class="fw-bold mt-3 mb-4 py-3 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 収録物情報</h5>
-                      <div class="col-8">
-                        <%= f.label :compiled_by, "編者名", class: "form-label" %>
-                          <%= f.text_field :compiled_by, class: "form-control border-dark-subtle", value: "#{ @record.compiled_by }", required: true %>
-                      </div>
-                      <div class="col-12 py-2">収録物タイトル</div>
-                      <div class="input-group col-md-12 pe-4">
-                        <%= f.text_field :publication_main_title, class: "form-control border-dark-subtle", placeholder: "主題", value: "#{ @record.publication_main_title }", required: true %>
-                        <span class="input-group-text">：</span>
-                        <%= f.text_field :publication_sub_title, class: "form-control border-dark-subtle", placeholder: "副題", value: "#{ @record.publication_sub_title }" %>
-                      </div>
-                      <div class="mt-3 pe-5 col-md-4">
-                        <label class="form-label">巻号（半角数字）</label>
-                        <div class="input-group">
-                          <span class="input-group-text">第</span>
-                          <%= f.number_field :volume, class: "form-control border-dark-subtle col-1", value: "#{ @record.volume }" %>
-                          <span class="input-group-text">巻</span>
-                          <%= f.number_field :no, class: "form-control border-dark-subtle col-1", value: "#{ @record.no }" %>
-                          <span class="input-group-text">号</span>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 mt-3">
-                        <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
-                        <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合", value: "#{ @record.volume_other_form }" %>
-                      </div>
-
-                      <div class="col-md-4 pe-5 mt-3">
-                        <%= f.label :publisher, "出版社", class: "form-label" %>
-                          <%= f.text_field :publisher, class: "form-control border-dark-subtle", value: "#{ @record.publisher }", required: true %>
-                      </div>
-                      <div class="col-md-3 mt-2">
-                        <div class="col-12 py-2">状態</div>
-                        <%= f.select :status,
-                        [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ], {},
-                        class: "form-select border-dark-subtle",
-                        required: true %>
-                      </div>
-                      <div class="d-grid gap-2 mt-4 col-6 mx-auto">
-                        <%= f.submit "更新", class: "btn btn-primary btn-lg mt-3" %>
-                      </div>
-                    </form>
-                  </div>
-                <% end %>
+            <% else %>
+              <%= render "compilation_registration" %>
             <% end %>            
           </div>
           

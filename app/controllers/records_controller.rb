@@ -46,7 +46,7 @@ class RecordsController < ApplicationController
     @compilation = Compilation.new(compilation_params)
     @compilation.user_id = current_user.id
     if @compilation.save
-      flash[:notice] = "登録に成功しました"
+      flash[:success] = "登録に成功しました"
       redirect_to records_path
     else
       flash.now[:danger] = "登録に失敗しました"
