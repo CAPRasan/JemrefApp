@@ -23,11 +23,11 @@
 
     <ul class="list-group mt-2">
       <% @records.each do |record| %>
-        <li class="row list-group-item d-flex justify-content-between align-items-start shadow mb-1 me-4 p-0 w-100">
+        <li class="row list-group-item d-flex justify-content-between align-items-start shadow-sm mb-1 me-4 p-0 w-100">
           <div class="accordion accordion-flush w-100 px-0" id="accordionFlushExample">
-            <div class="accordion-item" style="border-radius:5px 5px 0px 0px;">
+            <div class="accordion-item" style="border-radius:5px 5px 5px 5px;">
               <h2 class="accordion-header" >
-                <button class="accordion-button collapsed border py-0 ps-1" style="border-radius:5px 5px 0px 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= record.id%>" aria-expanded="false" aria-controls="flush-collapse<%= record.id%>">
+                <button class="accordion-button collapsed border py-0 ps-1 border-bottom-0" style="border-radius:5px 5px 0px 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= record.id%>" aria-expanded="false" aria-controls="flush-collapse<%= record.id%>">
                   <% if record.type == ("Compilation" || "Paper") %>
                     <%= render "paper_info", record: record %>
                   <% elsif record.type == "Book" %>
@@ -35,7 +35,7 @@
                   <% end %>
                 </button>
               </h2>
-              <div id="flush-collapse<%= record.id%>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div id="flush-collapse<%= record.id%>" class="accordion-collapse collapse border" data-bs-parent="#accordionFlushExample">
                 <div class="row justify-content-end accordion-body w-100">
                   <div class="col">
                     <div>
