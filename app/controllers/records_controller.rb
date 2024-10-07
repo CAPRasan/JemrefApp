@@ -13,44 +13,17 @@ class RecordsController < ApplicationController
   end
 
   def new
-    @book = current_user.records.new(type: Book)
-    @paper = current_user.records.new(type: Paper)
-    @compilation = current_user.records.new(type: Compilation)
+    @record = Record.new
   end
 
-  def create_book
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
-    if @book.save
+  def create
+    @record = Record.new(record_params)
+    @record.user_id = current_user.id
+    if @record.save
       flash[:success] = "登録に成功しました"
       redirect_to records_path
     else
       flash.now[:danger] = "登録に失敗しました"
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  def create_paper
-    @paper = Paper.new(paper_params)
-    @paper.user_id = current_user.id
-    if @paper.save
-      flash[:success] = "登録に成功しました"
-      redirect_to records_path
-    else
-      flash.now[:danger] = "登録に失敗しました"
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  def create_compilation
-    @compilation = Compilation.new(compilation_params)
-    @compilation.user_id = current_user.id
-    if @compilation.save
-      flash[:success] = "登録に成功しました"
-      redirect_to records_path
-    else
-      flash.now[:danger] = "登録に失敗しました"
-      puts @compilation.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -77,36 +50,38 @@ class RecordsController < ApplicationController
 
 
   private
+
     def record_params
-      params.permit(
+      params.require(:record).permit(
         :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
         :compiled_by, :publication_main_title, :publication_sub_title,
-        :volume, :no, :volume_other_form, :memo, :status
+        :volume, :no, :volume_other_form, :memo, :type, :status
       )
     end
 
-    def book_params
-      params.require(:book).permit(
-        :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-        :volume_other_form, :memo, :status
-      )
-    end
+    # def record_params
+    #   # typeに基づいてパラメータを取得
+    #   record_params = @record.class.name.downcase
+    #   case params[record_params][:type]
+    #   when "Book"
+    #     params.require(:book).permit(:type,  :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+    #                                  :volume_other_form, :memo, :status)
+    #   when "Paper"
+    #     params.require(:paper).permit(:type, :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+    #                                   :compiled_by, :publication_main_title, :publication_sub_title,
+    #                                   :volume, :no, :volume_other_form, :memo, :status)
+    #   when "Compilation"
+    #     params.require(:compilation).permit(:type, :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+    #                                         :compiled_by, :publication_main_title, :publication_sub_title,
+    #                                         :volume, :no, :volume_other_form, :memo, :status)
+    #   else
+    #     params.require(:record).permit(:type, :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
+    #                                    :compiled_by, :publication_main_title, :publication_sub_title,
+    #                                    :volume, :no, :volume_other_form, :memo, :type, :status
+    #   )
+    #   end
+    # end
 
-    def paper_params
-      params.require(:paper).permit(
-        :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-        :compiled_by, :publication_main_title, :publication_sub_title,
-        :volume, :no, :volume_other_form, :memo, :status
-      )
-    end
-
-    def compilation_params
-      params.require(:compilation).permit(
-        :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-        :compiled_by, :publication_main_title, :publication_sub_title,
-        :volume, :no, :volume_other_form, :memo, :status
-      )
-    end
 
     def ensure_correct_user
       @record = Record.find_by(id: params[:id])

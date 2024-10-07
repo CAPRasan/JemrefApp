@@ -1,197 +1,33 @@
 <% provide(:title, "文献情報の入力") %>
-        <div class="main-contents mx-2">
-            <h2 class="my-4">文献情報の入力</h2>
-            
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="book-tab" data-bs-toggle="tab" data-bs-target="#book-tab-pane" type="button" role="tab" aria-controls="book-tab-pane" aria-selected="true">著書</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="paper-tab" data-bs-toggle="tab" data-bs-target="#paper-tab-pane" type="button" role="tab" aria-controls="paper-tab-pane" aria-selected="false">雑誌論文</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="compilation-tab" data-bs-toggle="tab" data-bs-target="#compilation-tab-pane" type="button" role="tab" aria-controls="compilation-tab-pane" aria-selected="false">編著論文</button>
-              </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-            
-              <!-- 著書タブ -->
-              <div class="tab-pane fade show active" id="book-tab-pane" role="tabpanel" aria-labelledby="book-tab" tabindex="0">
-                <%= form_with model: Book.new, url: records_create_book_path, local: true do |f| %>
-                  <div class="input-group mb-3 p-4 border border-top-0 rounded-1 shadow-sm">
-                    <h5 class="fw-bold py-3 mb-4 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 著書情報</h5>
-                    <form class="row g-3 needs-validation" novalidate>
-                      <div class="col-md-6 pe-5">
-                        <%= f.label :author_name, "著者名", class: "form-label" %>
-                        <%= f.text_field :author_name, class: "form-control border-dark-subtle", required: true %>
-                      </div>
-                      <div class="col-md-3">
-                        <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
-                        <%= f.number_field :publish_date, class: "form-control border-dark-subtle", required: true %>
-                      </div>
-                      <div class="col-12 py-2">タイトル</div>
-                      <div class="input-group col-md-12 pe-4">
-                        <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", required: true %>
-                        <span class="input-group-text">：</span>
-                        <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題" %>
-                      </div>
-                      <div class="col-md-8 mt-5">
-                        <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
-                        <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合" %>
-                      </div>
-                      <div class="col-md-6 pe-5 mt-3">
-                        <%= f.label :publisher, "出版社", class: "form-label" %>
-                        <%= f.text_field :publisher, class: "form-control border-dark-subtle", required: true %>
-                      </div>
-                      <div class="col-md-3 mt-2">
-                        <div class="col-12 py-2">状態</div>
-                        <%= f.select :status,
-                        [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ], {},
-                        class: "form-select border-dark-subtle",
-                        required: true %>
-                      </div>
-                      <!-- 詳細情報の入力 -->
-                      <%= render "more_information_form", f: f %>
-                      
-                      <div class="d-grid gap-2 mt-4 col-6 mx-auto">
-                        <%= f.submit "著書として登録", class: "btn btn-primary btn-lg mt-3" %>
-                      </div>
-                    </form>
-                  </div>
-                <% end %>
-              </div>
+<div class="main-contents mx-2">
+  <h2 class="my-4">文献情報の入力</h2>
+  
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="book-tab" data-bs-toggle="tab" data-bs-target="#book-tab-pane" type="button" role="tab" aria-controls="book-tab-pane" aria-selected="true">著書</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="paper-tab" data-bs-toggle="tab" data-bs-target="#paper-tab-pane" type="button" role="tab" aria-controls="paper-tab-pane" aria-selected="false">雑誌論文</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="compilation-tab" data-bs-toggle="tab" data-bs-target="#compilation-tab-pane" type="button" role="tab" aria-controls="compilation-tab-pane" aria-selected="false">編著論文</button>
+    </li>
+  </ul>
 
-              <!-- 雑誌論文タブ -->
-              <div class="tab-pane fade" id="paper-tab-pane" role="tabpanel" aria-labelledby="paper-tab" tabindex="0">
-                <%= form_with model: Paper.new, url: records_create_paper_path, local: true do |f| %>
-                  <div class="input-group mb-3 p-4 border border-top-0 rounded-1 shadow-sm">
-                    <h5 class="fw-bold py-3 mb-4 col-12 border-bottom border-secondary border-2"><i class="fa fa-file pe-2"></i> 論文情報</h5>
-                    <form class="row g-3 needs-validation"novalidate>
-                      <div class="col-md-6 pe-5">
-                        <%= f.label :author_name, "著者名", class: "form-label" %>
-                        <%= f.text_field :author_name, class: "form-control border-dark-subtle", required: true %>
-                      </div>
-                      <div class="col-md-3">
-                        <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
-                        <%= f.number_field :publish_date, class: "form-control border-dark-subtle", required: true %>
-                      </div>
-                      <div class="col-12 py-2">タイトル</div>
-                      <div class="input-group col-md-12 pe-4">
-                        <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", required: true %>
-                        <span class="input-group-text">：</span>
-                        <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題" %>
-                      </div>
-                      <h5 class="fw-bold mt-3 mb-4 py-3 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 収録物情報</h5>
-                      <div class="col-8">
-                        <%= f.label :compiled_by, "編者名", class: "form-label" %>
-                        <%= f.text_field :compiled_by, class: "form-control border-dark-subtle", required: true %>
-                      </div>
-                      <div class="col-12 py-2">雑誌タイトル</div>
-                      <div class="input-group col-md-12 pe-4">
-                        <%= f.text_field :publication_main_title, class: "form-control border-dark-subtle", placeholder: "主題", required: true %>
-                        <span class="input-group-text">：</span>
-                        <%= f.text_field :publication_sub_title, class: "form-control border-dark-subtle", placeholder: "副題" %>
-                      </div>
-                      <div class="mt-3 pe-5 col-md-4">
-                        <label class="form-label">巻号（半角数字）</label>
-                        <div class="input-group">
-                          <span class="input-group-text">第</span>
-                          <%= f.number_field :volume, class: "form-control border-dark-subtle col-1" %>
-                          <span class="input-group-text">巻</span>
-                          <%= f.number_field :no, class: "form-control border-dark-subtle col-1" %>
-                          <span class="input-group-text">号</span>
-                        </div>
-                      </div>
-                      <div class="col-md-6 mt-3">
-                        <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
-                        <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合" %>
-                      </div>
-                      <div class="col-md-4 pe-5 mt-3">
-                        <%= f.label :publisher, "出版社", class: "form-label" %>
-                        <%= f.text_field :publisher, class: "form-control border-dark-subtle" %>
-                      </div>
-                      <div class="col-md-3 mt-2">
-                        <div class="col-12 py-2">状態</div>
-                        <%= f.select :status,
-                        [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ], {},
-                        class: "form-select border-dark-subtle",
-                        required: true %>
-                      </div>
-                      <!-- 詳細情報の入力 -->
-                      <%= render "more_information_form", f: f %>
-                      <div class="d-grid gap-2 mt-4 col-6 mx-auto">
-                        <%= f.submit "雑誌論文として登録", class: "btn btn-primary btn-lg mt-3" %>
-                      </div>
-                    </form>
-                  </div>
-                <% end %>
-              </div>
+  <div class="tab-content" id="myTabContent">
+    <!-- 著書タブ -->
+    <div class="tab-pane fade show active" id="book-tab-pane" role="tabpanel" aria-labelledby="book-tab" tabindex="0">
+      <%= render "book_registration"%>
+    </div>
 
-              <!-- 編著論文タブ -->
-              <div class="tab-pane fade" id="compilation-tab-pane" role="tabpanel" aria-labelledby="compilation-tab" tabindex="0">
-                <%= form_with model: Compilation.new, url: records_create_compilation_path, local: true do |f| %>
-                <div class="input-group mb-3 p-4 border border-top-0 rounded-1 shadow-sm">
-                  <h5 class="fw-bold py-3 mb-4 col-12 border-bottom border-secondary border-2"> <span class="fa fa-file pe-2"></span> 論文情報</h5>
-                  <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-md-6 pe-5">
-                      <%= f.label :author_name, "著者名", class: "form-label" %>
-                      <%= f.text_field :author_name, class: "form-control border-dark-subtle", required: true %>
-                    </div>
-                    <div class="col-md-3">
-                      <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
-                      <%= f.number_field :publish_date, class: "form-control border-dark-subtle", required: true %>
-                    </div>
-                    <div class="col-12 py-2">タイトル</div>
-                    <div class="input-group col-md-12 pe-4">
-                      <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", required: true %>
-                      <span class="input-group-text">：</span>
-                      <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題" %>
-                    </div>
-                    <h5 class="fw-bold mt-3 mb-4 py-3 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 収録物情報</h5>
-                    <div class="col-8">
-                      <%= f.label :compiled_by, "編者名", class: "form-label" %>
-                        <%= f.text_field :compiled_by, class: "form-control border-dark-subtle", required: true %>
-                    </div>
-                    <div class="col-12 py-2">収録物タイトル</div>
-                    <div class="input-group col-md-12 pe-4">
-                      <%= f.text_field :publication_main_title, class: "form-control border-dark-subtle", placeholder: "主題", required: true %>
-                      <span class="input-group-text">：</span>
-                      <%= f.text_field :publication_sub_title, class: "form-control border-dark-subtle", placeholder: "副題" %>
-                    </div>
-                    <div class="mt-3 pe-5 col-md-4">
-                      <label class="form-label">巻号（半角数字）</label>
-                      <div class="input-group">
-                        <span class="input-group-text">第</span>
-                        <%= f.number_field :volume, class: "form-control border-dark-subtle col-1" %>
-                        <span class="input-group-text">巻</span>
-                        <%= f.number_field :no, class: "form-control border-dark-subtle col-1" %>
-                        <span class="input-group-text">号</span>
-                      </div>
-                    </div>
+    <!-- 雑誌論文タブ -->
+    <div class="tab-pane fade" id="paper-tab-pane" role="tabpanel" aria-labelledby="paper-tab" tabindex="0">
+      <%= render "paper_registration"%>
+    </div>
 
-                    <div class="col-md-6 mt-3">
-                      <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
-                      <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合" %>
-                    </div>
-
-                    <div class="col-md-4 pe-5 mt-3">
-                      <%= f.label :publisher, "出版社", class: "form-label" %>
-                        <%= f.text_field :publisher, class: "form-control border-dark-subtle", required: true %>
-                    </div>
-                    <div class="col-md-3 mt-2">
-                      <div class="col-12 py-2">状態</div>
-                      <%= f.select :status,
-                      [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ], {},
-                      class: "form-select border-dark-subtle",
-                      required: true %>
-                    </div>
-                    <!-- 詳細情報の入力 -->
-                    <%= render "more_information_form", f: f %>
-                    <div class="d-grid gap-2 mt-4 col-6 mx-auto">
-                      <%= f.submit "編著論文として登録", class: "btn btn-primary btn-lg mt-3" %>
-                    </div>
-                  </form>
-                </div>
-                <% end %>
-              </div>
-            </div>
+    <!-- 編著論文タブ -->
+    <div class="tab-pane fade" id="compilation-tab-pane" role="tabpanel" aria-labelledby="compilation-tab" tabindex="0">
+      <%= render "compilation_registration"%>
+    </div>
+  </div>
+</div>

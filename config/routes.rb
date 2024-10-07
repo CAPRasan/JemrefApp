@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
   get "sessions/new"
-  resources :records, only: [ :new, :index, :edit ]
-  post "records/create_book", to: "records#create_book"
-  post "records/create_paper", to: "records#create_paper"
-  post "records/create_compilation", to: "records#create_compilation"
+  resources :records
   delete "records/:id/destroy", to: "records#destroy", as: :destroy_record
-  patch "records/:id/update", to: "records#update", as: :update_record
 
   get "/signup", to: "users#new"
   get "/login", to: "sessions#new"

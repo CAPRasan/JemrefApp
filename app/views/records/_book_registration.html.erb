@@ -1,21 +1,13 @@
-<%= form_with model: @record, url: update_record_path, method: :patch, local: true do |f| %>
+<!-- createアクションの場合とupdateアクションの場合で処理を分岐 -->
+<%= form_with model: @record, scope: :record, url: @record.new_record? ? records_path : record_path(@record),
+              local: true, method: @record.new_record? ? :post : :patch do |f| %>
+<%= f.hidden_field :type, value: "Book" %>
   <div class="input-group mb-3 p-4 pb-5 border rounded-1 shadow-sm">
     <h5 class="fw-bold pb-3 mb-4 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 著書情報</h5>
     <div class="row g-3 needs-validation" novalidate>
-      <div class="col-md-6 pe-5">
-        <%= f.label :author_name, "著者名", class: "form-label" %>
-        <%= f.text_field :author_name, class: "form-control border-dark-subtle", required: true %>
-      </div>
-      <div class="col-md-3">
-        <%= f.label :publish_date, "刊行年（西暦・半角数字）", class: "form-label" %>
-        <%= f.number_field :publish_date, class: "form-control border-dark-subtle", required: true %>
-      </div>
-      <div class="col-12 py-2">タイトル</div>
-      <div class="input-group col-md-12 pe-4">
-        <%= f.text_field :main_title, class: "form-control border-dark-subtle", placeholder: "主題", required: true %>
-        <span class="input-group-text">：</span>
-        <%= f.text_field :sub_title, class: "form-control border-dark-subtle", placeholder: "副題" %>
-      </div>
+
+      <%= render "general_information_form", f: f %>
+      
       <div class="col-md-8 mt-5">
         <%= f.label :volume_other_form, "巻号その他（任意）", class: "form-label" %>
         <%= f.text_field :volume_other_form, class: "form-control border-dark-subtle", placeholder: "1988年秋号 〇〇講座第2巻 など、-巻-号で表せない場合" %>
@@ -32,8 +24,7 @@
         required: true %>
       </div>
       
-      <!-- 詳細情報の入力 -->
-      <%= render partial: "more_information_form", locals: {f: f} %>
+      <%= render "more_information_form", f: f %>
 
       <div class="d-grid gap-2 mt-4 col-6 mx-auto">
         <%= f.submit "更新", class: "btn btn-primary btn-lg mt-3" %>
