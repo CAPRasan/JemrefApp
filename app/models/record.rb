@@ -2,6 +2,8 @@ class Record < ApplicationRecord
     validates :author_name, { presence: true }
     validates :main_title, { presence: true }
     validates :publish_date, { presence: true }
+    has_many :tag_relationships, dependent: :destroy
+    has_many :tags, through: :tag_relationships
     belongs_to :user
     # この書法は非推奨、要修正
     enum :status, { read: 0, unread: 1, unnecessary: 2 }, prefix: true
@@ -58,6 +60,44 @@ class Record < ApplicationRecord
             "%#{keyword}%",)
         else
             all
+        end
+    end
+    # 新規タグづけ用のメソッド
+    def save_tags(tags)
+        tags.each do |new_tag|
+            self.tags.find_or_create_by(name: new_tag)
+        end
+    end
+    # タグ更新用のメソッド
+    def update_tags(latest_tags)
+        # 既存のタグが存在しなかった場合
+        if !self.tags.exists?
+            latest_tags.each do |latest_tag|
+                self.tags.find_or_create_by(name: latest_tag)
+            end
+        # 更新対象がなかった場合
+        elsif
+            if latest_tags.nil?
+                return # nilなら何もしない
+            elsif latest_tags.empty?
+                self.tags.each do |tag|
+                    self.tags.delete(tag)
+                end
+            end
+        else
+            # 既存のタグも更新対象もある場合、差分を更新
+            current_tags = self.tags.pluck(:name)
+            current_tags ||= []  # nilの場合は空の配列にする
+            latest_tags ||= []   # 同上
+            old_tags = current_tags - latest_tags
+            new_tags = latest_tags - current_tags
+            old_tags.each do |old_tag|
+                tag = self.tags.find_by(name: old_tag)
+                self.tags.delete(tag) if tag.present?
+            end
+            new_tags.each do |new_tag|
+                self.tags.find_or_create_by(name: new_tag)
+            end
         end
     end
 end

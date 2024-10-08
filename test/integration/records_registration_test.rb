@@ -1,13 +1,13 @@
 require "test_helper"
 
-class RecordsNew < ActionDispatch::IntegrationTest
+class RecordsRegistration < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @other_user = users(:archer)
   end
 end
 
-class RecordsNewTest < RecordsNew
+class RecordsRegistrationTest < RecordsRegistration
   def setup
     super
     log_in_as(@user)
@@ -23,7 +23,8 @@ class RecordsNewTest < RecordsNew
                                              publisher: "明石書店",
                                              status: "unread",
                                              type: "Book",
-                                             memo: "メモの内容" } }
+                                             memo: "メモの内容",
+                                             tags: "音楽,伊沢,明治" } }
     end
     follow_redirect!
     assert_template "records/index"
@@ -43,7 +44,8 @@ class RecordsNewTest < RecordsNew
                                              publication_main_title: "音楽教育の歴史",
                                              publication_sub_title: "",
                                              volume_other_form: "音楽教育講座第２巻",
-                                             type: "Compilation" } }
+                                             type: "Compilation",
+                                             tags: "音楽,伊沢,明治" } }
     end
     follow_redirect!
     assert_template "records/index"
@@ -64,14 +66,15 @@ class RecordsNewTest < RecordsNew
                                              status: "read",
                                              publication_main_title: "日本の教育史学",
                                              publication_sub_title: "",
-                                             type: "Paper" } }
+                                             type: "Paper",
+                                             tags: "" } }
     end
     assert_response :unprocessable_entity
     assert_template "records/new"
   end
 end
 
-class InvalidRecordsNewTest < RecordsNew
+class InvalidRecordsRegistrationTest < RecordsRegistration
   test "create records by not logged-in user" do
     assert_no_difference "Record.count", 1 do
       post records_path, params: { record: { author_name: "ガート・ビースタ著、亘理陽一ほか訳",
@@ -85,7 +88,7 @@ class InvalidRecordsNewTest < RecordsNew
   end
 end
 
-class InvalidRecordsEditAndDestroyTest < RecordsNew
+class RecordsEditAndDestroyTest < RecordsRegistration
   def setup
     super
     log_in_as(@user)
@@ -96,10 +99,28 @@ class InvalidRecordsEditAndDestroyTest < RecordsNew
                                            publisher: "明石書店",
                                            status: "unread",
                                            type: "Book" } }
+  end
+
+  test "successful edit records" do
+    get edit_record_path(Record.last)
+    patch record_path(Record.last), params: { record: { author_name: "著者",
+                                                      main_title: "よい教育研究とはなにか",
+                                                      sub_title: "流行と正統への批判的考察",
+                                                      publish_date: 2024,
+                                                      publisher: "明石書店",
+                                                      status: "unread",
+                                                      tags: "音楽" } }
+    assert_redirected_to records_url
+    assert_not flash.empty?
+  end
+end
+
+class InvalidRecordsEditAndDestroyTest < RecordsEditAndDestroyTest
+  def setup
+    super
     delete logout_path
     log_in_as(@other_user)
   end
-
   test "destroy records by invalid user" do
     assert_no_difference "Record.count" do
       delete destroy_record_path(Record.last)
@@ -115,7 +136,8 @@ class InvalidRecordsEditAndDestroyTest < RecordsNew
                                                       sub_title: "流行と正統への批判的考察",
                                                       publish_date: 2024,
                                                       publisher: "明石書店",
-                                                      status: "unread" } }
+                                                      status: "unread",
+                                                      tags: "音楽" } }
     assert_redirected_to records_url
     assert_not flash.empty?
   end
