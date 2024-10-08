@@ -35,7 +35,6 @@ class RecordsController < ApplicationController
       redirect_to records_path
     else
       flash.now[:denger] = "書誌情報の更新に失敗しました"
-      puts @record.errors.full_messages
       render :edit, status: :unprocessable_entity
     end
   end
@@ -47,10 +46,7 @@ class RecordsController < ApplicationController
     redirect_to records_path
   end
 
-
-
   private
-
     def record_params
       params.require(:record).permit(
         :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
@@ -58,30 +54,6 @@ class RecordsController < ApplicationController
         :volume, :no, :volume_other_form, :memo, :type, :status
       )
     end
-
-    # def record_params
-    #   # typeに基づいてパラメータを取得
-    #   record_params = @record.class.name.downcase
-    #   case params[record_params][:type]
-    #   when "Book"
-    #     params.require(:book).permit(:type,  :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-    #                                  :volume_other_form, :memo, :status)
-    #   when "Paper"
-    #     params.require(:paper).permit(:type, :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-    #                                   :compiled_by, :publication_main_title, :publication_sub_title,
-    #                                   :volume, :no, :volume_other_form, :memo, :status)
-    #   when "Compilation"
-    #     params.require(:compilation).permit(:type, :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-    #                                         :compiled_by, :publication_main_title, :publication_sub_title,
-    #                                         :volume, :no, :volume_other_form, :memo, :status)
-    #   else
-    #     params.require(:record).permit(:type, :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
-    #                                    :compiled_by, :publication_main_title, :publication_sub_title,
-    #                                    :volume, :no, :volume_other_form, :memo, :type, :status
-    #   )
-    #   end
-    # end
-
 
     def ensure_correct_user
       @record = Record.find_by(id: params[:id])

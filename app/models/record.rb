@@ -61,28 +61,3 @@ class Record < ApplicationRecord
         end
     end
 end
-
-
-
-# ActiveRecord::Schema[7.2].define(version: 2024_08_21_001729) do
-#     create_table "records", force: :cascade do |t|
-#       t.string "author_name"
-#       t.string "main_title"
-#       t.string "sub_title"
-#       t.integer "publish_date"
-#       t.string "publisher"
-#       t.string "compiled_by"
-#       t.string "publication"
-#       t.integer "volume"
-#       t.integer "no"
-#       t.text "memo"
-#       t.datetime "created_at", null: false
-#       t.datetime "updated_at", null: false
-#       t.integer "status", default: 0, null: false
-#       t.integer "user_id"
-#       t.string "type"
-#       t.string "publication_main_title"
-#       t.string "publication_sub_title"
-#       t.string "volume_other_form"
-#       t.index ["user_id"], name: "index_records_on_user_id"
-#     end

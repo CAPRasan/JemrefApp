@@ -15,15 +15,15 @@
             
           <div class="container mt-5">
 
-            <!-- bookクラスの編集フォーム -->
+            <!-- bookの編集フォーム -->
             <% if @record.type == "Book" %>
               <%= render "book_registration"%>
               
-            <!-- paperクラスの編集フォーム -->
+            <!-- paperの編集フォーム -->
             <% elsif @record.type == "Paper" %>
               <%= render "paper_registration" %>
               
-              <!-- compilationクラスの編集フォーム -->
+              <!-- compilationの編集フォーム -->
             <% else %>
               <%= render "compilation_registration" %>
             <% end %>            
