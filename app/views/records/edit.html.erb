@@ -9,13 +9,13 @@
   <div class="container mt-5">
   <!-- bookの編集フォーム -->
     <% if @record.type == "Book" %>
-      <%= render "book_registration"%>
+      <%= render "book_registration", submit_btn: "更新" %>
   <!-- paperの編集フォーム -->
-    <% elsif @record.type == "Paper" %>
-      <%= render "paper_registration" %>
+    <% elsif @record.type == "Paper"%>
+      <%= render "paper_registration", submit_btn: "更新" %>
   <!-- compilationの編集フォーム -->
     <% else %>
-      <%= render "compilation_registration" %>
+      <%= render "compilation_registration", submit_btn: "更新" %>
     <% end %>            
   </div>
 
