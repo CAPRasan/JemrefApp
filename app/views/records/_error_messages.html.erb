@@ -1,0 +1,9 @@
+<% if @record.errors.full_messages %>
+<div class="error-alert">
+    <ul>
+      <% @record.errors.full_messages.each do |message| %>
+      <li class='error-message'><%= message %></li>
+      <% end %>
+    </ul>
+</div>
+<% end %>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [ :show, :edit, :update ]
   before_action :correct_user, only: [ :edit, :update, :destroy ]
+  before_action :not_logged_in_user, only: [ :new, :create ]
   # def index
   #   @users = User.all
   # end
@@ -64,5 +65,12 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find_by(id: params[:id])
     redirect_to records_path unless current_user?(@user)
+  end
+
+  def not_logged_in_user
+    if logged_in?
+      flash[:danger] = "すでにログイン済みです"
+      redirect_to records_path, status: :see_other
+    end
   end
 end

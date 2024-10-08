@@ -9,13 +9,12 @@
       <button type="submit" class="btn btn-primary px-5" id="button-addon">検索</button>
     </div>
     <% end %>
-
-  <div class="bib-list mb-5">
-    <% if @keyword.present? %>
-      <%= "「#{@keyword}」の検索結果" %>
-    <% end %>
-    <h6 class="ms-3 mb-3">全<%= @records.count %>件の文献情報</h6>
-  </div>
+    <div class="bib-list mb-5">
+      <% if @keyword.present? %>
+        <%= "「#{@keyword}」の検索結果" %>
+      <% end %>
+      <h6 class="ms-3 mb-3">全<%= @records.count %>件の文献情報</h6>
+    </div>
 
     <%= will_paginate @records %>
 
@@ -25,6 +24,7 @@
         <li class="row list-group-item d-flex justify-content-between align-items-start shadow-sm mb-1 me-4 p-0 w-100">
           <div class="accordion accordion-flush w-100 px-0" id="accordionFlushExample">
             <div class="accordion-item" style="border-radius:5px 5px 5px 5px;">
+              <!-- 基本的な書誌情報 -->
               <h2 class="accordion-header" >
                 <button class="accordion-button collapsed border py-0 ps-1 border-bottom-0" style="border-radius:5px 5px 0px 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= record.id%>" aria-expanded="false" aria-controls="flush-collapse<%= record.id%>">
                   <% if record.type == ("Compilation" || "Paper") %>
@@ -34,6 +34,7 @@
                   <% end %>
                 </button>
               </h2>
+              <!-- 詳細情報のアコーディオン -->
               <div id="flush-collapse<%= record.id%>" class="accordion-collapse collapse border" data-bs-parent="#accordionFlushExample">
                 <div class="row justify-content-end accordion-body w-100">
                   <div class="col">
@@ -53,10 +54,6 @@
         </li>
       <% end %>
     </ul>
-
-
-
-
   <div class="mt-5">
     <%= will_paginate @records %>
   </div>
