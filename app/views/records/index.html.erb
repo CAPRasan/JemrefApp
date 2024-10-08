@@ -18,6 +18,9 @@
 
     <%= will_paginate @records %>
 
+    <% if @records.empty? %>
+    <%= render "add_sample_records_button"%>
+    <% end %>
     <!-- レコード一覧 -->
     <ul class="list-group mt-2">
       <% @records.each do |record| %>

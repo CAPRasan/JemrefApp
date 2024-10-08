@@ -65,38 +65,42 @@ class Record < ApplicationRecord
     # 新規タグづけ用のメソッド
     def save_tags(tags)
         tags.each do |new_tag|
-            self.tags.find_or_create_by(name: new_tag)
+            normalized_tag_name = new_tag.strip.downcase
+            tag = Tag.find_or_create_by(name: normalized_tag_name)
+            self.tags << tag unless self.tags.include?(tag)
         end
     end
     # タグ更新用のメソッド
     def update_tags(latest_tags)
-        # 既存のタグが存在しなかった場合
+        # 既存のタグが存在しない場合
         if !self.tags.exists?
             latest_tags.each do |latest_tag|
-                self.tags.find_or_create_by(name: latest_tag)
+                # 念の為、空白や英字の大小文字をノーマライズ
+                normalized_tag_name = latest_tag.strip.downcase
+                tag = Tag.find_or_create_by(name: normalizad_tag_name)
+                self.tags << tag unless self.tags.include?(tag)
             end
         # 更新対象がなかった場合
-        elsif
-            if latest_tags.nil?
-                return # nilなら何もしない
-            elsif latest_tags.empty?
-                self.tags.each do |tag|
-                    self.tags.delete(tag)
-                end
-            end
+        elsif latest_tags.nil?
+            nil # nilなら何もしない
+        elsif latest_tags.empty?
+            self.tags.clear # 既存のタグをすべて削除
         else
             # 既存のタグも更新対象もある場合、差分を更新
             current_tags = self.tags.pluck(:name)
             current_tags ||= []  # nilの場合は空の配列にする
             latest_tags ||= []   # 同上
+
             old_tags = current_tags - latest_tags
             new_tags = latest_tags - current_tags
+
             old_tags.each do |old_tag|
                 tag = self.tags.find_by(name: old_tag)
                 self.tags.delete(tag) if tag.present?
             end
             new_tags.each do |new_tag|
-                self.tags.find_or_create_by(name: new_tag)
+                tag = Tag.find_or_create_by(name: new_tag.strip)
+                self.tags << tag unless self.tags.include?(tag)
             end
         end
     end

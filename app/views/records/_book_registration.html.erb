@@ -16,7 +16,7 @@
         <%= f.label :publisher, "出版社", class: "form-label" %>
         <%= f.text_field :publisher, class: "form-control border-dark-subtle", required: true %>
       </div>
-      <%= render partial: "status_form", locals: {f: f} %>
+      <%= render "status_form", f: f %>
       
       <%= render "more_information_form", f: f %>
 

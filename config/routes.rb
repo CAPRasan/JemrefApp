@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "sessions/new"
   resources :records
   delete "records/:id/destroy", to: "records#destroy", as: :destroy_record
+  post "records/create_sample", to: "records#create_sample"
 
   get "/signup", to: "users#new"
   get "/login", to: "sessions#new"
