@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      record: 文献情報
+      book: 著書
+      paper: 論文
+      compilation: 編著論文
+    attributes:
+      record/status:
+        read: 既読
+        unread: 未読
+        unnecessary: その他

@@ -1,0 +1,7 @@
+<div class="col-md-3 mt-2">
+    <div class="col-12 py-2">状態</div>
+    <%= f.select :status,
+    [ [ "既読", "read" ], [ "未読", "unread" ], [ "その他", "unnecessary" ] ], {},
+    class: "form-select border-dark-subtle",
+    required: true %>
+</div> 

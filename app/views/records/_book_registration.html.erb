@@ -16,13 +16,7 @@
         <%= f.label :publisher, "出版社", class: "form-label" %>
         <%= f.text_field :publisher, class: "form-control border-dark-subtle", required: true %>
       </div>
-      <div class="col-md-3 mt-2">
-        <div class="py-2">状態</div>
-        <%= f.select :status,
-        [ [ "既読", "read" ], [ "未読", "unread" ], [ "不必要", "unnecessary" ] ], {},
-        class: "form-select border-dark-subtle",
-        required: true %>
-      </div>
+      <%= render partial: "status_form", locals: {f: f} %>
       
       <%= render "more_information_form", f: f %>
 
