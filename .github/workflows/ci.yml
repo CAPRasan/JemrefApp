@@ -121,5 +121,5 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PSQL_PASSWORD: postgres 
+          PSQL_PASSWORD: password
         run: bin/rails db:create RAILS_ENV=test

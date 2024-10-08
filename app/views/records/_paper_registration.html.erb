@@ -1,7 +1,7 @@
 <%= form_with model: @record, scope: :record, url: @record.new_record? ? records_path : record_path(@record),
               local: true, method: @record.new_record? ? :post : :patch do |f| %>
 <%= f.hidden_field :type, value: "Paper" %>
-<div class="input-group mb-3 p-4 pb-5 border border-top-0 rounded-1 shadow-sm">
+<div class="input-group mb-3 p-4 pb-5 <%= @record.new_record? ? "border border-top-0" : "border" %> rounded-1 shadow-sm">
     <h5 class="fw-bold pb-3 mb-4 col-12 border-bottom border-secondary border-2"><i class="fa fa-file pe-2"></i> 論文情報</h5>
     <div class="row g-3 needs-validation"novalidate>
       

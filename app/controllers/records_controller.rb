@@ -63,7 +63,7 @@ class RecordsController < ApplicationController
     { type: "Paper", author_name: "牛山充", main_title: "ミンストレル雑考(一）", sub_title: "",
       publish_date: 1930, publisher: "音楽世界社", compiled_by: "",
       status: "read", publication_main_title: "音楽世界", publication_sub_title: "",
-      volume: 2, no: 3, memo: "文献を登録する場合は、上部「文献情報の入力」をクリックしてください。", tags: "音楽ジャーナリズム,音楽雑誌,昭和" },
+      volume: 2, no: 3, memo: "文献を新しく登録する場合は、ページ最上部の「文献情報の入力」をクリックしてください。", tags: "音楽ジャーナリズム,音楽雑誌,昭和" },
     { type: "Compilation", author_name: "増沢健美", main_title: "音楽史", sub_title: "",
       publish_date: 1927, publisher: "アルス", compiled_by: "小松耕輔（主幹）",
       status: "read", publication_main_title: "アルス西洋音楽講座", publication_sub_title: "",
