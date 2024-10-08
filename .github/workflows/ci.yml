@@ -105,7 +105,7 @@ jobs:
 
       - name: Set up database
         env:
-          PGPASSWORD: postgres  # 上で設定したパスワードと一致させる
+          PGPASSWORD: postgres
         run: |
           psql -h localhost -U postgres -c "CREATE DATABASE my_database_test;"
           psql -h localhost -U postgres -c "CREATE USER jemref WITH PASSWORD 'password';"
@@ -121,5 +121,5 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PSQL_PASSWORD: postgres  # 環境変数を設定
+          PSQL_PASSWORD: postgres 
         run: bin/rails db:create RAILS_ENV=test
