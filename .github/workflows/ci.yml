@@ -107,11 +107,11 @@ jobs:
         env:
           PGPASSWORD: postgres
         run: |
-          psql -h localhost -U postgres -c "CREATE DATABASE my_database_test;"
           psql -h localhost -U postgres -c "CREATE USER jemref WITH PASSWORD 'password';"
+          psql -h localhost -U postgres -c "CREATE DATABASE my_database_test;"
           psql -h localhost -U postgres -c "ALTER USER jemref CREATEDB;"
           psql -h localhost -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE my_database_test TO jemref;"
-
+          
       - name: Install Chrome for system tests
         run: sudo apt-get install --no-install-recommends -y google-chrome-stable
 
