@@ -21,7 +21,7 @@
 
   <!-- 削除ボタンと警告モーダル(edit用) -->
   <div class="mx-auto p-2 mt-4" style="width: 200px;">
-  <%= form_with url: destroy_record_path(@record), method: :delete  do %>
+  <%= form_with url: record_path(@record), method: :delete  do %>
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-confirmation">
       書誌情報を削除する
     </button>

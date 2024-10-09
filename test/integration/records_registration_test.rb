@@ -51,7 +51,7 @@ class RecordsRegistrationTest < RecordsRegistration
     assert_template "records/index"
     assert_not flash.empty?
     assert_difference "Record.count", -1 do
-      delete destroy_record_path(Record.last)
+      delete record_path(Record.last)
     end
   end
 
@@ -123,7 +123,7 @@ class InvalidRecordsEditAndDestroyTest < RecordsEditAndDestroyTest
   end
   test "destroy records by invalid user" do
     assert_no_difference "Record.count" do
-      delete destroy_record_path(Record.last)
+      delete record_path(Record.last)
     end
   end
 
