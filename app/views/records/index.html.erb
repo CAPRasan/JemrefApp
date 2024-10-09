@@ -9,11 +9,14 @@
       <button type="submit" class="btn btn-primary px-5" id="button-addon">検索</button>
     </div>
     <% end %>
-    <div class="bib-list mb-5">
+    <!-- 検索結果の表示 -->
+    <div class="bib-list ms-3 mb-5">
       <% if @keyword.present? %>
-        <%= "「#{@keyword}」の検索結果" %>
+        <%= "キーワード：「#{@keyword}」の検索結果" %>
+      <% elsif @tag_name.present? %>
+        <%= "タグ：「#{@tag_name}」の検索結果" %>
       <% end %>
-      <h6 class="ms-3 mb-3">全<%= @records.count %>件の文献情報</h6>
+      <h6 class="my-3">全 <%= @records.count %> 件の文献情報</h6>
     </div>
 
     <%= will_paginate @records %>
@@ -43,13 +46,8 @@
                 <div class="row justify-content-end accordion-body w-100">
                   <div class="col">
                     <!-- タグ表示 -->
-                      <% unless record.tags.empty? %>
-                        <% record.tags.each do |tag| %>
-                        <span class="badge rounded-pill text-bg-secondary px-3 py-2" style="font-weight:normal; font-size:14px;">
-                          <span class="fa fa-tag pe-2"></span><%= tag.name %>
-                        </span>
-                        <% end %>
-                      <% end %>
+                     <%= render "records_tags_button", record: record %>
+                      
                       <!-- メモ表示 -->
                       <div class="mt-4">
                         メモ：

@@ -38,30 +38,6 @@ class Record < ApplicationRecord
         volume_and_number
     end
 
-    def self.search(keyword)
-        # todo 検索方法について調査必要、現時点では力技フリーワード
-        if keyword
-            where("
-                author_name LIKE ? or
-                main_title LIKE ? or
-                sub_title LIKE ? or
-                publisher LIKE ? or
-                compiled_by LIKE ? or
-                publication_main_title LIKE ? or
-                publication_sub_title LIKE ? or
-                volume_other_form LIKE ? ",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",)
-        else
-            all
-        end
-    end
     # 新規タグづけ用のメソッド
     def save_tags(tags)
         tags.each do |new_tag|
@@ -102,6 +78,40 @@ class Record < ApplicationRecord
                 tag = Tag.find_or_create_by(name: new_tag.strip)
                 self.tags << tag unless self.tags.include?(tag)
             end
+        end
+    end
+
+    # 同じタグを持つレコードを返すメソッド
+    def self.tagged_with(tag_name, user)
+        tag = Tag.find_by(name: tag_name)
+        return [] unless tag
+        records = user.records.joins(:tags).where(tags: { id: tag.id })
+        records
+    end
+
+    # フリーワード検索のためのメソッド
+    def self.search(keyword)
+        # todo 検索方法について調査必要、現時点では力技フリーワード
+        if keyword
+            where("
+                author_name LIKE ? or
+                main_title LIKE ? or
+                sub_title LIKE ? or
+                publisher LIKE ? or
+                compiled_by LIKE ? or
+                publication_main_title LIKE ? or
+                publication_sub_title LIKE ? or
+                volume_other_form LIKE ?",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%",
+            "%#{keyword}%")
+        else
+            all
         end
     end
 end

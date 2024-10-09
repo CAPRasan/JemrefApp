@@ -1,3 +1,28 @@
+book1:
+  author_name: "奥中康人"
+  main_title: "国家と音楽"
+  sub_title: "伊沢修二がめざした近代"
+  publish_date: 2008
+  publisher: "春秋社"
+  status: "read"
+  user_id: 1
+  type: "Book"
+
+
+paper1:
+  author_name: "金井徹"
+  main_title: "務台理作における日本文化論の検討"
+  sub_title: "西田幾多郎(1940)『日本文化の問題』に関する講義録を手がかりに"
+  publish_date: 2024,
+  compiled_by: "教育史学会"
+  'no': 67
+  status: "read"
+  user_id: 1
+  publication_main_title: "日本の教育史学"
+  publication_sub_title: ""
+  type: "Paper"
+
+
 <% 30.times do |n| %>
 book_<%= n %>:
   author_name: "<%= Faker::Book.author %>"

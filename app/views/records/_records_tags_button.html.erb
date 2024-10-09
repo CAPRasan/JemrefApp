@@ -1,0 +1,13 @@
+
+<% unless record.tags.empty? %>
+    <% record.tags.each do |tag| %>
+    <div style="display:inline-block">
+        <%= form_with local: true, method: :get do |f| %>
+            <%= f.hidden_field :tag_name, value: tag.name %>
+            <button type="submit" class="btn text-bg-secondary rounded-pill" style="font-weight:normal; font-size:14px;" id="button-addon">
+                <span class="fa fa-tag pe-2"></span><%= tag.name %>
+            </button>
+        <% end %>
+    </div>
+    <% end %>
+<% end %>                        
