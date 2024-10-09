@@ -91,17 +91,11 @@ jobs:
             sleep 5
           done
 
-      - name: Modify pg_hba.conf to use password authentication
-        run: |
-          sudo sed -i 's/peer/md5/' /etc/postgresql/*/main/pg_hba.conf
-          sudo service postgresql restart
-
       - name: Drop existing test database (if exists)
         env:
           PGPASSWORD: postgres
         run: |
-          psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS my_database_test;"
-
+          psql -h 127.0.0.1 -U postgres -c "DROP DATABASE IF EXISTS my_database_test;"
 
       - name: Set up database
         env:
@@ -121,5 +115,6 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PSQL_PASSWORD: password
+          PGPASSWORD: postgres
+          PSQL_PASSWORD: "password"
         run: bin/rails db:create RAILS_ENV=test
