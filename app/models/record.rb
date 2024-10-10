@@ -101,7 +101,9 @@ class Record < ApplicationRecord
                 compiled_by LIKE ? or
                 publication_main_title LIKE ? or
                 publication_sub_title LIKE ? or
-                volume_other_form LIKE ?",
+                volume_other_form LIKE ? or
+                memo LIKE ?",
+            "%#{keyword}%",
             "%#{keyword}%",
             "%#{keyword}%",
             "%#{keyword}%",
