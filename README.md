@@ -26,19 +26,51 @@ JemRefが目指すのは、 **文献を〈忘れない〉、〈見逃さない�
 そのため文系は「大学こそが研究の場」でしたが、大学の研究環境は年々劣化しています。  
 アマチュア研究者も存在しますが、肩書きがないために受ける不利益が少なくありません。  
 良質な研究ツールをWeb上で広く提供し、プロ・アマを問わず誰もが本格的な研究に取り組める環境を整えることが、文系研究の存続・発展にとってきわめて重要と考えます。
-## 環境構築
-
-### バージョン情報
-* Ruby: 3.3.5
-* Ruby on Rails: 7.2.1
-* PostgreSQL: 14.13
-
-## JemRefの利用方法
+## 利用方法
+### web上でのJemRefのご利用
 注意：これはプロトタイプ版です。  
 開発過程でデータが失われる可能性がありますので、本格的なご利用はお控えください。  
 
 ご利用の際は、下記URLにアクセスしてください。  
 [https://prototype.jemref.com/](https://prototype.jemref.com)
+
+
+
+### ローカルでのセットアップ手順
+#### バージョン情報
+* Ruby: 3.3.5
+* Ruby on Rails: 7.2.1
+* PostgreSQL: 14.13
+
+#### 必要条件
+Dockerがインストールされていること。
+
+#### 手順
+1. Githubからリポジトリをクローンします。   
+```
+git clone https://github.com/CAPRasan/JemrefApp.git
+```
+2. .envファイルを作成し、以下の環境変数を設定します。（例）   
+```
+POSTGRES_USER=your_postgres_user
+POSTGRES_PASSWORD=your_postgres_password
+DATABASE_URL=postgres://your_postgres_user:your_postgres_password@db:5432/my_database_development
+```   
+
+3. クローンしたリポジトリのディレクトリに移動し、コンテナを起動します。
+```
+cd your-repo
+docker-compose up -d
+```
+
+4. データベースの準備  
+seedデータを使用する場合は、次のコマンドを実行してください。
+```
+docker-compose exec web ./bin/rails db:seed
+```
+
+5. アプリケーションにアクセス
+ブラウザで`http://localhost:3000 `にアクセスし、アプリケーションを確認します。
 
 ## 機能
 ### 現在できること
