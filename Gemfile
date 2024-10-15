@@ -44,7 +44,7 @@ gem "faker"
 gem "gimei"
 gem "rails-i18n"
 
-gem "jquery-rails"
+# gem "jquery-rails"
 gem "dartsass-sprockets"
 gem "bootstrap", "~> 5.3.3"
 gem "font-awesome-rails"
@@ -78,7 +78,3 @@ group :test do
   gem "minitest"
   gem "minitest-reporters"
 end
-
-# group :production do
-#   gem "pg"
-# end

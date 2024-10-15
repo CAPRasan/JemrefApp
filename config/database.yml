@@ -3,24 +3,14 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   encoding: unicode
-  username: jemref
-  password: <%= ENV["PSQL_PASSWORD"] %>
-  host: localhost
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %> 
+  host: db # compose.ymlと一致させる
 
 development:
   <<: *default
   database: my_database_development
-  host: 127.0.0.1
 
 test:
   <<: *default
   database: my_database_test
-  username: jemref
-  password: password
-  host: 127.0.0.1 
-
-production:
-  <<: *default
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
-  # database: my_database_production
-
