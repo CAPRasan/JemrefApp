@@ -52,6 +52,9 @@ git clone https://github.com/CAPRasan/JemrefApp.git
 ```
 2. .envファイルを作成し、以下の環境変数を設定します。（例）   
 ```
+ADMIN_NAME=your_admin_name
+ADMIN_PASSWORD=your_admin_password
+ADMIN_EMAIL=your_admin_email
 POSTGRES_USER=your_postgres_user
 POSTGRES_PASSWORD=your_postgres_password
 DATABASE_URL=postgres://your_postgres_user:your_postgres_password@db:5432/my_database_development
@@ -63,13 +66,8 @@ cd your-repo
 docker-compose up -d
 ```
 
-4. データベースの準備  
-seedデータを使用する場合は、次のコマンドを実行してください。
-```
-docker-compose exec web ./bin/rails db:seed
-```
 
-5. アプリケーションにアクセス
+5. アプリケーションにアクセス  
 ブラウザで`http://localhost:3000 `にアクセスし、アプリケーションを確認します。
 
 ## 機能

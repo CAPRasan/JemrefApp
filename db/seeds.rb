@@ -1,6 +1,6 @@
 User.create!(
-   email: "yagisan@example.com",
-   name: "やぎさん",
+   email: ENV["ADMIN_EMAIL"],
+   name: ENV["ADMIN_NAME"],
    admin: true,
    password: ENV["ADMIN_PASSWORD"])
 
