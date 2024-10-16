@@ -66,6 +66,11 @@ cd your-repo
 docker-compose up -d
 ```
 
+4. データベースの準備  
+初期データを使用する場合は、次のコマンドを実行してください。
+```
+docker-compose exec web ./bin/rails db:seed
+```
 
 5. アプリケーションにアクセス  
 ブラウザで`http://localhost:3000 `にアクセスし、アプリケーションを確認します。

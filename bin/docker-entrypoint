@@ -1,13 +1,17 @@
 #!/bin/bash -e
 
+# デバッグ用
+echo "Argument: ${@}"
+
 # Enable jemalloc for reduced memory usage and latency.
-if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
-  export LD_PRELOAD="/usr/lib/*/libjemalloc.so.2"
+if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/aarch64-linux-gnu/libjemalloc.so.2 ]; then
+  export LD_PRELOAD="/usr/lib/aarch64-linux-gnu/libjemalloc.so.2"
 fi
 
 # If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare && ./bin/rails db:seed
+if [[ "$@" == *"rails server"* ]]; then
+  echo "Running rails server - preparing database..."
+  ./bin/rails db:prepare
 fi
 
 exec "${@}"
