@@ -109,9 +109,6 @@ jobs:
       - name: Install Chrome for system tests
         run: sudo apt-get install --no-install-recommends -y google-chrome-stable
 
-      - name: Create test database
-        run: bin/rails db:create RAILS_ENV=test
-
       - name: Run tests
         env:
           RAILS_ENV: test
