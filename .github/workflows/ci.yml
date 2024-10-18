@@ -69,7 +69,7 @@ jobs:
           --health-cmd "pg_isready -U postgres" 
           --health-interval 10s 
           --health-timeout 5s 
-          --health-retries 5
+          --health-retries 10
 
     steps:
       - name: Checkout code
@@ -101,10 +101,10 @@ jobs:
         env:
           PGPASSWORD: postgres
         run: |
-          psql -h localhost -U postgres -c "CREATE USER jemref WITH PASSWORD 'password';"
-          psql -h localhost -U postgres -c "CREATE DATABASE my_database_test;"
-          psql -h localhost -U postgres -c "ALTER USER jemref CREATEDB;"
-          psql -h localhost -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE my_database_test TO jemref;"
+          psql -h 127.0.0.1 -U postgres -c "CREATE USER jemref WITH PASSWORD 'password';"
+          psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE my_database_test;"
+          psql -h 127.0.0.1 -U postgres -c "ALTER USER jemref CREATEDB;"
+          psql -h 127.0.0.1 -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE my_database_test TO jemref;"
           
       - name: Install Chrome for system tests
         run: sudo apt-get install --no-install-recommends -y google-chrome-stable
