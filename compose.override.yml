@@ -1,6 +1,6 @@
 #  開発環境用の設定
-services:
-  web:
-    environment:
-      - RAILS_ENV=development
-    command: bundle exec rails server -p 3000 -b '0.0.0.0'
+# services:
+#   web:
+#     environment:
+#       - RAILS_ENV=development
+#     command: bundle exec rails server -p 3000 -b '0.0.0.0'
