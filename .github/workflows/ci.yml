@@ -69,7 +69,11 @@ jobs:
           --health-cmd "pg_isready -U postgres" 
           --health-interval 10s 
           --health-timeout 5s 
-          --health-retries 10
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      PGPASSWORD: postgres
+      PSQL_PASSWORD: "password"
 
     steps:
       - name: Checkout code
@@ -82,14 +86,7 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y libpq-dev
-
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          until pg_isready -h localhost -p 5432 -U postgres; do
-            echo "Waiting for PostgreSQL to be ready..."
-            sleep 5
-          done
+        run: sudo apt-get update && sudo apt-get install -y libpq-dev google-chrome-stable
 
       - name: Drop existing test database (if exists)
         env:
@@ -105,13 +102,6 @@ jobs:
           psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE my_database_test;"
           psql -h 127.0.0.1 -U postgres -c "ALTER USER jemref CREATEDB;"
           psql -h 127.0.0.1 -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE my_database_test TO jemref;"
-          
-      - name: Install Chrome for system tests
-        run: sudo apt-get install --no-install-recommends -y google-chrome-stable
 
       - name: Run tests
-        env:
-          RAILS_ENV: test
-          PGPASSWORD: postgres
-          PSQL_PASSWORD: "password"
         run: bin/rails db:create RAILS_ENV=test
