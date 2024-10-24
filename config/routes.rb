@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [ :edit ]
 
   root to: "home#top"
+  get "home/about", to: "home#about"
   get "home/information", to: "home#information"
 
 
