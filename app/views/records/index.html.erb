@@ -3,12 +3,7 @@
   <h2 class="my-4">文献の一覧・検索</h1>
 
   <!-- 検索フォーム -->
-  <%= form_with local: true, method: :get do %>
-  <div class="input-group mb-4 ps-2 w-75">
-    <input type="text" class="form-control border-primary border-1" name="keyword" placeholder="フリーワード検索" aria-describedby="button-addon">
-    <button type="submit" class="btn btn-primary px-5" id="button-addon">検索</button>
-  </div>
-  <% end %>
+  <%= render "serch_form" %>
   <!-- 検索窓と検索結果の表示 -->
   <div class="bib-list mb-1" style="width:100%;">
     <div>
