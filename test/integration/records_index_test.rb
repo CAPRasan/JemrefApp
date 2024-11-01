@@ -44,7 +44,7 @@ class RecordIndexTest < RecordsIndex
   end
 end
 
-class RecordSampleTest < RecordIndex
+class RecordsSampleTest < RecordsIndex
   test "add sample records" do
     delete logout_path
     log_in_as(@other_user)
