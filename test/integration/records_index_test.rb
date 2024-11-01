@@ -3,6 +3,7 @@ require "test_helper"
 class RecordsIndex < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
+    @other_user = users(:archer)
     log_in_as(@user)
     post records_path, params: { record: {
       author_name: "ガート・ビースタ著、亘理陽一ほか訳",
@@ -26,6 +27,7 @@ class RecordIndexTest < RecordsIndex
     assigns(:records).paginate(page: 1).each do |record|
       assert_select "h5", text: "#{record.author_name}（#{record.publish_date}）"
       assert_select "a[href=?]", edit_record_path(record)
+      assert_select "button", text: "サンプルデータを入力", count: 0
     end
   end
 
@@ -39,5 +41,17 @@ class RecordIndexTest < RecordsIndex
     get records_path, params: { tag_name: "音楽" }
     assert_template "records/index"
     assert_match "明石書店", response.body
+  end
+end
+
+class RecordSampleTest < RecordIndex
+  test "add sample records" do
+    delete logout_path
+    log_in_as(@other_user)
+    get records_path
+    assert_select "button", text: "サンプルデータを入力"
+    assert_difference "Record.count", 5 do
+      post records_create_sample_path
+    end
   end
 end
