@@ -104,4 +104,6 @@ jobs:
           psql -h 127.0.0.1 -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE my_database_test TO jemref;"
 
       - name: Run tests
-        run: bin/rails db:create RAILS_ENV=test
+        run: |
+          bundle exec rails db:migrate RAILS_ENV=test
+          bundle exec rails test

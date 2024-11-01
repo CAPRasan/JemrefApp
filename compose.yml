@@ -19,5 +19,9 @@ services:
     command: bundle exec rails server -e production -b '0.0.0.0'
     depends_on:
       - db
+  test:
+    environment:
+      - RAILS_ENV=test
+    command: bundle exec rails test
 volumes:
   db-data:
