@@ -1,4 +1,3 @@
-
 # herokuでのみ適用する設定
 if ENV["RACK_ENV"] == "production" || ENV["RAILS_ENV"] == "production"
   workers Integer(ENV["WEB_CONCURRENCY"] || 2)

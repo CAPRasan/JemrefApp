@@ -1,3 +1,4 @@
+# 開発・テスト用の設定
 services:
   db:
     image: postgres:14
@@ -16,12 +17,9 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - DATABASE_URL=${DATABASE_URL}
-    command: bundle exec rails server -e production -b '0.0.0.0'
+      - RAILS_ENV=${RAILS_ENV:-development}
+    command: bundle exec rails server -b '0.0.0.0'
     depends_on:
       - db
-  test:
-    environment:
-      - RAILS_ENV=test
-    command: bundle exec rails test
 volumes:
   db-data:

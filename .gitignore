@@ -40,3 +40,6 @@
 
 # dotenv
 .env*
+
+#開発環境用のdocker設定ファイル
+compose.override.yml
