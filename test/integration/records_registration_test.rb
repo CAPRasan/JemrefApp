@@ -108,8 +108,8 @@ class RecordsEditAndDestroyTest < RecordsRegistration
                                                       sub_title: "流行と正統への批判的考察",
                                                       publish_date: 2024,
                                                       publisher: "明石書店",
-                                                      status: "unread"
-                                                      } }
+                                                      status: "unread",
+                                                      tags: "音楽, 社会"} }
     assert_redirected_to records_url
     assert_not flash.empty?
   end
