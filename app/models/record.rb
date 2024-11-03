@@ -53,7 +53,7 @@ class Record < ApplicationRecord
             latest_tags.each do |latest_tag|
                 # 念の為、空白や英字の大小文字をノーマライズ
                 normalized_tag_name = latest_tag.strip.downcase
-                tag = Tag.find_or_create_by(name: normalizad_tag_name)
+                tag = Tag.find_or_create_by(name: normalized_tag_name)
                 self.tags << tag unless self.tags.include?(tag)
             end
         # 更新対象がなかった場合
