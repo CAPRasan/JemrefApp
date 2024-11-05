@@ -109,7 +109,7 @@ class RecordsEditAndDestroyTest < RecordsRegistration
                                                       publish_date: 2024,
                                                       publisher: "明石書店",
                                                       status: "unread",
-                                                      tags: "音楽, 社会"} }
+                                                      tags: "音楽, 社会" } }
     assert_redirected_to records_url
     assert_not flash.empty?
   end
