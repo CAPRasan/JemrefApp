@@ -1,7 +1,9 @@
+# テスト要実装
 class Record < ApplicationRecord
     validates :author_name, { presence: true }
     validates :main_title, { presence: true }
     validates :publish_date, { presence: true }
+    validates :status, { presence: true }
     has_many :tag_relationships, dependent: :destroy
     has_many :tags, through: :tag_relationships
     belongs_to :user

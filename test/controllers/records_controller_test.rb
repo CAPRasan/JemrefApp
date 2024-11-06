@@ -4,7 +4,7 @@ class RecordsControllerSetup < ActionDispatch::IntegrationTest
     def setup
         @user = users(:michael)
         @other_user = users(:archer)
-        @book = records(:book1) 
+        @book = records(:book1)
     end
 end
 
