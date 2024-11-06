@@ -127,7 +127,6 @@ class InvalidRecordsEditAndDestroyTest < RecordsEditAndDestroyTest
     end
   end
 
-  # タグづけのテスト要実装
   test "edit records by invalid user" do
     get edit_record_path(Record.last)
     assert_redirected_to records_path
