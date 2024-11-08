@@ -1,11 +1,13 @@
 require "test_helper"
 
-class UsersEditTest < ActionDispatch::IntegrationTest
+class UsersEdit < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @other_user = users(:archer)
   end
+end
 
+class UsersEditTest < UsersEdit
   test "unsuccessful edit" do
     log_in_as(@user)
     get edit_user_path(@user)
@@ -37,7 +39,9 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     assert_template "sessions/new"
   end
+end
 
+class UsersEditByInvalidUserTest < UsersEdit
   test "should redirect edit when logged in as wrong user" do
     log_in_as(@other_user)
     get edit_user_path(@user)
