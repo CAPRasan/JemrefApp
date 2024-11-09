@@ -1,12 +1,19 @@
-<li class="nav-item"></li>
-<%= link_to "使い方", home_about_path, class: "nav-link pe-3" %>
-</li>
-<li class="nav-item">
-<%= link_to "お知らせ・お問い合わせ", home_information_path, class:"nav-link pe-3" %>
-</li>
-<li class="nav-item">
-<%= link_to "ログイン", login_path, class: "nav-link pe-3" %>
-</li>
-<li class="nav-item">
-<%= link_to "新規登録", signup_path, class: "nav-link pe-3" %>
-</li>
+<!-- 左づめメニュー -->
+<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+<!-- 右づめメニュー -->
+<div class="d-flex navbar-nav">
+  <li class="nav-item"></li>
+    <%= link_to home_about_path, class: "nav-link pe-3" do %>
+    使い方
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "お知らせ・お問い合わせ", home_information_path, class:"nav-link pe-3" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "ログイン", login_path, class: "nav-link pe-3" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "新規登録", signup_path, class: "nav-link pe-3" %>
+  </li>
+</div>

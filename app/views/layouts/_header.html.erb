@@ -10,15 +10,16 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+
         <!-- ログイン時のナビゲーションバー -->
-          <% if logged_in? %>
-          <%= render "layouts/logged_in_header" %>
+        <% if logged_in? %>
+        <%= render "layouts/logged_in_header" %>
+        
         <!-- 非ログイン時のナビゲーションバー -->
-          <% else %>
-          <%= render "layouts/not_logged_in_header" %>
-          <% end %>
-        </ul>
+        <% else %>
+        <%= render "layouts/not_logged_in_header" %>
+        
+        <% end %>
       </div>
     </div>
   </nav>
