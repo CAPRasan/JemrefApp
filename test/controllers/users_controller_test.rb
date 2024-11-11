@@ -1,11 +1,13 @@
 require "test_helper"
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
+class UsersControllerSetup < ActionDispatch::IntegrationTest
     def setup
         @user = users(:michael)
         @other_user = users(:archer)
     end
+end
 
+class UsersValidActionTest < UsersControllerSetup
     test "should get login" do
         get login_path
         assert_response :success
@@ -20,6 +22,23 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_select "title", "新規登録 | JemRef"
     end
 
+    test "successful edit" do
+        log_in_as(@user)
+        patch user_path(@user), params: { user: { name: @user.name,
+                                                  email: @user.email } }
+        assert_not flash.empty?
+    end
+
+    test "successful destroy" do
+        log_in_as(@user)
+        assert_difference "User.count", -1 do
+            delete user_path(@user)
+        end
+        assert_redirected_to root_url
+    end
+end
+
+class UsersInvalidTest < UsersControllerSetup
     test "should redirect edit when not logged in" do
         get edit_user_path(@user)
         assert_not flash.empty?
@@ -48,13 +67,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to records_url
     end
 
-    test "successful destroy" do
-        log_in_as(@user)
-        assert_difference "User.count", -1 do
-            delete user_path(@user)
-        end
-        assert_redirected_to root_url
-    end
+
 
     test "should not allow the admin attribute to be edited via web" do
         log_in_as(@other_user)
