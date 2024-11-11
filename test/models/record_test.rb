@@ -13,7 +13,7 @@ class RecordSetup < ActiveSupport::TestCase
   end
 end
 
-class RecordTest < RecordSetup
+class RecordsValidationTest < RecordSetup
   test "should be valid" do
     assert @record.valid?
   end

@@ -7,7 +7,7 @@ class UsersControllerSetup < ActionDispatch::IntegrationTest
     end
 end
 
-class UsersValidActionTest < UsersControllerSetup
+class ValidUsersActionTest < UsersControllerSetup
     test "should get login" do
         get login_path
         assert_response :success
@@ -38,7 +38,7 @@ class UsersValidActionTest < UsersControllerSetup
     end
 end
 
-class UsersInvalidTest < UsersControllerSetup
+class InvalidUsersActionTest < UsersControllerSetup
     test "should redirect edit when not logged in" do
         get edit_user_path(@user)
         assert_not flash.empty?
