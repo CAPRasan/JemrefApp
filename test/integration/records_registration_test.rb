@@ -14,7 +14,7 @@ class RecordsRegistrationTest < RecordsRegistration
     get new_record_path
     assert_template "records/new"
   end
-  
+
   test "successful record(book) registration" do
     assert_difference "Record.count", 1 do
       post records_path, params: { record: { author_name: "ガート・ビースタ著、亘理陽一ほか訳",
