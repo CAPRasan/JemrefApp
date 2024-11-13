@@ -7,10 +7,12 @@ class Record < ApplicationRecord
     has_many :tag_relationships, dependent: :destroy
     has_many :tags, through: :tag_relationships
     belongs_to :user
-    # この書法は非推奨、要修正
+    # TODO: この書法は非推奨、のちに修正
     enum :status, { read: 0, unread: 1, unnecessary: 2 }, prefix: true
 
+    # TODO: 日本語用のみ、英語対応のさい要修正。
     def get_title
+        # TODO: 念の為、nilのケースも追加しておく
         if self.sub_title != ""
             title = "#{ self.main_title } 　━#{ self.sub_title }━"
         else
@@ -21,7 +23,7 @@ class Record < ApplicationRecord
 
     def get_publication_title
         if self.publication_sub_title != ""
-            publication_title = "#{ self.publication_main_title }　 ━#{ self.publication_sub_title }━"
+            publication_title = "#{ self.publication_main_title } 　━#{ self.publication_sub_title }━"
         else
             publication_title = "#{ self.publication_main_title }"
         end
@@ -93,7 +95,7 @@ class Record < ApplicationRecord
 
     # フリーワード検索のためのメソッド
     def self.search(keyword)
-        # todo 検索方法について調査必要、現時点では力技フリーワード
+        # todo のちにransackに置き換え、現時点では力技フリーワード
         if keyword
             where("
                 author_name LIKE ? or
