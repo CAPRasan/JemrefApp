@@ -93,31 +93,12 @@ class Record < ApplicationRecord
         records
     end
 
-    # フリーワード検索のためのメソッド
-    def self.search(keyword)
-        # todo のちにransackに置き換え、現時点では力技フリーワード
-        if keyword
-            where("
-                author_name LIKE ? or
-                main_title LIKE ? or
-                sub_title LIKE ? or
-                publisher LIKE ? or
-                compiled_by LIKE ? or
-                publication_main_title LIKE ? or
-                publication_sub_title LIKE ? or
-                volume_other_form LIKE ? or
-                memo LIKE ?",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%",
-            "%#{keyword}%")
-        else
-            all
-        end
+    # ransack検索フォーム用のモデルメソッド
+    def self.ransackable_attributes(auth_object = nil)
+        ["author_name", "compiled_by", "created_at", "main_title", "memo", "no", "publication_main_title", "publication_sub_title", "publish_date", "publisher", "status", "sub_title", "type", "updated_at", "volume", "volume_other_form"]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+        ["tag_relationships", "tags", "user"]
     end
 end

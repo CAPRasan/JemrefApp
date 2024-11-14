@@ -32,9 +32,9 @@ class RecordIndexTest < RecordsIndex
   end
 
   test "keyword search" do
-    get records_path, params: { keyword: "音楽" }
+    get records_path, params: { q: { main_title_cont: "教育研究" } }
     assert_template "records/index"
-    assert_match "奥中康人", response.body
+    assert_match "ビースタ", response.body
   end
 
   test "tag search" do
@@ -49,9 +49,18 @@ class RecordsSampleTest < RecordsIndex
     delete logout_path
     log_in_as(@other_user)
     get records_path
+    assert_response :success
     assert_select "button", text: "サンプルデータを入力"
     assert_difference "Record.count", 5 do
       post records_create_sample_path
     end
+  end
+
+  test "should not show add sample records button" do
+    log_in_as(@user)
+    get records_path, params: { q: { main_title_cont: "userのレコードに存在しないタイトル" } }
+    assert_response :success
+    assert_match "全 0 件の文献情報", response.body
+    assert_select "button", text: "サンプルデータを入力", count: 0
   end
 end

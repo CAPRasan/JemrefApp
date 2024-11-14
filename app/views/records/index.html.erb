@@ -3,7 +3,7 @@
   <h2 class="my-4">文献の一覧・検索</h1>
 
   <!-- 検索フォーム -->
-  <%= render "serch_form" %>
+  <%= render "search_form" %>
   <!-- 検索窓と検索結果の表示 -->
   <div class="bib-list mb-1" style="width:100%;">
     <div>
@@ -23,7 +23,7 @@
   <div>
     <%= will_paginate @records %>
     <!-- 文献情報がない場合のみ、サンプル入力ボタン -->
-    <% if @records.empty? %>
+    <% if current_user.records.empty? %>
     <%= render "add_sample_records_button"%>
     <% end %>
     <!-- 文献リスト -->

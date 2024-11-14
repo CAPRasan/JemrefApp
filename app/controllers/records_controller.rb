@@ -3,16 +3,17 @@ class RecordsController < ApplicationController
   before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
-    @keyword = search_params[:keyword]
-    @tag_name = search_params[:tag_name]
-    records = if @keyword.present?
-                 current_user.records.search(@keyword)
-    elsif @tag_name.present?
-                 Record.tagged_with(@tag_name, current_user)
-    else
-                 current_user.records # 検索パラメータがない場合のデフォルト
+    @q = current_user.records.ransack(params[:q])
+    @tag_name = search_params ? search_params[:tag_name] : nil
+              # 通常検索の場合
+    records = if params[:q].present?
+                @q.result(distinct: true).order(:publish_date)
+              elsif @tag_name.present?
+                Record.tagged_with(@tag_name, current_user)
+              else
+                current_user.records
     end
-    @records = records.order(:publish_date).paginate(page: params[:page], per_page: 20)
+    @records = records.paginate(page: params[:page], per_page: 20)
   end
 
 
