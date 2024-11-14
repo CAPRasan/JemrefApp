@@ -95,10 +95,10 @@ class Record < ApplicationRecord
 
     # ransack検索フォーム用のモデルメソッド
     def self.ransackable_attributes(auth_object = nil)
-        ["author_name", "compiled_by", "created_at", "main_title", "memo", "no", "publication_main_title", "publication_sub_title", "publish_date", "publisher", "status", "sub_title", "type", "updated_at", "volume", "volume_other_form"]
+        [ "author_name", "compiled_by", "created_at", "main_title", "memo", "no", "publication_main_title", "publication_sub_title", "publish_date", "publisher", "status", "sub_title", "type", "updated_at", "volume", "volume_other_form" ]
     end
 
     def self.ransackable_associations(auth_object = nil)
-        ["tag_relationships", "tags", "user"]
+        [ "tag_relationships", "tags", "user" ]
     end
 end

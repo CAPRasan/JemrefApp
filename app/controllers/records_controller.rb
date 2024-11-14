@@ -5,13 +5,13 @@ class RecordsController < ApplicationController
   def index
     @q = current_user.records.ransack(params[:q])
     @tag_name = search_params ? search_params[:tag_name] : nil
-              # 通常検索の場合
+    # 通常検索の場合。ソート機能は後日実装
     records = if params[:q].present?
                 @q.result(distinct: true).order(:publish_date)
-              elsif @tag_name.present?
-                Record.tagged_with(@tag_name, current_user)
-              else
-                current_user.records
+    elsif @tag_name.present?
+                Record.tagged_with(@tag_name, current_user).order(:publish_date)
+    else
+                current_user.records.order(:publish_date)
     end
     @records = records.paginate(page: params[:page], per_page: 20)
   end
