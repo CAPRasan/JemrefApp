@@ -3,13 +3,17 @@ class RecordsController < ApplicationController
   before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
+    # キーワード検索とタグ検索は別機能として実装。ややfat。
+    # TODO: strong param設定。
     @q = current_user.records.ransack(params[:q])
     @tag_name = search_params ? search_params[:tag_name] : nil
     # 通常検索の場合。ソート機能は後日実装
     records = if params[:q].present?
                 @q.result(distinct: true).order(:publish_date)
+    # タグ検索の場合。
     elsif @tag_name.present?
                 Record.tagged_with(@tag_name, current_user).order(:publish_date)
+    # デフォルトの場合。
     else
                 current_user.records.order(:publish_date)
     end
