@@ -39,7 +39,7 @@ JemRefが目指すのは、 **文献を〈忘れない〉、〈見逃さない�
 ### ローカルでのセットアップ手順
 #### バージョン情報
 * Ruby: 3.3.5
-* Ruby on Rails: 7.2.1
+* Ruby on Rails: 8.0.0
 * PostgreSQL: 14.13
 
 #### 必要条件
@@ -55,8 +55,6 @@ git clone https://github.com/CAPRasan/JemrefApp.git
 ADMIN_NAME=your_admin_name
 ADMIN_PASSWORD=your_admin_password
 ADMIN_EMAIL=your_admin_email
-POSTGRES_USER=your_postgres_user
-POSTGRES_PASSWORD=your_postgres_password
 DATABASE_URL=postgres://your_postgres_user:your_postgres_password@db:5432/my_database_development
 ```   
 
