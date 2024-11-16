@@ -10,6 +10,7 @@ class Record < ApplicationRecord
     # TODO: この書法は非推奨、のちに修正
     enum :status, { read: 0, unread: 1, unnecessary: 2 }, prefix: true
 
+
     # TODO: 日本語用のみ、英語対応のさい要修正。
     def get_title
         # TODO: 念の為、nilのケースも追加しておく
@@ -93,12 +94,13 @@ class Record < ApplicationRecord
         records
     end
 
-    # ransack検索フォーム用のモデルメソッド
-    def self.ransackable_attributes(auth_object = nil)
-        [ "author_name", "compiled_by", "created_at", "main_title", "memo", "no", "publication_main_title", "publication_sub_title", "publish_date", "publisher", "status", "sub_title", "type", "updated_at", "volume", "volume_other_form" ]
-    end
+    private
+        # ransack検索フォーム用のモデルメソッド
+        def self.ransackable_attributes(auth_object = nil)
+            [ "author_name", "compiled_by", "created_at", "main_title", "memo", "no", "publication_main_title", "publication_sub_title", "publish_date", "publisher", "status", "sub_title", "type", "updated_at", "volume", "volume_other_form" ]
+        end
 
-    def self.ransackable_associations(auth_object = nil)
-        [ "tag_relationships", "tags", "user" ]
-    end
+        def self.ransackable_associations(auth_object = nil)
+            [ "tag_relationships", "tags", "user" ]
+        end
 end

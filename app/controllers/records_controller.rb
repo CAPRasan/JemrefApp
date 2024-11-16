@@ -3,19 +3,15 @@ class RecordsController < ApplicationController
   before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
-    # キーワード検索とタグ検索は別機能として実装。ややfat。
+    # キーワード検索とタグ検索は別機能（ややfat）。
     # TODO: strong param設定。
-    @q = current_user.records.ransack(params[:q])
+    @q = current_user.records.ransack(search_params)
     @tag_name = tag_params ? tag_params[:tag_name] : nil
-    # 通常検索の場合。ソート機能は後日実装
-    records = if params[:q].present?
-                @q.result(distinct: true).order(:publish_date)
-    # タグ検索の場合。
-    elsif @tag_name.present?
-                Record.tagged_with(@tag_name, current_user).order(:publish_date)
-    # デフォルトの場合。
-    else
-                current_user.records.order(:publish_date)
+    # タグ検索の場合。ソート機能は後日実装
+    records = if @tag_name.present?
+                 Record.tagged_with(@tag_name, current_user).order(:publish_date)
+
+    else @q.result(distinct: true).order(:publish_date)
     end
     @records = records.paginate(page: params[:page], per_page: 20)
   end
@@ -104,12 +100,29 @@ class RecordsController < ApplicationController
         :volume, :no, :volume_other_form, :memo, :type, :status
     ])
     end
+    # ransack検索用のparams
+    def search_params
+      if params[:q].present?
+      params.expect(q: [
+        # フリーワード検索
+        :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont
+    ])
+      else
+        {} # paramsがない場合、空のハッシュを返す
+      end
+    end
+
+    # tag用のparams処理
+    def tag_params
+      params.permit(:tag_name)
+    end
 
     def extract_tags(tags_param)
       tags = tags_param.presence || ""
       tags.split(",").map(&:strip)
     end
 
+    # 以下、before action
     def ensure_correct_user
       @record = Record.find_by(id: params[:id])
       if @record.user_id != current_user.id
@@ -123,13 +136,5 @@ class RecordsController < ApplicationController
         flash[:danger] = "ログインしてください"
         redirect_to login_url, status: :see_other
       end
-    end
-
-    def search_params
-      params.expect(q: [:tags] )
-    end
-
-    def tag_params
-      params.permit(:keyword, :tag_name)
     end
 end
