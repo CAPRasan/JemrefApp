@@ -58,7 +58,7 @@ class RecordsSampleTest < RecordsIndex
 
   test "should not show add sample records button" do
     log_in_as(@user)
-    get records_path, params: { q: { freeword_cont: "userのレコードに存在しないタイトル" } }
+    get records_path, params: { q: { main_title_cont: "userのレコードに存在しないタイトル" } }
     assert_response :success
     assert_match "全 0 件の文献情報", response.body
     assert_select "button", text: "サンプルデータを入力", count: 0
