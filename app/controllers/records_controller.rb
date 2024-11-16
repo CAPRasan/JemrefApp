@@ -6,7 +6,7 @@ class RecordsController < ApplicationController
     # キーワード検索とタグ検索は別機能として実装。ややfat。
     # TODO: strong param設定。
     @q = current_user.records.ransack(params[:q])
-    @tag_name = search_params ? search_params[:tag_name] : nil
+    @tag_name = tag_params ? tag_params[:tag_name] : nil
     # 通常検索の場合。ソート機能は後日実装
     records = if params[:q].present?
                 @q.result(distinct: true).order(:publish_date)
@@ -126,6 +126,10 @@ class RecordsController < ApplicationController
     end
 
     def search_params
+      params.expect(q: [:tags] )
+    end
+
+    def tag_params
       params.permit(:keyword, :tag_name)
     end
 end
