@@ -43,3 +43,6 @@
 
 #開発環境用のdocker設定ファイル
 compose.override.yml
+
+# テストカバレッジに関するもの
+/coverage/*

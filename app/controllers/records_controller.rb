@@ -97,13 +97,12 @@ class RecordsController < ApplicationController
   end
 
   private
-    # 要確認：strong paramaterに:tagsを含めておく
     def record_params
-      params.require(:record).permit(
+      params.expect(record: [
         :user_id, :author_name, :main_title, :sub_title, :publish_date, :publisher,
         :compiled_by, :publication_main_title, :publication_sub_title,
         :volume, :no, :volume_other_form, :memo, :type, :status
-      )
+    ])
     end
 
     def extract_tags(tags_param)
