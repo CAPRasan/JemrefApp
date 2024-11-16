@@ -61,13 +61,14 @@ DATABASE_URL=postgres://your_postgres_user:your_postgres_password@db:5432/my_dat
 3. クローンしたリポジトリのディレクトリに移動し、コンテナを起動します。
 ```
 cd your-repo
-docker-compose up -d
+docker compose build --no-cache
+docker compose up -d
 ```
 
 4. データベースの準備  
 初期データを使用する場合は、次のコマンドを実行してください。
 ```
-docker-compose exec web ./bin/rails db:seed
+docker compose exec web ./bin/rails db:seed
 ```
 
 5. アプリケーションにアクセス  
