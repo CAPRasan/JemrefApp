@@ -2,44 +2,66 @@
 
 <%= search_form_for @q do |f| %>
 <!-- フリーワード検索 -->
-<div class="input-group mb-4 ps-2 w-75">
-  <!-- alias, ransackerによるリファクタリングの余地あり -->
-  <%= f.search_field :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont,
-                     class: "form-control border-primary border-1", placeholder: "フリーワード検索", aria: { describedby: "button-addon" } %>
-                  
-  <%= f.submit "検索", class: "btn btn-primary px-5", id: "button-addon" %>
+ <div class="row">
+  <div class="input-group mb-4 ps-2 w-75">
+    <!-- alias, ransackerによるリファクタリングの余地あり -->
+    <%= f.search_field :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont,
+                      class: "form-control border-primary border-1", placeholder: "フリーワード検索", aria: { describedby: "button-addon" } %>
+                    
+    <%= f.submit "検索", class: "btn btn-primary px-5", id: "button-addon" %>
+  </div>
+  <div class="w-25" style="line-height:38px;">
+  <button class="border-0 btn btn-link-dark btn-sm" style="font-size:16px;" type="button" data-bs-toggle="collapse" data-bs-target="#search-collapse" aria-expanded="false" aria-controls="search-collapse">
+    詳細検索
+  </button>
+  </div>
 </div>
 
-<div class="accordion accordion-flush mt-3 p-0 mb-5" id="accordionFlush">
+<!-- 詳細検索フォーム（アコーディオンの中身） -->
+<div class="accordion accordion-flush mb-5" id="searchAccordionFlush">
   <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="border-0 col-12" style="font-size:16px;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        詳細検索
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
-      <div class="accordion-body">
-        <div>
-          <%= f.label :author_name_or_compiled_by_cont, "著者・編者", class: "form-comtrol" %>
-          <%= f.search_field :author_name_or_compiled_by_cont %>
-          <p>タイトル</p>
-          <p>出版社</p>
-          <p>期間YYYY~YYYY</p>
-      
-        </div>
-        <div class="input-group">
+    <h2 class="accordion-header"></h2>
+    <div id="search-collapse" class="accordion-collapse collapse" data-bs-parent="#searchAccordionFlush">
+      <div class="accordion-body input-group ms-1 border-start">
+            <div class=" my-2 col-12">
+              <%= f.label :author_name_or_compiled_by_cont, "著者・編者 :", class: "", style: "width:8em;" %>
+              <%= f.search_field :author_name_or_compiled_by_cont, class: "form-comtrol w-50" %>
+            </div>
+            <div class="mb-2 col-12">
+              <%= f.label :main_title_or_sub_title_cont, "タイトル :", class: "", style: "width:8em;" %>
+              <%= f.search_field :main_title_or_sub_title_cont, class: "form-comtrol w-50" %>
+            </div>
+            <div class="mb-5 col-12">
+              <%= f.label :publication_main_title_or_publication_sub_title_or_volume_other_form_cont, "収録物タイトル :", class: "", style: "width:8em;" %>
+              <%= f.search_field :publication_main_title_or_publication_sub_title_or_volume_other_form_cont, class: "form-comtrol w-50" %>
+            </div>
+            <div class="mb-2 col-3">
+              <%= f.label :publisher_cont, "出版社 :", class: "", style: "width:4em;" %>
+              <%= f.search_field :publisher_cont, class: "form-comtrol w-50" %>
+            </div>
+            <div class="mb-2 col-3">
+              <!-- 要調整（選択するバーを出したい） -->
+              <%= f.label :publish_date_cont, "期間 :", class: "", style: "width:4em;" %>
+              <%= f.search_field :publish_date_cont, class: "form-comtrol" %>
+            </div>
+            <div class="mb-2 col-3">
+              <!-- 要調整（セレクトボックスに） -->
               <%= f.label :status, "既読"%>
               <%= f.radio_button :status_eq, "0" %>
       
               <%= f.label :status, "未読"%>
               <%= f.radio_button :status_eq, "1" %>
-      
+        
               <%= f.label :status, "不必要"%>
               <%= f.radio_button :status_eq, "2" %>
-      
-        </div>
+            </div>    
+            <div class="my-2 col-12">
+              <%= f.label :memo_cont, "メモ :", class: "", style: "width:4em;" %>
+              <%= f.search_field :memo_cont, class: "form-comtrol w-75" %>
+            </div>
+ 
       </div>
-      <%= f.submit "検索", class: "btn btn-primary px-5" %>
+      <%= f.submit "この条件で検索", class: "btn btn-secondary offset-4 col-4 px-5" %>
 
     </div>
   </div>

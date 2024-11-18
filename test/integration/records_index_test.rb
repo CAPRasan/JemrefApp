@@ -32,7 +32,7 @@ class RecordIndexTest < RecordsIndex
   end
 
   test "keyword search" do
-    get records_path, params: { q: { main_title_cont: "教育研究" } }
+    get records_path, params: { q: { author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont: "教育研究" } }
     assert_template "records/index"
     assert_match "ビースタ", response.body
   end
@@ -58,7 +58,7 @@ class RecordsSampleTest < RecordsIndex
 
   test "should not show add sample records button" do
     log_in_as(@user)
-    get records_path, params: { q: { main_title_cont: "userのレコードに存在しないタイトル" } }
+    get records_path, params: { q: { main_title_or_sub_title_cont: "userのレコードに存在しないタイトル" } }
     assert_response :success
     assert_match "全 0 件の文献情報", response.body
     assert_select "button", text: "サンプルデータを入力", count: 0

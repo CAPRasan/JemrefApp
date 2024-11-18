@@ -83,15 +83,23 @@ class RecordsController < ApplicationController
       params.expect(q: [
         # フリーワード検索
         :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont,
-        # 主題で検索
-        :main_title_cont,
+        # タイトルで検索
+        :main_title_or_sub_title_cont,
+        # 出版物タイトルで検索
+        :publication_main_title_or_publication_sub_title_or_volume_other_form_cont,
         # 人名で検索
         :author_name_or_compiled_by_cont,
+        # 出版社で検索
+        :publisher_cont,
+        # 出版期間で検索
+        :publish_date,
+        # メモで検索
+        :memo_cont,
         # 既読・未読・不必要で絞り込み
         :status_eq
     ])
       else
-        {} # paramsがない場合、空のハッシュを返す
+        {} # params[:q]がない場合、空のハッシュを返す
       end
     end
 
