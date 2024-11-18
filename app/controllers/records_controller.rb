@@ -107,7 +107,11 @@ class RecordsController < ApplicationController
         # フリーワード検索
         :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont,
         # 主題で検索
-        :main_title_cont
+        :main_title_cont,
+        # 人名で検索
+        :author_name_or_compiled_by_cont,
+        # 状態で検索
+        :status_eq
     ])
       else
         {} # paramsがない場合、空のハッシュを返す
