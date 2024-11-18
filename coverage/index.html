@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-16T08:32:01+00:00">2024-11-16T08:32:01+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-18T03:57:35+00:00">2024-11-18T03:57:35+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -42,9 +42,9 @@
   </div>
 
   <div class="t-line-summary">
-    <b>543</b> relevant lines,
-    <span class="green"><b>186</b> lines covered</span> and
-    <span class="red"><b>357</b> lines missed. </span>
+    <b>546</b> relevant lines,
+    <span class="green"><b>187</b> lines covered</span> and
+    <span class="red"><b>359</b> lines missed. </span>
     (<span class="red">
   34.25%
 </span>
@@ -104,12 +104,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#c2a974a3768dda0873addbe476583f8b26fe2fc4" class="src_link" title="app/helpers/records_helper.rb">app/helpers/records_helper.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="red strong cell--number t-file__coverage">50.00 %</td>
+            <td class="cell--number">6</td>
+            <td class="cell--number">4</td>
             <td class="cell--number">2</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">0</td>
-            <td class="cell--number">1.00</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">0.50</td>
             
           </tr>
         
@@ -704,8 +704,8 @@
   <div class="header">
     <h3>app/helpers/records_helper.rb</h3>
     <h4>
-      <span class="green">
-  100.0%
+      <span class="red">
+  50.0%
 </span>
 
       lines covered
@@ -714,9 +714,9 @@
     
 
     <div class="t-line-summary">
-      <b>1</b> relevant lines.
-      <span class="green"><b>1</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>4</b> relevant lines.
+      <span class="green"><b>2</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
 
     
@@ -739,7 +739,49 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="2">
+          <li class="covered" data-hits="1" data-linenumber="2">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def extract_tags(tags)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="3">
+            
+
+            
+
+            <code class="ruby">        tags = tags.presence || &quot;&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="4">
+            
+
+            
+
+            <code class="ruby">        tags.split(&quot;,&quot;).map(&amp;:strip)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
             
 
             
