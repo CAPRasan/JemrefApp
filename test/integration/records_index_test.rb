@@ -37,6 +37,11 @@ class RecordIndexTest < RecordsIndex
     assert_match "ビースタ", response.body
   end
 
+  test "advanced search" do
+    get records_path, params: { q: { main_title_or_sub_title_cont: "教育研究", publisher_cont: "明石" } }
+    assert_match "流行と正統", response.body
+  end
+
   test "tag search" do
     get records_path, params: { tag_name: "音楽" }
     assert_template "records/index"

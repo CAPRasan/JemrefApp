@@ -4,15 +4,14 @@ class RecordsController < ApplicationController
   before_action :ensure_correct_user, { only: [ :edit, :update, :destroy ] }
 
   def index
-    # 通常検索とタグ検索は別機能。
-    # TODO: strong param設定。
     @q = current_user.records.ransack(search_params)
-    @tag_name = tag_params[:tag_name].presence
-    # タグ検索の場合。ソート機能は後日実装
-    records = if @tag_name.present?
-                 Record.tagged_with(@tag_name, current_user).order(:publish_date)
-    # 通常検索の場合
-    else @q.result(distinct: true).order(:publish_date)
+    # タグ検索がなされた場合
+    if params[:tag_name].present?
+      @tag_name = params[:tag_name]
+      records = Record.tagged_with(@tag_name, current_user).order(:publish_date)
+    # キーワード検索がなされた場合
+    else
+      records = @q.result(distinct: true).order(:publish_date)
     end
     @records = records.paginate(page: params[:page], per_page: 20)
   end
@@ -80,28 +79,30 @@ class RecordsController < ApplicationController
     # ransack検索用のparams
     def search_params
       if params[:q].present?
-      params.expect(q: [
-        # フリーワード検索
-        :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont,
-        # タイトルで検索
-        :main_title_or_sub_title_cont,
-        # 出版物タイトルで検索
-        :publication_main_title_or_publication_sub_title_or_volume_other_form_cont,
-        # 人名で検索
-        :author_name_or_compiled_by_cont,
-        # 出版社で検索
-        :publisher_cont,
-        # 出版期間で検索
-        :publish_date,
-        # メモで検索
-        :memo_cont,
-        # 既読・未読・不必要で絞り込み
-        :status_eq
-    ])
+        params.require(:q).permit(
+          # フリーワード検索
+          :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont,
+          # 著者・編者で検索
+          :author_name_or_compiled_by_cont,
+          # タイトルで検索
+          :main_title_or_sub_title_cont,
+          # 出版物タイトルで検索
+          :publication_main_title_or_publication_sub_title_or_volume_other_form_cont,
+          # 出版社で検索
+          :publisher_cont,
+          # 出版期間で検索
+          :publish_date_gteq,
+          :publish_date_lteq,
+          # 既読・未読・不必要で絞り込み
+          :status_eq,
+          # メモで検索
+          :memo_cont
+        )
       else
-        {} # params[:q]がない場合、空のハッシュを返す
+        {} # params[:q] がない場合、空のハッシュを返す
       end
     end
+
 
     # tag用のparams処理
     def tag_params

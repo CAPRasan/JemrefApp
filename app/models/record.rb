@@ -96,8 +96,22 @@ class Record < ApplicationRecord
 
     private
         # ransack検索フォーム用のモデルメソッド
-        def self.ransackable_attributes(auth_object = nil)
-            [ "author_name", "compiled_by", "created_at", "main_title", "memo", "no", "publication_main_title", "publication_sub_title", "publish_date", "publisher", "status", "sub_title", "type", "updated_at", "volume", "volume_other_form" ]
+        def self.ransackable_attributes(auth_object = nil)[
+            "author_name",
+            "main_title",
+            "sub_title",
+            "publisher",
+            "publication_main_title",
+            "publication_sub_title",
+            "compiled_by",
+            "memo",
+            "created_at",
+            "no",
+            "publish_date",
+            "status",
+            "volume",
+            "volume_other_form"
+        ]
         end
 
         def self.ransackable_associations(auth_object = nil)
