@@ -5,13 +5,16 @@ class RecordsController < ApplicationController
 
   def index
     @q = current_user.records.ransack(search_params)
-    # タグ検索がなされた場合
-    if params[:tag_name].present?
+
+    if params[:tag_name].present? # タグ検索がなされた場合
       @tag_name = params[:tag_name]
-      records = Record.tagged_with(@tag_name, current_user).order(:publish_date)
-    # キーワード検索がなされた場合
-    else
-      records = @q.result(distinct: true).order(:publish_date)
+      records = Record.tagged_with(@tag_name, current_user)
+      .includes(:tags) # タグを事前ロード
+      .order(:publish_date)
+    else # キーワード検索がなされた場合
+      records = @q.result(distinct: true)
+      .includes(:tags) # タグを事前ロード
+      .order(:publish_date)
     end
     @records = records.paginate(page: params[:page], per_page: 20)
   end
@@ -23,8 +26,7 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.new(record_params)
-    # 入力したタグ名を受け取れるようにする（タグだけテーブルが異なるため）
-    tags_array = extract_tags(params[:record][:tags])
+    tags_array = extract_tags(params[:record][:tags]) # 入力したタグ名を受け取れるようにする（タグだけテーブルが異なるため）
     @record.user_id = current_user.id
     if @record.save
       @record.save_tags(tags_array)
@@ -109,7 +111,7 @@ class RecordsController < ApplicationController
       params.permit(:tag_name)
     end
 
-    # 以下、before action
+    # 以下、before_action
     def ensure_correct_user
       @record = Record.find_by(id: params[:id])
       if @record.user_id != current_user.id
