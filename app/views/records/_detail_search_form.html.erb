@@ -1,0 +1,43 @@
+<div class="accordion accordion-flush mb-5" id="searchAccordionFlush">
+  <div class="accordion-item">
+    <h2 class="accordion-header"></h2>
+    <div id="search-collapse" class="accordion-collapse collapse" data-bs-parent="#searchAccordionFlush">
+      <div class="accordion-body input-group ms-1 ps-5 border-start border-2">
+        <div class=" my-2 col-12">
+          <%= f.label :author_name_or_compiled_by_cont, "著者・編者", class: "mb-1", style: "width:8em;" %>
+          <%= f.search_field :author_name_or_compiled_by_cont, class: "form-control w-75 border-dark-subtle" %>
+        </div>
+        <div class="mb-2 col-12">
+          <%= f.label :main_title_or_sub_title_cont, "タイトル", class: "mb-1", style: "width:8em;" %>
+          <%= f.search_field :main_title_or_sub_title_cont, class: "form-control w-75 border-dark-subtle" %>
+        </div>
+        <div class="mb-4 col-12">
+          <%= f.label :publication_main_title_or_publication_sub_title_or_volume_other_form_cont, "収録物タイトル", class: "mb-1", style: "width:8em;" %>
+          <%= f.search_field :publication_main_title_or_publication_sub_title_or_volume_other_form_cont, class: "form-control w-75 border-dark-subtle" %>
+        </div>
+        <div class="mb-2 col-8 col-xl-6">
+          <%= f.label :publisher_cont, "出版社", class: "mb-1", style: "width:4em;" %>
+          <%= f.search_field :publisher_cont, class: "form-control w-75 border-dark-subtle" %>
+        </div>
+        <div class="mb-2 col-8 col-xl-6">
+          <%= f.label :publish_date_cont, "期間", class: "mb-1", style: "width:3em;" %>
+          <div class="input-group w-75">
+            <%= f.search_field :publish_date_gteq, class: "form-control border-dark-subtle w-25" %>
+            <span class="input-group-text">年から</span>
+            <%= f.search_field :publish_date_lteq, class: "form-control border-dark-subtle w-25" %>
+            <span class="input-group-text">年まで</span>
+          </div>
+        </div>
+        <div class="mb-2 col-8 col-xl-8">
+          <%= f.label :status_eq, "状態", class: "mb-1", style: "width:3em;" %>
+          <%= f.select :status_eq, { "既読": 0, "未読": 1, "不必要": 2 }, { include_blank: true }, {class: "form-control w-25 border-dark-subtle"} %>
+        </div>    
+        <div class="mb-2 col-12">
+          <%= f.label :memo_cont, "メモ", class: "mb-1", style: "width:4em;" %>
+          <%= f.search_field :memo_cont, class: "form-control w-75 border-dark-subtle" %>
+        </div>
+      </div>
+      <%= f.submit "この条件で検索", class: "btn btn-secondary offset-4 col-4 my-2 py-2" %>
+    </div>
+  </div>
+</div>

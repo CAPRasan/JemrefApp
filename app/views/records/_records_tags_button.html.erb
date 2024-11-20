@@ -1,6 +1,5 @@
 
 <% unless record.tags.empty? %>
-<!-- TODO: n+1問題が生じている。事前にrecordsをタグごと引っ張り出しておく必要があるか。 -->
     <% record.tags.each do |tag| %>
     <div style="display:inline-block">
         <%= form_with local: true, method: :get do |f| %>

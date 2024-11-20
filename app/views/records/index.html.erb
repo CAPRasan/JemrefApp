@@ -5,17 +5,21 @@
   <!-- 検索窓 -->
   <%= render "search_form" %>
   <!-- 検索結果の表示 -->
+
+  <!-- TODO: リファクタリング対象 -->
   <div class="bib-list mb-1" style="width:100%;">
-<!-- TODO: リファクタリング対象 -->
     <div>
-       <!-- タグクリックによる絞り込み -->
+      <!-- タグクリックによる絞り込み -->
       <% if @tag_name.present? %>
         <%= "タグ：「#{@tag_name}」" %>
+
       <!-- キーワード検索による絞り込み -->
       <% elsif @q.author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont.present? %>
       <%= "「#{@q.author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont}」の検索結果" %>
       <% end %>
     </div>
+
+    <!-- 戻るボタン -->
     <div class="ms-3">
       <p class="my-2" style="display:inline-block;">全 <%= @records.count %> 件の文献情報</p>
         <%= link_to "（一覧に戻る）", records_path, class: "link-underline link-underline-opacity-0", style: "display:inline-block;" unless @q.nil? && @tag_name.nil? %>
@@ -25,10 +29,11 @@
   <!-- 検索結果一覧 -->
   <div>
     <%= will_paginate @records %>
-    <!-- ユーザーが保持する文献情報がない場合のみ、サンプル入力ボタン -->
+    <!-- ユーザーが保持する文献情報がない場合のみ、サンプル入力ボタンを表示 -->
     <% if current_user.records.empty? %>
     <%= render "add_sample_records_button"%>
     <% end %>
+
     <!-- 文献一覧 -->
     <ul class="list-group mt-2">
       <% @records.each do |record| %>
@@ -51,20 +56,20 @@
                 <div class="row justify-content-end accordion-body w-100">
                   <div class="col">
                     <!-- タグ表示 -->
-                     <%= render "records_tags_button", record: record %>
+                    <%= render "records_tags_button", record: record %>
                       
-                      <!-- メモ表示 -->
-                      <div class="mt-4">
-                        メモ：
-                        <%= record.memo %>
-                      </div>
-                      <div>
+                    <!-- メモ表示 -->
+                    <div class="mt-4">
+                      メモ：
+                      <%= record.memo %>
                     </div>
                   </div>
+                  <!-- 更新・削除ボタン -->
                   <div class="col-1 ms-1 me-1">
                     <%= link_to "更新", edit_record_path(record), class: "col btn btn-outline-secondary btn-sm mt-2 px-3" %>
                     <%= render "delete_btn", record: record %>
                   </div>
+                  
                 </div>
               </div>
             </div>

@@ -79,6 +79,7 @@ class RecordsController < ApplicationController
     ])
     end
     # ransack検索用のparams
+    # TODO: 検索カラムを切り出し
     def search_params
       if params[:q].present?
         params.require(:q).permit(
