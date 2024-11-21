@@ -90,8 +90,7 @@ class Record < ApplicationRecord
     def self.tagged_with(tag_name, user)
         tag = Tag.find_by(name: tag_name)
         return [] unless tag
-        records = user.records.joins(:tags).where(tags: { id: tag.id })
-        records
+        user.records.joins(:tags).where(tags: { id: tag.id })
     end
 
     private

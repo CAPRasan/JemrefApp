@@ -2,36 +2,35 @@
 <div class="container-fluid">
   <h2 class="my-4">文献の一覧・検索</h1>
 
-  <!-- 検索窓 -->
+  <!-- 検索フォーム -->
   <%= render "search_form" %>
-  <!-- 検索結果の表示 -->
 
   <!-- TODO: リファクタリング対象 -->
   <div class="bib-list mb-1" style="width:100%;">
     <div>
-      <!-- タグクリックによる絞り込み -->
+      <!-- タグクリックによる絞り込み結果 -->
       <% if @tag_name.present? %>
         <%= "タグ：「#{@tag_name}」" %>
 
-      <!-- キーワード検索による絞り込み -->
+      <!-- フリーワード検索による絞り込み結果 -->
       <% elsif @q.author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont.present? %>
       <%= "「#{@q.author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont}」の検索結果" %>
       <% end %>
     </div>
 
-    <!-- 戻るボタン -->
+    <!-- 取得レコードの件数表示、および戻るボタン -->
     <div class="ms-3">
       <p class="my-2" style="display:inline-block;">全 <%= @records.count %> 件の文献情報</p>
-        <%= link_to "（一覧に戻る）", records_path, class: "link-underline link-underline-opacity-0", style: "display:inline-block;" unless @q.nil? && @tag_name.nil? %>
+      <%= link_to "（一覧に戻る）", records_path, class: "link-underline link-underline-opacity-0", style: "display:inline-block;" unless @q.nil? && @tag_name.nil? %>
     </div>
   </div>
 
-  <!-- 検索結果一覧 -->
+  <!-- レコード一覧 -->
   <div>
     <%= will_paginate @records %>
     <!-- ユーザーが保持する文献情報がない場合のみ、サンプル入力ボタンを表示 -->
     <% if current_user.records.empty? %>
-    <%= render "add_sample_records_button"%>
+      <%= render "add_sample_records_button"%>
     <% end %>
 
     <!-- 文献一覧 -->
@@ -40,7 +39,7 @@
         <li class="row list-group-item d-flex justify-content-between align-items-start shadow-sm mb-1 me-4 p-0 w-100">
           <div class="accordion accordion-flush w-100 px-0" id="accordionFlushExample">
             <div class="accordion-item" style="border-radius:5px 5px 5px 5px;">
-              <!-- 基本的な情報 -->
+              <!-- 基本情報 -->
               <h2 class="accordion-header" >
                 <button class="accordion-button collapsed border py-0 ps-1 border-bottom-0" style="border-radius:5px 5px 0px 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= record.id%>" aria-expanded="false" aria-controls="flush-collapse<%= record.id%>">
                   <% case record.type %>
@@ -51,7 +50,7 @@
                   <% end %>
                 </button>
               </h2>
-              <!-- 詳細情報のアコーディオン -->
+              <!-- 詳細情報（アコーディオン） -->
               <div id="flush-collapse<%= record.id%>" class="accordion-collapse collapse border">
                 <div class="row justify-content-end accordion-body w-100">
                   <div class="col">
@@ -65,11 +64,10 @@
                     </div>
                   </div>
                   <!-- 更新・削除ボタン -->
-                  <div class="col-1 ms-1 me-1">
+                  <div class="col-1 mx-1">
                     <%= link_to "更新", edit_record_path(record), class: "col btn btn-outline-secondary btn-sm mt-2 px-3" %>
                     <%= render "delete_btn", record: record %>
                   </div>
-                  
                 </div>
               </div>
             </div>

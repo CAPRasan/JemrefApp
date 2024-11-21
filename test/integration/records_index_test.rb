@@ -20,14 +20,17 @@ class RecordsIndex < ActionDispatch::IntegrationTest
 end
 
 class RecordIndexTest < RecordsIndex
-  test "index including pagination" do
+  test "index including search forms and pagination" do
     get records_path
     assert_template "records/index"
+    assert_select "div.free-word-search"
+    assert_select "div.detail-search-form"
     assert_select "ul.pagination"
+    assert_select "button", text: "サンプルデータを入力", count: 0
     assigns(:records).paginate(page: 1).each do |record|
       assert_select "h5", text: "#{record.author_name}（#{record.publish_date}）"
       assert_select "a[href=?]", edit_record_path(record)
-      assert_select "button", text: "サンプルデータを入力", count: 0
+      assert_select "button.delete-record-btn", count: 20
     end
   end
 
@@ -45,6 +48,7 @@ class RecordIndexTest < RecordsIndex
   test "tag search" do
     get records_path, params: { tag_name: "音楽" }
     assert_template "records/index"
+    assert_select "button", text: "音楽", count: 1
     assert_match "明石書店", response.body
   end
 end

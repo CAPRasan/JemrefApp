@@ -1,3 +1,5 @@
+# タグ周りのstrong paramが不完全。絶対検証。
+
 class RecordsController < ApplicationController
   include RecordsHelper
   before_action :logged_in_user
@@ -5,20 +7,18 @@ class RecordsController < ApplicationController
 
   def index
     @q = current_user.records.ransack(search_params)
-
-    if params[:tag_name].present? # タグ検索がなされた場合
-      @tag_name = params[:tag_name]
+    # タグ検索がなされた場合
+    if params[:tag_name].present?
+      @tag_name = params[:tag_name].to_s.strip.downcase # 念の為正規化
       records = Record.tagged_with(@tag_name, current_user)
-      .includes(:tags) # タグを事前ロード
-      .order(:publish_date)
-    else # キーワード検索がなされた場合
+    # キーワード検索がなされた場合
+    else
       records = @q.result(distinct: true)
-      .includes(:tags) # タグを事前ロード
-      .order(:publish_date)
     end
-    @records = records.paginate(page: params[:page], per_page: 20)
+    @records = records.order(:publish_date)
+               .includes(:tags) # タグをロード
+               .paginate(page: params[:page], per_page: 20)
   end
-
 
   def new
     @record = Record.new
@@ -26,7 +26,7 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.new(record_params)
-    tags_array = extract_tags(params[:record][:tags]) # 入力したタグ名を受け取れるようにする（タグだけテーブルが異なるため）
+    tags_array = extract_tags(tag_params[:tags]) # 入力したタグ名を受け取る（タグだけテーブルが異なるため）
     @record.user_id = current_user.id
     if @record.save
       @record.save_tags(tags_array)
@@ -45,8 +45,7 @@ class RecordsController < ApplicationController
 
   def update
     @record = Record.find_by(id: params[:id])
-    tags_array = extract_tags(params[:record][:tags])
-
+    tags_array = extract_tags(tag_params[:tags])
     if @record.update(record_params)
       @record.update_tags(tags_array)
       flash[:success] = "書誌情報を更新しました"
@@ -78,6 +77,11 @@ class RecordsController < ApplicationController
         :volume, :no, :volume_other_form, :memo, :type, :status
     ])
     end
+
+    def tag_params
+      params.expect(record: [ :tags ])
+    end
+
     # ransack検索用のparams
     # TODO: 検索カラムを切り出し
     def search_params
@@ -106,9 +110,8 @@ class RecordsController < ApplicationController
       end
     end
 
-
-    # tag用のparams処理
-    def tag_params
+    # tag検索用のparams処理
+    def tag_search_params
       params.permit(:tag_name)
     end
 
