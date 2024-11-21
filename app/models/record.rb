@@ -10,7 +10,6 @@ class Record < ApplicationRecord
     # TODO: この書法は非推奨、のちに修正
     enum :status, { read: 0, unread: 1, unnecessary: 2 }, prefix: true
 
-
     # TODO: 日本語用のみ、英語対応のさい要修正。
     def get_title
         # TODO: 念の為、nilのケースも追加しておく

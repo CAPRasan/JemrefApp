@@ -1,5 +1,3 @@
-# タグ周りのstrong paramが不完全。絶対検証。
-
 class RecordsController < ApplicationController
   include RecordsHelper
   before_action :logged_in_user

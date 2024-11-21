@@ -2,7 +2,7 @@
 <!-- フリーワード検索 -->
  <div class="row">
   <div class="free-word-search input-group mb-4 ps-2 w-75">
-    <!-- alias, ransackerによるリファクタリングの余地あり -->
+    <!-- リファクタリングの余地あり、しかしransack_aliasが機能しない -->
     <%= f.search_field :author_name_or_main_title_or_sub_title_or_publisher_or_publication_main_title_or_publication_sub_title_or_compiled_by_or_memo_cont,
                       class: "form-control border-primary border-1", placeholder: "フリーワード検索", aria: { describedby: "button-addon" } %>
                     
