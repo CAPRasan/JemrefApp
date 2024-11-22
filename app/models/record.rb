@@ -93,7 +93,7 @@ class Record < ApplicationRecord
     end
 
     private
-        # ransack検索フォーム用のモデルメソッド
+        # ransack検索フォーム用クラスメソッド
         def self.ransackable_attributes(auth_object = nil)[
             "author_name",
             "main_title",

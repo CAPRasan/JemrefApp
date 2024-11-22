@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   before_action :not_logged_in_user, only: [ :new, :create ]
   before_action :logged_in_user, only: [ :destroy ]
+
   def new
   end
 
