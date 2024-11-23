@@ -23,6 +23,8 @@ class RecordIndexTest < RecordsIndex
   test "index including search forms and pagination" do
     get records_path
     assert_template "records/index"
+    assert_template "records/_search_form"
+    assert_template "records/_detail_search_form"
     assert_select "div.free-word-search"
     assert_select "div.detail-search-form"
     assert_select "ul.pagination"
