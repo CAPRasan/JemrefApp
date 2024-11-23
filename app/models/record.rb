@@ -7,7 +7,7 @@ class Record < ApplicationRecord
     has_many :tag_relationships, dependent: :destroy
     has_many :tags, through: :tag_relationships
     belongs_to :user
-    # TODO: この書法は非推奨、のちに修正
+
     enum :status, { read: 0, unread: 1, unnecessary: 2 }, prefix: true
 
     # TODO: 日本語用のみ、英語対応のさい要修正。
@@ -52,6 +52,7 @@ class Record < ApplicationRecord
     end
     # タグ更新用のメソッド
     def update_tags(latest_tags)
+        # TagUpdate.new(latest_tags).call
         # 既存のタグが存在しない場合
         if !self.tags.exists?
             latest_tags.each do |latest_tag|

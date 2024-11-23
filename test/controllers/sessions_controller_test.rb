@@ -28,18 +28,20 @@ class InvalidSessionsTest < SessionsControllerTest
     super
   end
 
-  test "login with invalid email" do
+  test "login with invalid email / password" do
     @user.email = "invalid"
     log_in_as(@user)
     assert_response :unprocessable_entity
     assert_template "sessions/new"
   end
 
-  # test "login with invalid password" do
-  #   @user.password_digest = "invalid"
-  #   log_in_as(@user)
-  #   assert_template "sessions/new"
-  # end
+  test "login with invalid password" do
+    post login_path, params: { session: { email: @user.email,
+                                          password: "invalid_password",
+                                          remember_me: "1" } }
+    assert_response :unprocessable_entity
+    assert_template "sessions/new"
+  end
 
   test "should redirect login with logged-in user" do
     log_in_as(@user)
