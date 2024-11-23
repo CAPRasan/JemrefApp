@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-23T03:09:00+00:00">2024-11-23T03:09:00+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-23T05:56:13+00:00">2024-11-23T05:56:13+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -22,7 +22,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  33.33%
+  33.06%
 </span>
 
      </span>
@@ -38,15 +38,15 @@
   <a name="AllFiles"></a>
 
   <div>
-    <b>33</b> files in total.
+    <b>34</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>576</b> relevant lines,
-    <span class="green"><b>192</b> lines covered</span> and
-    <span class="red"><b>384</b> lines missed. </span>
+    <b>605</b> relevant lines,
+    <span class="green"><b>200</b> lines covered</span> and
+    <span class="red"><b>405</b> lines missed. </span>
     (<span class="red">
-  33.33%
+  33.06%
 </span>
 )
   </div>
@@ -429,6 +429,17 @@
             <td class="cell--number">15</td>
             <td class="cell--number">30</td>
             <td class="cell--number">0.33</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#587936ae1f66f79b3271f56103ca5af205485914" class="src_link" title="test/services/tag_manager_test.rb">test/services/tag_manager_test.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">27.59 %</td>
+            <td class="cell--number">54</td>
+            <td class="cell--number">29</td>
+            <td class="cell--number">8</td>
+            <td class="cell--number">21</td>
+            <td class="cell--number">0.28</td>
             
           </tr>
         
@@ -8054,7 +8065,7 @@
 
             
 
-            <code class="ruby">  </code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -13683,6 +13694,593 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="77">
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="587936ae1f66f79b3271f56103ca5af205485914">
+  <div class="header">
+    <h3>test/services/tag_manager_test.rb</h3>
+    <h4>
+      <span class="red">
+  27.59%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>29</b> relevant lines.
+      <span class="green"><b>8</b> lines covered</span> and
+      <span class="red"><b>21</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">require &quot;test_helper&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class TagManagerSetup &lt; ActiveSupport::TestCase</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def setup</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="4">
+            
+
+            
+
+            <code class="ruby">        @record = Record.create!(</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby">        author_name: &quot;ガート・ビースタ著、亘理陽一ほか訳&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+
+            
+
+            <code class="ruby">        main_title: &quot;よい教育研究とはなにか&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+
+            
+
+            <code class="ruby">        sub_title: &quot;流行と正統への批判的考察&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="8">
+            
+
+            
+
+            <code class="ruby">        publish_date: 2024,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="9">
+            
+
+            
+
+            <code class="ruby">        publisher: &quot;明石書店&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="10">
+            
+
+            
+
+            <code class="ruby">        status: &quot;unread&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+
+            
+
+            <code class="ruby">        type: &quot;Book&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+
+            
+
+            <code class="ruby">        memo: &quot;メモの内容&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+
+            
+
+            <code class="ruby">        user_id: 1</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
+            
+
+            
+
+            <code class="ruby">        )</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
+
+            
+
+            <code class="ruby">        @tag1 = [ &quot;Music&quot; ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="16">
+            
+
+            
+
+            <code class="ruby">        @tag2 = [ &quot;FineArt&quot;, &quot;Singing&quot; ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="18">
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="19">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="20">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class TagManagerTest &lt; TagManagerSetup</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="21">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def setup</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="22">
+            
+
+            
+
+            <code class="ruby">        super</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="23">
+            
+
+            
+
+            <code class="ruby">        </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="24">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="25">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="26">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    test &quot;save tags&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="27">
+            
+
+            
+
+            <code class="ruby">        tag_manager = TagManager.new(@record, @tag1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="28">
+            
+
+            
+
+            <code class="ruby">        assert_difference &quot;@record.tags.count&quot;, 1 do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="29">
+            
+
+            
+
+            <code class="ruby">            tag_manager.save_tags</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="30">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="31">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="32">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="33">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    test &quot;update / delete tags&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="34">
+            
+
+            
+
+            <code class="ruby">        tag_manager1 = TagManager.new(@record, @tag1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="35">
+            
+
+            
+
+            <code class="ruby">        tag_manager1.save_tags</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="36">
+            
+
+            
+
+            <code class="ruby">        assert_includes @record.tags.pluck(:name), &quot;music&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="37">
+            
+
+            
+
+            <code class="ruby">        tag_manager2 = TagManager.new(@record, @tag2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="38">
+            
+
+            
+
+            <code class="ruby">        tag_manager2.update_tags</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="39">
+            
+
+            
+
+            <code class="ruby">        assert_includes @record.tags.pluck(:name), &quot;fineart&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="40">
+            
+
+            
+
+            <code class="ruby">        assert_not_includes @record.tags.pluck(:name), &quot;music&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="41">
+            
+
+            
+
+            <code class="ruby">        assert_difference &quot;@record.tags.count&quot;, -2 do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="42">
+            
+
+            
+
+            <code class="ruby">            tag_manager3 = TagManager.new(@record, [])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="43">
+            
+
+            
+
+            <code class="ruby">            tag_manager3.update_tags</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="44">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="45">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="46">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="47">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    test &quot;normalized tags&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="48">
+            
+
+            
+
+            <code class="ruby">        tag_manager = TagManager.new(@record, [&quot;  mixed  &quot;, &quot;TAG1  &quot;])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="49">
+            
+
+            
+
+            <code class="ruby">        tag_manager.save_tags</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="50">
+            
+
+            
+
+            <code class="ruby">        assert_includes @record.tags.pluck(:name), &quot;mixed&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="51">
+            
+
+            
+
+            <code class="ruby">        assert_includes @record.tags.pluck(:name), &quot;tag1&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="52">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="53">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="54">
             
 
             

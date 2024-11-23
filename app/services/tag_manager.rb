@@ -1,8 +1,8 @@
 # テストがほぼできていない、要検討
 class TagManager
-    def initialize(record, tags)
+    def initialize(record, tags_array)
         @record = record
-        @tags = tags
+        @tags = tags_array
     end
 
     # 新規タグ保存
@@ -30,6 +30,7 @@ class TagManager
             @record.tags.clear
 
         # 既存のタグも更新対象もある場合、差分を更新
+        # ノーマライズできてなかった。
         else
             current_tags = @record.tags.pluck(:name) || []
             latest_tags = @tags || []
@@ -41,7 +42,8 @@ class TagManager
                 @record.tags.delete(tag) if tag.present?
             end
             new_tags.each do |new_tag|
-                tag = Tag.find_or_create_by(name: new_tag.strip)
+                normalized_tag_name = new_tag.strip.downcase
+                tag = Tag.find_or_create_by(name: normalized_tag_name)
                 @record.tags << tag unless @record.tags.include?(tag)
             end
         end

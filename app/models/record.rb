@@ -42,6 +42,14 @@ class Record < ApplicationRecord
         volume_and_number
     end
 
+    # 同じタグを持つレコードを返すメソッド
+    # TODO: 検索されたタグしか返せなくなる？要検証。
+    def self.tagged_with(tag_name, user)
+        tag = Tag.find_by(name: tag_name)
+        return [] unless tag
+        user.records.joins(:tags).where(tags: { id: tag.id })
+    end
+
     # 新規タグづけ用のメソッド
     def save_tags(tags)
         TagManager.new(self, tags).save_tags
@@ -49,14 +57,6 @@ class Record < ApplicationRecord
     # タグ更新用のメソッド
     def update_tags(latest_tags)
         TagManager.new(self, latest_tags).update_tags
-    end
-
-    # 同じタグを持つレコードを返すメソッド
-    # TODO: 検索されたタグしか返せなくなる？要検証。
-    def self.tagged_with(tag_name, user)
-        tag = Tag.find_by(name: tag_name)
-        return [] unless tag
-        user.records.joins(:tags).where(tags: { id: tag.id })
     end
 
     private
