@@ -16,6 +16,7 @@ class UsersEditTest < UsersEdit
                                        email: "foo@invalid",
                                        password: "foo",
                                        password_confirmation: "bar" } }
+    assert_response :unprocessable_entity
     assert_not flash.empty?
     assert_template "users/edit"
   end

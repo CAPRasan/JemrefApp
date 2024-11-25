@@ -1,4 +1,3 @@
-# テストがほぼできていない、要検討
 class TagManager
     def initialize(record, tags_array)
         @record = record

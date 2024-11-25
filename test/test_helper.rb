@@ -1,6 +1,7 @@
-ENV["RAILS_ENV"] ||= "test"
-require "simplecov"
-SimpleCov.start
+if ENV["RAILS_ENV"] == "test"
+  require "simplecov"
+  SimpleCov.start
+end
 require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/reporters"

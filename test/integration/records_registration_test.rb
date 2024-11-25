@@ -77,7 +77,7 @@ end
 
 class InvalidRecordsRegistrationTest < RecordsRegistration
   test "create records by not logged-in user" do
-    assert_no_difference "Record.count", 1 do
+    assert_no_difference "Record.count" do
       post records_path, params: { record: { author_name: "ガート・ビースタ著、亘理陽一ほか訳",
                                              main_title: "よい教育研究とはなにか",
                                              sub_title: "流行と正統への批判的考察",
