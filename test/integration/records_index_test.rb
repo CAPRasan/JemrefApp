@@ -23,8 +23,8 @@ class RecordIndexTest < RecordsIndex
   test "index including search forms and pagination" do
     get records_path
     assert_template "records/index"
-    assert_template "records/_search_form"
-    assert_template "records/_detail_search_form"
+    assert_template "records/search_forms/_freewords"
+    assert_template "records/search_forms/_details"
     assert_select "div.free-word-search"
     assert_select "div.detail-search-form"
     assert_select "ul.pagination"
@@ -61,6 +61,7 @@ class RecordsSampleTest < RecordsIndex
     log_in_as(@other_user)
     get records_path
     assert_response :success
+    assert_template "records/buttons/_add_sample"
     assert_select "button", text: "サンプルデータを入力"
     assert_difference "Record.count", 5 do
       post records_create_sample_path

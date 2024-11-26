@@ -5,7 +5,7 @@
     <h5 class="fw-bold pb-3 mb-4 col-12 border-bottom border-secondary border-2"><i class="fa fa-file pe-2"></i> 論文情報</h5>
     <div class="row g-3 needs-validation"novalidate>
       
-      <%= render "general_information_form", f: f %>
+      <%= render "records/forms/general", f: f %>
       
       <h5 class="fw-bold mt-3 mb-4 py-3 col-12 border-bottom border-secondary border-2"><span class="fa fa-book fa-lg pe-2"></span> 収録物情報</h5>
       <div class="col-8">
@@ -39,7 +39,7 @@
       </div>
       <%= render "status_form", f: f %>
 
-      <%= render "more_information_form", f: f %>
+      <%= render "records/forms/details", f: f %>
 
       <div class="d-grid gap-2 mt-4 col-6 mx-auto">
         <%= f.submit "#{submit_btn}", class: "btn btn-primary btn-lg mt-3" %>
