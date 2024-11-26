@@ -30,7 +30,7 @@
     <%= will_paginate @records %>
     <!-- ユーザーが保持する文献情報がない場合のみ、サンプル入力ボタンを表示 -->
     <% if current_user.records.empty? %>
-      <%= render "add_sample_records_button"%>
+      <%= render "records/buttons/add_sample"%>
     <% end %>
 
     <!-- 文献一覧 -->
@@ -44,9 +44,9 @@
                 <button class="accordion-button collapsed border py-0 ps-1 border-bottom-0" style="border-radius:5px 5px 0px 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= record.id%>" aria-expanded="false" aria-controls="flush-collapse<%= record.id%>">
                   <% case record.type %>
                   <% when "Compilation", "Paper" %>
-                    <%= render "paper_info", record: record %>
+                    <%= render "records/infos/paper", record: record %>
                   <% when "Book" %>
-                    <%= render "book_info", record: record %>
+                    <%= render "records/infos/book", record: record %>
                   <% end %>
                 </button>
               </h2>
@@ -55,7 +55,7 @@
                 <div class="row justify-content-end accordion-body w-100">
                   <div class="col">
                     <!-- タグ表示 -->
-                    <%= render "records_tags_button", record: record %>
+                    <%= render "records/buttons/tags", record: record %>
                       
                     <!-- メモ表示 -->
                     <div class="mt-4">
@@ -66,7 +66,7 @@
                   <!-- 更新・削除ボタン -->
                   <div class="col-1 mx-1">
                     <%= link_to "更新", edit_record_path(record), class: "col btn btn-outline-secondary btn-sm mt-2 px-3" %>
-                    <%= render "delete_btn", record: record %>
+                    <%= render "records/buttons/delete", record: record %>
                   </div>
                 </div>
               </div>
