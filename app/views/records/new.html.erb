@@ -17,20 +17,19 @@
   </ul>
 
   <div class="tab-content" id="myTabContent">
-    <!-- 各タブ内容のリファクタリングは今後の課題 -->
     <!-- 著書タブ -->
     <div class="tab-pane fade show active" id="book-tab-pane" role="tabpanel" aria-labelledby="book-tab" tabindex="0">
-      <%= render "book_registration", submit_btn: "著書として登録" %>
+      <%= render "records/forms/book", submit_btn: "著書として登録" %>
     </div>
 
     <!-- 雑誌論文タブ -->
     <div class="tab-pane fade" id="paper-tab-pane" role="tabpanel" aria-labelledby="paper-tab" tabindex="0">
-      <%= render "paper_registration", submit_btn: "雑誌論文として登録" %>
+      <%= render "records/forms/paper", submit_btn: "雑誌論文として登録" %>
     </div>
 
     <!-- 編著論文タブ -->
     <div class="tab-pane fade" id="compilation-tab-pane" role="tabpanel" aria-labelledby="compilation-tab" tabindex="0">
-      <%= render "compilation_registration", submit_btn: "編著論文として登録" %>
+      <%= render "records/forms/compilation", submit_btn: "編著論文として登録" %>
     </div>
   </div>
 </div>
