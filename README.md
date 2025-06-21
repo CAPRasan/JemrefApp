@@ -2,6 +2,9 @@
 
 
 文系（人文・社会科学系）の和文文献の収集・整理に特化した文献管理ツールです。  
+※現在、ウェブページ停止中
+ 言語、フレームワーク、インフラ等を切り替え、開発を続ける予定です。
+
  </br>
 <img width="500" alt="jemref_img_index" src="https://github.com/user-attachments/assets/bdc55db9-0b2b-42fa-80d3-7fb6157c7e33">   
  </br>
